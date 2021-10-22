@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect, Route } from 'react-router-dom';
+import { CollectiblesController } from '@metamask/controllers';
 import { formatDate } from '../../helpers/utils/util';
 import AssetList from '../../components/app/asset-list';
 import HomeNotification from '../../components/app/home-notification';
@@ -32,6 +33,7 @@ import {
   VIEW_QUOTE_ROUTE,
   CONFIRMATION_V_NEXT_ROUTE,
 } from '../../helpers/constants/routes';
+import FormField from '../../components/ui/form-field';
 import BetaHomeFooter from './beta-home-footer.component';
 
 const LEARN_MORE_URL =
@@ -90,6 +92,8 @@ export default class Home extends PureComponent {
     // eslint-disable-next-line react/no-unused-state
     mounted: false,
     canShowBlockageNotification: true,
+    contractAddress: '',
+    tokenId: '',
   };
 
   componentDidMount() {
@@ -346,6 +350,8 @@ export default class Home extends PureComponent {
       hideWhatsNewPopup,
       seedPhraseBackedUp,
       showRecoveryPhraseReminder,
+      addCollectible,
+      collectibles,
     } = this.props;
 
     if (forgottenPassword) {
@@ -404,6 +410,45 @@ export default class Home extends PureComponent {
                 name={t('activity')}
               >
                 <TransactionList />
+              </Tab>
+              <Tab
+                activeClassName="home__tab--active"
+                className="home__tab"
+                name="NFTS"
+              >
+                <FormField
+                  value={this.state.contractAddress}
+                  titleText="Contract Address"
+                  onChange={(value) =>
+                    this.setState({ contractAddress: value })
+                  }
+                />
+                <FormField
+                  value={this.state.tokenId}
+                  titleText="TokenID"
+                  onChange={(value) => this.setState({ tokenId: value })}
+                />
+                <Button
+                  onClick={() =>
+                    addCollectible(
+                      this.state.contractAddress,
+                      this.state.tokenId,
+                    )
+                  }
+                >
+                  Add NFT
+                </Button>
+                {collectibles.map((collectible) => (
+                  <img
+                    style={{
+                      width: '200px',
+                      height: '200px',
+                      borderRadius: '10px',
+                      margin: '10px',
+                    }}
+                    src={collectible.image}
+                  />
+                ))}
               </Tab>
             </Tabs>
             <div className="home__support">
