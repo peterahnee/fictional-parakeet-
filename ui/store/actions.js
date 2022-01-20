@@ -2730,18 +2730,6 @@ export function loadingMethodDataFinished() {
   };
 }
 
-export async function getTokenStandardAndDetails(
-  address,
-  userAddress,
-  tokenId,
-) {
-  return await promisifiedBackground.getTokenStandardAndDetails(
-    address,
-    userAddress,
-    tokenId,
-  );
-}
-
 export function getContractMethodData(data = '') {
   return (dispatch, getState) => {
     const prefixedData = addHexPrefix(data);
