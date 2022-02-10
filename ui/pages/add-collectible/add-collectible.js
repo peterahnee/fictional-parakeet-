@@ -16,6 +16,7 @@ import FormField from '../../components/ui/form-field';
 import { getIsMainnet, getUseCollectibleDetection } from '../../selectors';
 import { getCollectiblesDetectionNoticeDismissed } from '../../ducks/metamask/metamask';
 import CollectiblesDetectionNotice from '../../components/app/collectibles-detection-notice';
+import { BN } from 'ethjs';
 
 export default function AddCollectible() {
   const t = useI18nContext();
@@ -42,7 +43,7 @@ export default function AddCollectible() {
   const handleAddCollectible = async () => {
     try {
       await dispatch(
-        addCollectibleVerifyOwnership(address, tokenId.toString()),
+        addCollectibleVerifyOwnership(address, tokenId),
       );
     } catch (error) {
       const { message } = error;
@@ -66,7 +67,7 @@ export default function AddCollectible() {
 
   const validateAndSetTokenId = (val) => {
     setDisabled(!util.isValidHexAddress(address) || !val);
-    setTokenId(val);
+    setTokenId(new BN(val));
   };
 
   return (
@@ -106,12 +107,12 @@ export default function AddCollectible() {
               id="token-id"
               titleText={t('tokenId')}
               placeholder={t('nftTokenIdPlaceholder')}
-              value={tokenId}
+              value={tokenId?.toString(10)}
               onChange={(val) => {
+                console.log("val:", val)
                 validateAndSetTokenId(val);
               }}
               tooltipText={t('importNFTTokenIdToolTip')}
-              numeric
             />
           </Box>
         </Box>
