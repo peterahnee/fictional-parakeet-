@@ -2772,7 +2772,9 @@ export function detectNfts() {
 }
 
 export function setAdvancedGasFee(val) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const { chainId } = getState().metamask.provider;
+
     dispatch(showLoadingIndication());
     log.debug(`background.setAdvancedGasFee`);
     callBackgroundMethod('setAdvancedGasFee', [val], (err) => {
