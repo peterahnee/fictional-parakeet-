@@ -2,7 +2,10 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { HIGH_FEE_WARNING_MULTIPLIER } from '../../../../../pages/send/send.constants';
-import { EDIT_GAS_MODES } from '../../../../../../shared/constants/gas';
+import {
+  EDIT_GAS_MODES,
+  PRIORITY_LEVELS,
+} from '../../../../../../shared/constants/gas';
 import { PRIMARY } from '../../../../../helpers/constants/common';
 import { bnGreaterThan, bnLessThan } from '../../../../../helpers/utils/util';
 import { decGWEIToHexWEI } from '../../../../../helpers/utils/conversions.util';
@@ -61,6 +64,7 @@ const BaseFeeInput = () => {
 
   const [baseFee, setBaseFee] = useState(() => {
     if (
+      estimateUsed !== PRIORITY_LEVELS.CUSTOM &&
       advancedGasFeeValues?.maxBaseFee &&
       editGasMode !== EDIT_GAS_MODES.SWAPS
     ) {
