@@ -618,6 +618,15 @@ describe('Transaction Controller', function () {
           maxPriorityFeePerGas: TEST_MAX_PRIORITY_FEE_PER_GAS,
         }));
 
+      const stub3 = sinon
+        .stub(txController, 'getAdvancedGasFee')
+        .callsFake(() => ({
+          currentChainId: {
+            maxFeePerGas: TEST_MAX_FEE_PER_GAS,
+            maxPriorityFeePerGas: TEST_MAX_PRIORITY_FEE_PER_GAS,
+          },
+        }));
+
       txController.txStateManager._addTransactionsToState([
         {
           id: 1,
@@ -655,10 +664,13 @@ describe('Transaction Controller', function () {
       );
       stub1.restore();
       stub2.restore();
+      stub3.restore();
     });
 
     it('should add gasPrice as maxFeePerGas and maxPriorityFeePerGas if there are no sources of other fee data available', async function () {
       const TEST_GASPRICE = '0x12a05f200';
+      const TEST_MAX_FEE_PER_GAS = '0x12a05f200';
+      const TEST_MAX_PRIORITY_FEE_PER_GAS = '0x77359400';
 
       const stub1 = sinon
         .stub(txController, 'getEIP1559Compatibility')
@@ -667,6 +679,15 @@ describe('Transaction Controller', function () {
       const stub2 = sinon
         .stub(txController, '_getDefaultGasFees')
         .callsFake(() => ({ gasPrice: TEST_GASPRICE }));
+
+      const stub3 = sinon
+        .stub(txController, 'getAdvancedGasFee')
+        .callsFake(() => ({
+          currentChainId: {
+            maxFeePerGas: TEST_MAX_FEE_PER_GAS,
+            maxPriorityFeePerGas: TEST_MAX_PRIORITY_FEE_PER_GAS,
+          },
+        }));
 
       txController.txStateManager._addTransactionsToState([
         {
@@ -705,6 +726,7 @@ describe('Transaction Controller', function () {
       );
       stub1.restore();
       stub2.restore();
+      stub3.restore();
     });
 
     it('should not add maxFeePerGas and maxPriorityFeePerGas to type-0 transactions', async function () {
@@ -772,6 +794,15 @@ describe('Transaction Controller', function () {
         .stub(txController, '_getDefaultGasFees')
         .callsFake(() => ({ gasPrice: TEST_GASPRICE }));
 
+      const stub3 = sinon
+        .stub(txController, 'getAdvancedGasFee')
+        .callsFake(() => ({
+          currentChainId: {
+            maxFeePerGas: TEST_MAX_FEE_PER_GAS,
+            maxPriorityFeePerGas: TEST_MAX_PRIORITY_FEE_PER_GAS,
+          },
+        }));
+
       txController.txStateManager._addTransactionsToState([
         {
           id: 1,
@@ -811,6 +842,7 @@ describe('Transaction Controller', function () {
       );
       stub1.restore();
       stub2.restore();
+      stub3.restore();
     });
   });
 
