@@ -76,8 +76,12 @@ async function setupStreams() {
   extensionMux.setMaxListeners(25);
   extensionMux.ignoreStream(LEGACY_PUBLIC_CONFIG); // TODO:LegacyProvider: Delete
 
-  pump(pageMux, pageStream, pageMux, (err) =>
-    logStreamDisconnectWarning('MetaMask Inpage Multiplex', err),
+  pump(
+    pageMux,
+    pageStream,
+    notifySWOnInjectedScriptActivity(),
+    pageMux,
+    (err) => logStreamDisconnectWarning('MetaMask Inpage Multiplex', err),
   );
   pump(
     extensionMux,
@@ -138,8 +142,8 @@ async function setupStreams() {
 
 function notifySWOnInjectedScriptActivity() {
   return createThoughStream((chunk, _, cb) => {
-    if (chunk?.name === PROVIDER) {
-      browser.runtime.sendMessage({ msg: PROVIDER });
+    if (chunk?.name === PROVIDER && chunk?.data?.method !== undefined) {
+      browser.runtime.sendMessage({ msg: PROVIDER, chunk });
     }
     cb(null, chunk);
   });
