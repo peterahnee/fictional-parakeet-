@@ -480,7 +480,7 @@ function setupController(initState, initLangCode) {
     if (count) {
       label = String(count);
     }
-    if (process.env.ENABLE_MV3 === true) {
+    if (process.env.ENABLE_MV3) {
       browser.action.setBadgeText({ text: label });
       browser.action.setBadgeBackgroundColor({ color: '#037DD6' });
     } else {
