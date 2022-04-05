@@ -26,15 +26,10 @@ function importAllScripts() {
 
   // for performance metrics/reference
   console.log(
-    'SCRIPTS IMPORT COMPLETE in Seconds:',
-    (Date.now() - startImportScriptsTime) / 1000,
+    `SCRIPTS IMPORT COMPLETE in Seconds: ${
+      (Date.now() - startImportScriptsTime) / 1000
+    }`,
   );
 }
 
 importAllScripts();
-
-// Not sure why but keeping this onFetch hook seems to matter
-// for the first onConnect to correctly hit in the background script
-// after the service worker dies/goes idle
-// eslint-disable-next-line
-self.onfetch = () => console.log('ONFETCH');

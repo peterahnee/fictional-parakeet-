@@ -211,6 +211,7 @@ function setupController(initState, initLangCode) {
   //
   // MetaMask Controller
   //
+
   const controller = new MetamaskController({
     infuraProjectId: process.env.INFURA_PROJECT_ID,
     // User confirmation callbacks:
@@ -366,6 +367,7 @@ function setupController(initState, initLangCode) {
       // communication with popup
       controller.isClientOpen = true;
       controller.setupTrustedCommunication(portStream, remotePort.sender);
+
       if (processName === ENVIRONMENT_TYPE_POPUP) {
         popupIsOpen = true;
         endOfStream(portStream, () => {
