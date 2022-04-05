@@ -13,8 +13,7 @@ function tryImport(...fileNames) {
 }
 // eslint-disable-next-line no-undef
 chrome.runtime.onMessage.addListener((request) => {
-  console.log('REQUEST MESSAGE METHOD:', request?.chunk?.data?.method);
-  if (request.msg === 'metamask-provider') {
+  if (request.msg === 'metamask-provider' || request.msg === 'stream ended') {
     importAllScripts();
   }
 });

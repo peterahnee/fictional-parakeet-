@@ -60,6 +60,7 @@ function injectScript(content) {
  *
  */
 async function setupStreams() {
+  console.log('SETUP STREAMS');
   // the transport-specific streams for communication between inpage and background
   const pageStream = new WindowPostMessageStream({
     name: CONTENT_SCRIPT,
@@ -91,6 +92,7 @@ async function setupStreams() {
     (err) => {
       logStreamDisconnectWarning('MetaMask Background Multiplex', err);
       notifyInpageOfStreamFailure();
+      browser.runtime.sendMessage({ msg: 'stream ended' });
     },
   );
 
