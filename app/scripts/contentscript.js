@@ -60,7 +60,6 @@ function injectScript(content) {
  *
  */
 async function setupStreams() {
-  console.log('SETUP STREAMS');
   // the transport-specific streams for communication between inpage and background
   const pageStream = new WindowPostMessageStream({
     name: CONTENT_SCRIPT,
