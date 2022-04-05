@@ -42,7 +42,11 @@ function injectScript(content) {
     const container = document.head || document.documentElement;
     const scriptTag = document.createElement('script');
     scriptTag.setAttribute('async', 'false');
-    scriptTag.textContent = content;
+    if (process.env.ENABLE_MV3) {
+      scriptTag.setAttribute('src', browser.runtime.getURL('inpage.js'));
+    } else {
+      scriptTag.textContent = content;
+    }
     container.insertBefore(scriptTag, container.children[0]);
     container.removeChild(scriptTag);
   } catch (error) {
@@ -75,10 +79,16 @@ async function setupStreams() {
   pump(pageMux, pageStream, pageMux, (err) =>
     logStreamDisconnectWarning('MetaMask Inpage Multiplex', err),
   );
-  pump(extensionMux, extensionStream, extensionMux, (err) => {
-    logStreamDisconnectWarning('MetaMask Background Multiplex', err);
-    notifyInpageOfStreamFailure();
-  });
+  pump(
+    extensionMux,
+    extensionStream,
+    notifySWOnInjectedScriptActivity(),
+    extensionMux,
+    (err) => {
+      logStreamDisconnectWarning('MetaMask Background Multiplex', err);
+      notifyInpageOfStreamFailure();
+    },
+  );
 
   // forward communication across inpage-background for these channels only
   forwardTrafficBetweenMuxes(PROVIDER, pageMux, extensionMux);
@@ -124,6 +134,15 @@ async function setupStreams() {
     legacyPageMux,
     legacyExtensionMux,
   );
+}
+
+function notifySWOnInjectedScriptActivity() {
+  return createThoughStream((chunk, _, cb) => {
+    if (chunk?.name === PROVIDER) {
+      browser.runtime.sendMessage({ msg: PROVIDER });
+    }
+    cb(null, chunk);
+  });
 }
 
 function forwardTrafficBetweenMuxes(channelName, muxA, muxB) {
