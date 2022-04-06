@@ -27,6 +27,14 @@ const LEGACY_INPAGE = 'inpage';
 const LEGACY_PROVIDER = 'provider';
 const LEGACY_PUBLIC_CONFIG = 'publicConfig';
 
+
+const MESSAGE_SW_WHILE_DAPP_OPEN_INTERVAL = 60000 // 1 min
+const providerInitializationMethods = [
+  'metamask_getProviderState',
+  'metamask_sendDomainMetadata',
+  'metamask_chainChanged',
+];
+
 if (shouldInjectProvider()) {
   injectScript(inpageBundle);
   setupStreams();
@@ -44,6 +52,7 @@ function injectScript(content) {
     scriptTag.setAttribute('async', 'false');
     if (process.env.ENABLE_MV3) {
       scriptTag.setAttribute('src', browser.runtime.getURL('inpage.js'));
+      scriptTag.textContent = content;
     } else {
       scriptTag.textContent = content;
     }
@@ -92,6 +101,7 @@ async function setupStreams() {
       logStreamDisconnectWarning('MetaMask Background Multiplex', err);
       notifyInpageOfStreamFailure();
       browser.runtime.sendMessage({ msg: 'stream ended' });
+      setupStreams();
     },
   );
 
@@ -141,10 +151,22 @@ async function setupStreams() {
   );
 }
 
+let openDappInterval;
+
 function notifySWOnInjectedScriptActivity() {
   return createThoughStream((chunk, _, cb) => {
     if (chunk?.name === PROVIDER && chunk?.data?.method !== undefined) {
       browser.runtime.sendMessage({ msg: PROVIDER, chunk });
+
+      if (!providerInitializationMethods.includes(chunk?.data?.method)) {
+        if (openDappInterval) {
+          clearInterval(openDappInterval);
+        };
+        
+        openDappInterval = setInterval(() => {
+          browser.runtime.sendMessage({ msg: 'dapp open' });
+        }, MESSAGE_SW_WHILE_DAPP_OPEN_INTERVAL);
+      }
     }
     cb(null, chunk);
   });

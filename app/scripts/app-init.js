@@ -13,7 +13,17 @@ function tryImport(...fileNames) {
 }
 // eslint-disable-next-line no-undef
 chrome.runtime.onMessage.addListener((request) => {
-  if (request.msg === 'metamask-provider' || request.msg === 'stream ended') {
+  if (
+    request.msg === 'metamask-provider' ||
+    request.msg === 'stream ended' ||
+    request.msg === 'dapp open'
+  ) {
+    console.log(
+      'REQUEST METHOD:',
+      request?.chunk?.data?.method,
+      '&& request message:',
+      request.msg,
+    );
     importAllScripts();
   }
 });
