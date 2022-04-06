@@ -87,14 +87,14 @@ async function setupStreams() {
   pump(
     pageMux,
     pageStream,
-    // notifySWOnInjectedScriptActivity(),
+    notifySWOnInjectedScriptActivity(),
     pageMux,
     (err) => logStreamDisconnectWarning('MetaMask Inpage Multiplex', err),
   );
   pump(
     extensionMux,
     extensionStream,
-    notifySWOnInjectedScriptActivity(),
+    // notifySWOnInjectedScriptActivity(),
     extensionMux,
     (err) => {
       logStreamDisconnectWarning('MetaMask Background Multiplex', err);
@@ -153,28 +153,26 @@ async function setupStreams() {
 let openDappInterval;
 
 function notifySWOnInjectedScriptActivity() {
-  if (process.env.ENABLE_MV3) {
-    return createThoughStream((chunk, _, cb) => {
-      if (chunk?.name === PROVIDER && chunk?.data?.method !== undefined) {
-        browser.runtime.sendMessage({ msg: PROVIDER, chunk });
+  return createThoughStream((chunk, _, cb) => {
+    if (chunk?.name === PROVIDER && chunk?.data?.method !== undefined) {
+      browser.runtime.sendMessage({ msg: PROVIDER, chunk });
 
-        // if a method other than one of those called by the provider for all webpages
-        // is called we know we are on a dapp and we start an interval that sends a message
-        // to the background service-worker to keep it alive until the dapp page is closed.
-        if (!providerInitializationMethods.includes(chunk?.data?.method)) {
-          if (openDappInterval) {
-            clearInterval(openDappInterval);
-          }
-
-          openDappInterval = setInterval(() => {
-            console.log('SENDING DAPP OPEN MESSAGE', Date.now());
-            browser.runtime.sendMessage({ msg: 'dapp open' });
-          }, MESSAGE_SW_WHILE_DAPP_OPEN_INTERVAL);
+      // if a method other than one of those called by the provider for all webpages
+      // is called we know we are on a dapp and we start an interval that sends a message
+      // to the background service-worker to keep it alive until the dapp page is closed.
+      if (!providerInitializationMethods.includes(chunk?.data?.method)) {
+        if (openDappInterval) {
+          clearInterval(openDappInterval);
         }
+
+        openDappInterval = setInterval(() => {
+          console.log('SENDING DAPP OPEN MESSAGE', Date.now());
+          browser.runtime.sendMessage({ msg: 'dapp open' });
+        }, MESSAGE_SW_WHILE_DAPP_OPEN_INTERVAL);
       }
-      cb(null, chunk);
-    });
-  }
+    }
+    cb(null, chunk);
+  });
 }
 
 function forwardTrafficBetweenMuxes(channelName, muxA, muxB) {
