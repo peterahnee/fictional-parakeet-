@@ -32,6 +32,8 @@ import {
   ERC721,
 } from '../../../../shared/constants/transaction';
 import { CHAIN_IDS, TEST_CHAINS } from '../../../../shared/constants/network';
+import { fetchTokenBalance } from '../../swaps/swaps.util';
+import NftInfoSetApprovalForAll from '../../../components/ui/nft-info-setApprovalForAll';
 
 export default class ConfirmApproveContent extends Component {
   static contextTypes = {
@@ -82,6 +84,7 @@ export default class ConfirmApproveContent extends Component {
   state = {
     showFullTxDetails: false,
     copied: false,
+    collectionBalance: 0,
   };
 
   renderApproveContentCard({
@@ -565,6 +568,17 @@ export default class ConfirmApproveContent extends Component {
     return description;
   }
 
+  async componentDidMount() {
+    const { tokenAddress, userAddress, isSetApproveForAll, assetStandard } =
+      this.props;
+    if (isSetApproveForAll && assetStandard === ERC721) {
+      const tokenBalance = await fetchTokenBalance(tokenAddress, userAddress);
+      this.setState({
+        collectionBalance: tokenBalance?.balance?.words?.[0] || 0,
+      });
+    }
+  }
+
   render() {
     const { t } = this.context;
     const {
@@ -588,6 +602,9 @@ export default class ConfirmApproveContent extends Component {
       isContract,
       assetStandard,
       userAddress,
+      assetName,
+      tokenAddress,
+      isSetApproveForAll,
     } = this.props;
     const { showFullTxDetails } = this.state;
 
@@ -698,6 +715,16 @@ export default class ConfirmApproveContent extends Component {
             </Button>
           </Box>
         </Box>
+        {isSetApproveForAll ? (
+          <Box padding={4} width={BLOCK_SIZES.FULL}>
+            <NftInfoSetApprovalForAll
+              assetName={assetName}
+              tokenAddress={tokenAddress}
+              total={this.state.collectionBalance}
+              isERC721={assetStandard === ERC721}
+            />
+          </Box>
+        ) : null}
         {assetStandard === ERC20 ? (
           <div className="confirm-approve-content__edit-submission-button-container">
             <div
