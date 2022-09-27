@@ -44,9 +44,12 @@ const render = (defaultGasParams, contextParams) => {
       gasFeeEstimates:
         mockEstimates[GAS_ESTIMATE_TYPES.FEE_MARKET].gasFeeEstimates,
       provider: {
-        chainId: '0x4',
+        chainId: '0x3',
         nickname: '',
-        type: 'kovan',
+        rpcPrefs: {},
+        rpcUrl: '',
+        ticker: 'RopstenETH',
+        type: 'ropsten',
       },
     },
   });
@@ -72,22 +75,22 @@ describe('AdvancedGasFeeDefaults', () => {
   });
   it('should renders correct message when the default values are set', () => {
     render({
-      advancedGasFee: { '0x4': { maxBaseFee: '75', priorityFee: '2' } },
+      advancedGasFee: { '0x3': { maxBaseFee: '75', priorityFee: '2' } },
     });
     expect(
       screen.queryByText(
-        'Always use these values and advanced setting as default on Kovan Test Network.',
+        'Always use these values and advanced setting as default on Ropsten test network.',
       ),
     ).toBeInTheDocument();
   });
   it('should renders correct message when the default values are set and the maxBaseFee values are updated', () => {
     render({
-      advancedGasFee: { '0x4': { maxBaseFee: '75', priorityFee: '2' } },
+      advancedGasFee: { '0x3': { maxBaseFee: '75', priorityFee: '2' } },
     });
     expect(document.getElementsByTagName('input')[2]).toBeChecked();
     expect(
       screen.queryByText(
-        'Always use these values and advanced setting as default on Kovan Test Network.',
+        'Always use these values and advanced setting as default on Ropsten test network.',
       ),
     ).toBeInTheDocument();
     fireEvent.change(document.getElementsByTagName('input')[0], {
@@ -101,12 +104,12 @@ describe('AdvancedGasFeeDefaults', () => {
   });
   it('should renders correct message when the default values are set and the priorityFee values are updated', () => {
     render({
-      advancedGasFee: { '0x4': { maxBaseFee: '75', priorityFee: '2' } },
+      advancedGasFee: { '0x3': { maxBaseFee: '75', priorityFee: '2' } },
     });
     expect(document.getElementsByTagName('input')[2]).toBeChecked();
     expect(
       screen.queryByText(
-        'Always use these values and advanced setting as default on Kovan Test Network.',
+        'Always use these values and advanced setting as default on Ropsten test network.',
       ),
     ).toBeInTheDocument();
     fireEvent.change(document.getElementsByTagName('input')[1], {
@@ -121,13 +124,13 @@ describe('AdvancedGasFeeDefaults', () => {
 
   it('should call action setAdvancedGasFee when checkbox or label text is clicked', () => {
     render({
-      advancedGasFee: { '0x4': { maxBaseFee: '75', priorityFee: '2' } },
+      advancedGasFee: { '0x3': { maxBaseFee: '75', priorityFee: '2' } },
     });
     const mock = jest
       .spyOn(Actions, 'setAdvancedGasFee')
       .mockReturnValue({ type: 'test' });
     const checkboxLabel = screen.queryByText(
-      'Always use these values and advanced setting as default on Kovan Test Network.',
+      'Always use these values and advanced setting as default on Ropsten test network.',
     );
     fireEvent.click(checkboxLabel);
     expect(mock).toHaveBeenCalledTimes(1);
