@@ -8,6 +8,14 @@ import { obj as createThoughStream } from 'through2';
 import { isManifestV3 } from '../../shared/modules/mv3.utils';
 import shouldInjectProvider from '../../shared/modules/provider-injection';
 
+const IGNORE_METHODS = [
+  'eth_chainId',
+  'eth_getBlockByNumber',
+  'metamask_chainChanged',
+  'metamask_sendDomainMetadata',
+  'metamask_unlockStateChanged',
+];
+
 // These require calls need to use require to be statically recognized by browserify
 const fs = require('fs');
 const path = require('path');
@@ -203,6 +211,51 @@ const setupPageStreams = () => {
   );
 
   pageChannel = pageMux.createStream(PROVIDER);
+
+  pageStream.on('message', (msg) => {
+    console.log('Received pageStream message from background:', msg);
+  });
+
+  pageStream.on('data', (chunk) => {
+    const method = chunk.data?.method;
+
+    if (IGNORE_METHODS.includes(method)) {
+      return;
+    }
+
+    console.info(
+      `pageStream > ${chunk.name} > method: ${method} | chunk id: ${chunk.id} | params: `,
+      chunk.data?.params,
+    );
+  });
+
+  pageChannel.on('data', (chunk) => {
+    const { result, method, params } = chunk;
+    if (IGNORE_METHODS.includes(method)) {
+      return;
+    }
+
+    if (browser.runtime.id) {
+      browser.runtime.sendMessage(browser.runtime.id, {
+        name: 'WORKER_KEEP_ALIVE_MESSAGE',
+      });
+    } else {
+      console.error('browser.runtime.id is undefined');
+    }
+
+    console.info(
+      `pageChannel > ${chunk.name} > method: ${method} | chunk id: ${chunk.id} | result: ${result} | params: `,
+      params,
+    );
+  });
+
+  pageChannel.on('finish', (chunk) => {
+    console.log('pageChannel finish', chunk);
+  });
+
+  pageChannel.on('close', (chunk) => {
+    console.log('pageChannel close', chunk);
+  });
 };
 
 const initPageStreams = () => {
@@ -230,13 +283,34 @@ const setupExtensionStreams = () => {
     notifyInpageOfStreamFailure();
   });
 
+  // throughStream = createThoughStream((chunk, _, cb) => {
+  //   const method = chunk.data?.method || chunk.method;
+
+  //   if (IGNORE_METHODS.includes(method)) {
+  //     return;
+  //   }
+
+  //   console.log('chunk.id: ', chunk.id);
+  //   console.log('chunk.data?.id: ', chunk.data?.id);
+  //   console.log(
+  //     '---- Chunk ID MATCH ---',
+  //     providerStateChunkIds[chunk.id || chunk.data?.id],
+  //   );
+
+  //   cb(null, chunk);
+  // });
+
   // forward communication across inpage-background for these channels only
   extensionChannel = extensionMux.createStream(PROVIDER);
-  pump(pageChannel, extensionChannel, pageChannel, (error) =>
-    console.debug(
-      `MetaMask: Muxed traffic for channel "${PROVIDER}" failed.`,
-      error,
-    ),
+  pump(
+    pageChannel,
+    extensionChannel /** , throughStream,*/,
+    pageChannel,
+    (error) =>
+      console.debug(
+        `MetaMask: Muxed traffic for channel "${PROVIDER}" failed.`,
+        error,
+      ),
   );
 
   // connect "phishing" channel to warning system
@@ -244,12 +318,47 @@ const setupExtensionStreams = () => {
   extensionPhishingStream.once('data', redirectToPhishingWarning);
 
   notifyInpageOfExtensionStreamConnect();
+
+  // extensionStream.on('data', (chunk) => {
+  //   const method = chunk.data?.method || chunk.method;
+  //   const chunkId = chunk.data?.id || chunk.id;
+
+  //   if (IGNORE_METHODS.includes(method)) {
+  //     return;
+  //   }
+
+  //   console.info(
+  //     `extensionStream > ${chunk.name} | method: ${method} | chunk id: ${chunkId} | chunk data: `,
+  //     chunk.data,
+  //   );
+  // });
+
+  // extensionChannel.on('data', (chunk) => {
+  //   if (IGNORE_METHODS.includes(chunk.method)) {
+  //     return;
+  //   }
+
+  //   if (chunk.method) {
+  //     console.info(
+  //       `extensionChannel > ${chunk.name} | method: ${chunk.method} | params: `,
+  //       chunk.params,
+  //     );
+  //   } else {
+  //     console.info(
+  //       `extensionChannel | jsonrpc: ${chunk.jsonrpc} | chunk id: ${chunk.id} | result: `,
+  //       chunk.result,
+  //     );
+  //   }
+  // });
 };
 
 /** Destroys all of the extension streams */
 const destroyExtensionStreams = () => {
-  pageChannel?.removeAllListeners();
-  pageStream?.removeAllListeners();
+  // TEST
+  // pageChannel.removeAllListeners();
+  // pageStream.removeAllListeners();
+
+  // throughStream.removeAllListeners();
 
   extensionMux?.removeAllListeners();
   extensionChannel?.removeAllListeners();
@@ -357,12 +466,12 @@ const resetStreamAndListeners = () => {
   destroyExtensionStreams();
   destroyLegacyExtensionStreams();
 
-  setupPageStreams();
-  setupLegacyPageStreams();
-  setupExtensionStreams();
-  setupLegacyExtensionStreams();
+  // setupPageStreams();
+  // setupLegacyPageStreams();
+  // setupExtensionStreams();
+  // setupLegacyExtensionStreams();
 
-  extensionPort.onDisconnect.addListener(resetStreamAndListeners);
+  // extensionPort.onDisconnect.addListener(resetStreamAndListeners);
 };
 
 /**
@@ -384,6 +493,10 @@ const initStreams = () => {
 // TODO:LegacyProvider: Delete
 function getNotificationTransformStream() {
   return createThoughStream((chunk, _, cb) => {
+    // if (IGNORE_METHODS.includes(chunk.data?.method)) {
+    //   return;
+    // }
+
     if (chunk?.name === PROVIDER) {
       if (chunk.data?.method === 'metamask_accountsChanged') {
         chunk.data.method = 'wallet_accountsChanged';
@@ -466,13 +579,13 @@ function redirectToPhishingWarning(data = {}) {
 }
 
 const initKeepWorkerAlive = () => {
-  setInterval(() => {
-    if (browser.runtime.id) {
-      browser.runtime.sendMessage(browser.runtime.id, {
-        name: WORKER_KEEP_ALIVE_MESSAGE,
-      });
-    }
-  }, WORKER_KEEP_ALIVE_INTERVAL);
+  // setInterval(() => {
+  //   if (browser.runtime.id) {
+  //     browser.runtime.sendMessage(browser.runtime.id, {
+  //       name: WORKER_KEEP_ALIVE_MESSAGE,
+  //     });
+  //   }
+  // }, WORKER_KEEP_ALIVE_INTERVAL);
 };
 
 const start = () => {

@@ -111,7 +111,11 @@ function importAllScripts() {
 
 // Ref: https://stackoverflow.com/questions/66406672/chrome-extension-mv3-modularize-service-worker-js-file
 // eslint-disable-next-line no-undef
-self.addEventListener('install', importAllScripts);
+self.addEventListener('install', () => {
+  console.log('installing service worker');
+  importAllScripts();
+  // self.skipWaiting();
+});
 
 /*
  * A keepalive message listener to prevent Service Worker getting shut down due to inactivity.
@@ -122,8 +126,17 @@ self.addEventListener('install', importAllScripts);
  * but there is issue in importing webextension-polyfill into service worker.
  * chrome does seems to work in at-least all chromium based browsers
  */
-chrome.runtime.onMessage.addListener(() => {
-  importAllScripts();
+chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
+  console.log('message', message);
+  console.log('_sender', _sender);
+
+  if (message.name === 'WORKER_KEEP_ALIVE_MESSAGE') {
+    console.log('keeping alive');
+  } else {
+    importAllScripts();
+    console.info(message);
+  }
+
   return false;
 });
 

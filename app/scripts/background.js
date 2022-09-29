@@ -200,6 +200,7 @@ async function loadPhishingWarningPage() {
     // error.
     extensionStartupPhishingPageUrl.hash = '#extensionStartup';
 
+    return;
     iframe = window.document.createElement('iframe');
     iframe.setAttribute('src', extensionStartupPhishingPageUrl.href);
     iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin');
