@@ -4492,8 +4492,8 @@
       },
       "packages": {
         "browserify>browser-resolve": true,
-        "eth-block-tracker>@metamask/utils": true,
         "eth-json-rpc-middleware>@metamask/eth-sig-util": true,
+        "eth-json-rpc-middleware>@metamask/utils": true,
         "eth-json-rpc-middleware>pify": true,
         "eth-rpc-errors": true,
         "json-rpc-engine": true,
@@ -4538,6 +4538,13 @@
         "browserify>buffer": true,
         "ethjs>ethjs-util>is-hex-prefixed": true,
         "ethjs>ethjs-util>strip-hex-prefix": true
+      }
+    },
+    "eth-json-rpc-middleware>@metamask/utils": {
+      "packages": {
+        "@metamask/snap-utils>superstruct": true,
+        "eslint>fast-deep-equal": true,
+        "nock>debug": true
       }
     },
     "eth-keyring-controller": {
@@ -4661,9 +4668,17 @@
     },
     "eth-lattice-keyring>@ethereumjs/tx": {
       "packages": {
-        "@ethereumjs/common": true,
         "browserify>buffer": true,
         "browserify>insert-module-globals>is-buffer": true,
+        "eth-lattice-keyring>@ethereumjs/tx>@ethereumjs/common": true,
+        "ethereumjs-util": true
+      }
+    },
+    "eth-lattice-keyring>@ethereumjs/tx>@ethereumjs/common": {
+      "packages": {
+        "@ethereumjs/common>crc-32": true,
+        "browserify>buffer": true,
+        "browserify>events": true,
         "ethereumjs-util": true
       }
     },
@@ -4896,8 +4911,9 @@
         "@ethereumjs/tx": true,
         "browserify>buffer": true,
         "browserify>events": true,
+        "eth-trezor-keyring>@trezor/connect-plugin-ethereum": true,
+        "eth-trezor-keyring>@trezor/connect-web": true,
         "eth-trezor-keyring>hdkey": true,
-        "eth-trezor-keyring>trezor-connect": true,
         "ethereumjs-util": true
       }
     },
@@ -4928,6 +4944,68 @@
         "browserify>buffer": true,
         "ethjs>ethjs-util>is-hex-prefixed": true,
         "ethjs>ethjs-util>strip-hex-prefix": true
+      }
+    },
+    "eth-trezor-keyring>@trezor/connect-plugin-ethereum": {
+      "packages": {
+        "eth-trezor-keyring>@metamask/eth-sig-util": true
+      }
+    },
+    "eth-trezor-keyring>@trezor/connect-web": {
+      "globals": {
+        "addEventListener": true,
+        "btoa": true,
+        "chrome": true,
+        "clearInterval": true,
+        "clearTimeout": true,
+        "document.body": true,
+        "document.createElement": true,
+        "document.createTextNode": true,
+        "document.getElementById": true,
+        "document.querySelectorAll": true,
+        "open": true,
+        "removeEventListener": true,
+        "setInterval": true,
+        "setTimeout": true
+      },
+      "packages": {
+        "browserify>events": true,
+        "eth-trezor-keyring>@trezor/connect-web>@trezor/connect": true,
+        "eth-trezor-keyring>@trezor/connect-web>@trezor/utils": true,
+        "eth-trezor-keyring>@trezor/connect-web>tslib": true
+      }
+    },
+    "eth-trezor-keyring>@trezor/connect-web>@trezor/connect": {
+      "globals": {
+        "__TREZOR_CONNECT_SRC": true,
+        "chrome": true,
+        "console.error": true,
+        "console.log": true,
+        "console.warn": true,
+        "location": true,
+        "navigator": true
+      },
+      "packages": {
+        "eth-trezor-keyring>@trezor/connect-web>@trezor/connect>@trezor/transport": true,
+        "eth-trezor-keyring>@trezor/connect-web>@trezor/connect>tslib": true
+      }
+    },
+    "eth-trezor-keyring>@trezor/connect-web>@trezor/connect>tslib": {
+      "globals": {
+        "define": true
+      }
+    },
+    "eth-trezor-keyring>@trezor/connect-web>@trezor/utils": {
+      "globals": {
+        "setTimeout": true
+      },
+      "packages": {
+        "browserify>process": true
+      }
+    },
+    "eth-trezor-keyring>@trezor/connect-web>tslib": {
+      "globals": {
+        "define": true
       }
     },
     "eth-trezor-keyring>hdkey": {
@@ -4966,34 +5044,6 @@
       "packages": {
         "browserify>buffer": true,
         "browserify>crypto-browserify>create-hmac": true
-      }
-    },
-    "eth-trezor-keyring>trezor-connect": {
-      "globals": {
-        "__TREZOR_CONNECT_SRC": true,
-        "addEventListener": true,
-        "btoa": true,
-        "chrome": true,
-        "clearInterval": true,
-        "clearTimeout": true,
-        "console": true,
-        "document.body": true,
-        "document.createElement": true,
-        "document.createTextNode": true,
-        "document.getElementById": true,
-        "document.querySelectorAll": true,
-        "location": true,
-        "navigator": true,
-        "open": true,
-        "removeEventListener": true,
-        "setInterval": true,
-        "setTimeout": true
-      },
-      "packages": {
-        "3box>graphql-request>cross-fetch": true,
-        "@babel/runtime": true,
-        "browserify>events": true,
-        "eth-trezor-keyring>@metamask/eth-sig-util": true
       }
     },
     "ethereumjs-abi": {
