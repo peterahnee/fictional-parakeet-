@@ -174,7 +174,7 @@
     "eth-query": "^2.1.2",
     "eth-rpc-errors": "^4.0.2",
     "eth-sig-util": "^3.0.0",
-    "eth-trezor-keyring": "^0.10.0",
+    "eth-trezor-keyring": "https://github.com/mroz22/eth-trezor-keyring.git#bump-connect",
     "ethereum-ens-network-map": "^1.0.2",
     "ethereumjs-abi": "^0.6.4",
     "ethereumjs-util": "^7.0.10",
@@ -482,7 +482,10 @@
       "web3>web3-core>web3-core-requestmanager>web3-providers-ws>websocket>bufferutil": false,
       "web3>web3-core>web3-core-requestmanager>web3-providers-ws>websocket>es5-ext": false,
       "web3>web3-core>web3-core-requestmanager>web3-providers-ws>websocket>utf-8-validate": false,
-      "web3>web3-shh": false
+      "web3>web3-shh": false,
+      "3box>ipfs>ipld-bitcoin>bitcoinjs-lib>tiny-secp256k1": false,
+      "eth-trezor-keyring>@trezor/connect-web>@trezor/connect>@trezor/transport>protobufjs": false,
+      "eth-trezor-keyring>@trezor/connect-web>@trezor/connect>@trezor/utxo-lib>blake-hash": false
     }
   }
 }
