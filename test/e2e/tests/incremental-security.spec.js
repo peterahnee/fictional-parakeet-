@@ -4,8 +4,6 @@ const enLocaleMessages = require('../../../app/_locales/en/messages.json');
 const FixtureBuilder = require('../fixture-builder');
 
 describe('Incremental Security', function () {
-  // We want ganache to run on chainId 1, so the Backup reminder is displayed
-  const chainId = 1;
   const ganacheOptions = {
     accounts: [
       {
@@ -19,7 +17,6 @@ describe('Incremental Security', function () {
         balance: convertToHexValue(25000000000000000000),
       },
     ],
-    network_id: chainId,
   };
   it('Back up Secret Recovery Phrase from backup reminder', async function () {
     await withFixtures(
