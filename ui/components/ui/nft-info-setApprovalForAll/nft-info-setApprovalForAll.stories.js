@@ -5,15 +5,10 @@ export default {
   title: 'Components/UI/NftInfoSetApprovalForAll',
   id: __filename,
   argTypes: {
-    assetName: {
-      control: { type: 'text' },
-    },
-    tokenAddress: {
-      control: { type: 'text' },
-    },
-    total: {
-      control: { type: 'number' },
-    },
+    assetName: { control: 'text' },
+    tokenAddress: { control: 'text' },
+    total: { control: 'number' },
+    isERC721: { control: 'boolean' },
   },
   args: {
     assetName: 'Bored Ape Yatch Club',
