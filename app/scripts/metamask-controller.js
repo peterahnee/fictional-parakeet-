@@ -1846,6 +1846,10 @@ export default class MetamaskController extends EventEmitter {
         ),
       setFirstTimeUsedNetwork:
         appStateController.setFirstTimeUsedNetwork.bind(appStateController),
+      setOpenSeaTransactionSecurityProviderPopoverHasBeenShown:
+        appStateController.setOpenSeaTransactionSecurityProviderPopoverHasBeenShown.bind(
+          appStateController,
+        ),
       // EnsController
       tryReverseResolveAddress:
         ensController.reverseResolveAddress.bind(ensController),

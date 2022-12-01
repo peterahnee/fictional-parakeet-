@@ -3833,6 +3833,12 @@ export function setFirstTimeUsedNetwork(chainId) {
   return submitRequestToBackground('setFirstTimeUsedNetwork', [chainId]);
 }
 
+export function setOpenSeaTransactionSecurityProviderPopoverHasBeenShown() {
+  return submitRequestToBackground(
+    'setOpenSeaTransactionSecurityProviderPopoverHasBeenShown',
+  );
+}
+
 // QR Hardware Wallets
 export async function submitQRHardwareCryptoHDKey(cbor) {
   await submitRequestToBackground('submitQRHardwareCryptoHDKey', [cbor]);
