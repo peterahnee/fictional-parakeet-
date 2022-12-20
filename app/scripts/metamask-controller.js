@@ -49,11 +49,13 @@ import { RateLimitController } from '@metamask/rate-limit-controller';
 import { NotificationController } from '@metamask/notification-controller';
 ///: END:ONLY_INCLUDE_IN
 import SmartTransactionsController from '@metamask/smart-transactions-controller';
+///: BEGIN:ONLY_INCLUDE_IN(flask)
 import {
   CronjobController,
   SnapController,
   OffscreenExecutionService,
 } from '@metamask/snaps-controllers';
+///: END:ONLY_INCLUDE_IN
 
 import browser from 'webextension-polyfill';
 import {
