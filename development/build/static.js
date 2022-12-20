@@ -44,6 +44,13 @@ module.exports = function createStaticAssetTasks({
         src: './app/build-types/flask/images/',
         dest: `images`,
       },
+      {
+        src: getPathInsideNodeModules(
+          '@metamask/snaps-execution-environments',
+          'dist/webpack/offscreen',
+        ),
+        dest: 'snaps',
+      },
     ],
   };
 

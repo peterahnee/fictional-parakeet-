@@ -49,13 +49,11 @@ import { RateLimitController } from '@metamask/rate-limit-controller';
 import { NotificationController } from '@metamask/notification-controller';
 ///: END:ONLY_INCLUDE_IN
 import SmartTransactionsController from '@metamask/smart-transactions-controller';
-///: BEGIN:ONLY_INCLUDE_IN(flask)
 import {
   CronjobController,
   SnapController,
-  IframeExecutionService,
+  OffscreenExecutionService,
 } from '@metamask/snaps-controllers';
-///: END:ONLY_INCLUDE_IN
 
 import browser from 'webextension-polyfill';
 import {
@@ -684,10 +682,8 @@ export default class MetamaskController extends EventEmitter {
     });
 
     ///: BEGIN:ONLY_INCLUDE_IN(flask)
-    this.snapExecutionService = new IframeExecutionService({
-      iframeUrl: new URL(
-        'https://metamask.github.io/iframe-execution-environment/0.11.1',
-      ),
+    this.snapExecutionService = new OffscreenExecutionService({
+      documentUrl: browser.runtime.getURL('./snaps/index.html'),
       messenger: this.controllerMessenger.getRestricted({
         name: 'ExecutionService',
       }),

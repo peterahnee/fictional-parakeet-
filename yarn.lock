@@ -3776,6 +3776,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@metamask/post-message-stream@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "@metamask/post-message-stream@npm:6.1.0"
+  dependencies:
+    "@metamask/utils": ^3.0.1
+    readable-stream: 2.3.3
+  checksum: 2503f3fbce7f9c8372ccc429253688f296876ccb83e7c55e8cbc512e7004d84555f111c75c0f81444a6f8148533a86d537bffa9fad9b5c8b13727615a96b32fe
+  languageName: node
+  linkType: hard
+
 "@metamask/preferences-controller@npm:~1.0.0":
   version: 1.0.0
   resolution: "@metamask/preferences-controller@npm:1.0.0"
@@ -22882,13 +22892,14 @@ __metadata:
     "@metamask/permission-controller": ^1.0.0
     "@metamask/phishing-controller": ^1.0.0
     "@metamask/phishing-warning": ^1.2.1
-    "@metamask/post-message-stream": ^6.0.0
+    "@metamask/post-message-stream": ^6.1.0
     "@metamask/providers": ^10.2.1
     "@metamask/rate-limit-controller": ^1.0.0
     "@metamask/rpc-methods": ^0.27.1
     "@metamask/slip44": ^2.1.0
     "@metamask/smart-transactions-controller": ^3.0.0
     "@metamask/snaps-controllers": ^0.27.1
+    "@metamask/snaps-execution-environments": ^0.27.1
     "@metamask/snaps-ui": ^0.27.1
     "@metamask/snaps-utils": ^0.27.1
     "@metamask/subject-metadata-controller": ^1.0.0
