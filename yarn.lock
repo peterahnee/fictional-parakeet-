@@ -3756,26 +3756,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@metamask/post-message-stream@npm:^5.1.0":
-  version: 5.1.0
-  resolution: "@metamask/post-message-stream@npm:5.1.0"
-  dependencies:
-    "@metamask/utils": ^2.0.0
-    readable-stream: 2.3.3
-  checksum: d6c66d82b94970a0689f2d78e4011b891a48edb0f397b54d657c10506cfc066298f3198203a6e8ec090ba87705d62c0db5ba409fede209e1612c8028160059da
-  languageName: node
-  linkType: hard
-
-"@metamask/post-message-stream@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "@metamask/post-message-stream@npm:6.0.0"
-  dependencies:
-    "@metamask/utils": ^2.0.0
-    readable-stream: 2.3.3
-  checksum: 2909b92b1372f88e072d22ea833c8d722c20e5584e11d765705193641bdb37f0cbbdb8ba1923f6a6d511771daef8c877b7ef874d7413d75ea5184ab57078c82b
-  languageName: node
-  linkType: hard
-
 "@metamask/post-message-stream@npm:^6.1.0":
   version: 6.1.0
   resolution: "@metamask/post-message-stream@npm:6.1.0"
@@ -3982,15 +3962,6 @@ __metadata:
   version: 1.1.0
   resolution: "@metamask/types@npm:1.1.0"
   checksum: 500e8c076a2b0a6d688c8c465101256f090547d99c9a5585efe3d1db7a494b6b2712b127043fb316912caffc4fff78976b9a7780780abb68305e8a3bf812689c
-  languageName: node
-  linkType: hard
-
-"@metamask/utils@npm:^2.0.0":
-  version: 2.1.0
-  resolution: "@metamask/utils@npm:2.1.0"
-  dependencies:
-    fast-deep-equal: ^3.1.3
-  checksum: 50970fe28cbf98fbc34fb4f69d9bc90f5db94929c69ab532f57b48f42163ea77fb080ab31854efd984361c3e29e67831a78d94d1211ac3bcc6b9557769c73127
   languageName: node
   linkType: hard
 
