@@ -44,15 +44,18 @@ module.exports = function createStaticAssetTasks({
         src: './app/build-types/flask/images/',
         dest: `images`,
       },
-      {
-        src: getPathInsideNodeModules(
-          '@metamask/snaps-execution-environments',
-          'dist/webpack/offscreen',
-        ),
-        dest: 'snaps',
-      },
     ],
   };
+
+  if (process.env.ENABLE_MV3) {
+    additionalBuildTargets[BuildType.flask].push({
+      src: getPathInsideNodeModules(
+        '@metamask/snaps-execution-environments',
+        'dist/webpack/offscreen',
+      ),
+      dest: 'snaps',
+    });
+  }
 
   if (Object.keys(additionalBuildTargets).includes(buildType)) {
     Object.entries(copyTargetsProds).forEach(([_, copyTargetsProd]) =>
