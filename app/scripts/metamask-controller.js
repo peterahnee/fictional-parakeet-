@@ -53,6 +53,7 @@ import SmartTransactionsController from '@metamask/smart-transactions-controller
 import {
   CronjobController,
   SnapController,
+  IframeExecutionService,
   OffscreenExecutionService,
 } from '@metamask/snaps-controllers';
 ///: END:ONLY_INCLUDE_IN
@@ -684,16 +685,27 @@ export default class MetamaskController extends EventEmitter {
     });
 
     ///: BEGIN:ONLY_INCLUDE_IN(flask)
-    this.snapExecutionService = new OffscreenExecutionService({
-      documentUrl: browser.runtime.getURL('./snaps/index.html'),
-      frameUrl: new URL(
-        'https://metamask.github.io/iframe-execution-environment/0.11.0',
-      ),
-      messenger: this.controllerMessenger.getRestricted({
+    const executionEnvironmentUrl = new URL(
+      'https://metamask.github.io/iframe-execution-environment/0.11.0',
+    );
+
+    const executionEnvironmentMessenger =
+      this.controllerMessenger.getRestricted({
         name: 'ExecutionService',
-      }),
-      setupSnapProvider: this.setupSnapProvider.bind(this),
-    });
+      });
+
+    this.snapExecutionService = isManifestV3
+      ? new OffscreenExecutionService({
+          documentUrl: browser.runtime.getURL('./snaps/index.html'),
+          frameUrl: executionEnvironmentUrl,
+          messenger: executionEnvironmentMessenger,
+          setupSnapProvider: this.setupSnapProvider.bind(this),
+        })
+      : new IframeExecutionService({
+          iframeUrl: executionEnvironmentUrl,
+          messenger: executionEnvironmentMessenger,
+          setupSnapProvider: this.setupSnapProvider.bind(this),
+        });
 
     const snapControllerMessenger = this.controllerMessenger.getRestricted({
       name: 'SnapController',
