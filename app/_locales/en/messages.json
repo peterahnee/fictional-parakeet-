@@ -339,6 +339,9 @@
     "message": "Allow $1 to withdraw and spend up to the following amount:",
     "description": "The url of the site that requested permission to 'withdraw and spend'"
   },
+  "alwaysBeSureTo": {
+    "message": "Always be sure to do your own due diligence before approving any requests."
+  },
   "amount": {
     "message": "Amount"
   },
@@ -1229,7 +1232,7 @@
     "message": "Use OpenSea's API to fetch NFT data. NFT auto-detection relies on OpenSea's API, and will not be available when this is turned off."
   },
   "enableOpenSeaSecurityProvider": {
-    "message": "Enable OpenSea's security provider"
+    "message": "Enable security provider"
   },
   "enableSmartTransactions": {
     "message": "Enable smart transactions"
@@ -1579,6 +1582,9 @@
   },
   "getStarted": {
     "message": "Get started"
+  },
+  "getWarningsFromOpenSea": {
+    "message": "Get warnings from OpenSea whenever you receive a known malicious request."
   },
   "goBack": {
     "message": "Go back"
@@ -2365,6 +2371,9 @@
   "notEnoughGas": {
     "message": "Not enough gas"
   },
+  "notNow": {
+    "message": "Not now"
+  },
   "notifications": {
     "message": "Notifications"
   },
@@ -2711,8 +2720,11 @@
   "openSea": {
     "message": "OpenSea (Beta)"
   },
-  "openSeaSecurityProviderSubDescription": {
-    "message": "OpenSea is the first security provider available in MetaMask and there'll be more coming soon!"
+  "openSeaAltText": {
+    "message": "OpenSea security provider"
+  },
+  "openSeaDescription": {
+    "message": "OpenSea is the first security provider for this feature. More providers coming soon!"
   },
   "optional": {
     "message": "Optional"
@@ -3578,6 +3590,9 @@
   "statusNotConnected": {
     "message": "Not connected"
   },
+  "staySafeWithOpenSea": {
+    "message": "Stay safe with OpenSea"
+  },
   "step1LatticeWallet": {
     "message": "Connect your Lattice1"
   },
@@ -4289,9 +4304,6 @@
   },
   "transactionSecurityCheckDescription": {
     "message": "We use third-party APIs to detect and display risks involved in unsigned transaction and signature requests before you sign them. These services will have access to your unsigned transaction and signature requests, your account address,  and your preferred language."
-  },
-  "transactionSecurityProviders": {
-    "message": "Transaction security providers are here!"
   },
   "transactionSubmitted": {
     "message": "Transaction submitted with estimated gas fee of $1 at $2."
