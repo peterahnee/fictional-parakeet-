@@ -139,6 +139,7 @@ function defaultFixture() {
           [CHAIN_IDS.GOERLI]: true,
           [CHAIN_IDS.LOCALHOST]: true,
         },
+        openSeaTransactionSecurityProviderPopoverHasBeenShown: true,
       },
       CachedBalancesController: {
         cachedBalances: {
