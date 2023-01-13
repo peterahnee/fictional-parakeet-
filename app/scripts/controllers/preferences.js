@@ -69,6 +69,7 @@ export default class PreferencesController {
       improvedTokenAllowanceEnabled: false,
       transactionSecurityCheckEnabled: false,
       theme: THEME_TYPE.OS,
+      openSeaTransactionSecurityProviderPopoverHasBeenShown: false,
       ...opts.initState,
     };
 
@@ -214,6 +215,16 @@ export default class PreferencesController {
   setTransactionSecurityCheckEnabled(transactionSecurityCheckEnabled) {
     this.store.updateState({
       transactionSecurityCheckEnabled,
+    });
+  }
+
+  /**
+   * Setter for the `openSeaTransactionSecurityProviderPopoverHasBeenShown` property
+   *
+   */
+  setOpenSeaTransactionSecurityProviderPopoverHasBeenShown() {
+    this.store.updateState({
+      openSeaTransactionSecurityProviderPopoverHasBeenShown: true,
     });
   }
 

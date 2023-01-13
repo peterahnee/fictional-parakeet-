@@ -1782,6 +1782,10 @@ export default class MetamaskController extends EventEmitter {
         preferencesController.setTransactionSecurityCheckEnabled.bind(
           preferencesController,
         ),
+      setOpenSeaTransactionSecurityProviderPopoverHasBeenShown:
+        preferencesController.setOpenSeaTransactionSecurityProviderPopoverHasBeenShown.bind(
+          preferencesController,
+        ),
       // AssetsContractController
       getTokenStandardAndDetails: this.getTokenStandardAndDetails.bind(this),
 
@@ -1846,10 +1850,6 @@ export default class MetamaskController extends EventEmitter {
         ),
       setFirstTimeUsedNetwork:
         appStateController.setFirstTimeUsedNetwork.bind(appStateController),
-      setOpenSeaTransactionSecurityProviderPopoverHasBeenShown:
-        appStateController.setOpenSeaTransactionSecurityProviderPopoverHasBeenShown.bind(
-          appStateController,
-        ),
       // EnsController
       tryReverseResolveAddress:
         ensController.reverseResolveAddress.bind(ensController),

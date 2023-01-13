@@ -139,7 +139,6 @@ function defaultFixture() {
           [CHAIN_IDS.GOERLI]: true,
           [CHAIN_IDS.LOCALHOST]: true,
         },
-        openSeaTransactionSecurityProviderPopoverHasBeenShown: true,
       },
       CachedBalancesController: {
         cachedBalances: {
@@ -242,6 +241,7 @@ function defaultFixture() {
         useTokenDetection: false,
         useCurrencyRateCheck: true,
         useMultiAccountBalanceChecker: true,
+        openSeaTransactionSecurityProviderPopoverHasBeenShown: true,
       },
       SmartTransactionsController: {
         smartTransactionsState: {
@@ -307,7 +307,6 @@ function onboardingFixture() {
           [CHAIN_IDS.GOERLI]: true,
           [CHAIN_IDS.LOCALHOST]: true,
         },
-        openSeaTransactionSecurityProviderPopoverHasBeenShown: true,
       },
       NetworkController: {
         network: '1337',
@@ -357,6 +356,7 @@ function onboardingFixture() {
         useTokenDetection: false,
         useCurrencyRateCheck: true,
         useMultiAccountBalanceChecker: true,
+        openSeaTransactionSecurityProviderPopoverHasBeenShown: true,
       },
       SmartTransactionsController: {
         smartTransactionsState: {
