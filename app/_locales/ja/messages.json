@@ -4575,9 +4575,6 @@
   "yourNFTmayBeAtRisk": {
     "message": "NFT が危険にさらされている可能性があります"
   },
-  "yourPrivateSeedPhrase": {
-    "message": "秘密のシークレットリカバリーフレーズ"
-  },
   "zeroGasPriceOnSpeedUpError": {
     "message": "スピードアップのガス代ゼロ"
   }

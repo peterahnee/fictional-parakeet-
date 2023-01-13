@@ -4575,9 +4575,6 @@
   "yourNFTmayBeAtRisk": {
     "message": "Maaaring nasa panganib ang iyong NFT"
   },
-  "yourPrivateSeedPhrase": {
-    "message": "Ang iyong pribadong seed phrase"
-  },
   "zeroGasPriceOnSpeedUpError": {
     "message": "Walang presyo ng gas sa pagpapabilis"
   }

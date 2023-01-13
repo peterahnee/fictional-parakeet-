@@ -4575,9 +4575,6 @@
   "yourNFTmayBeAtRisk": {
     "message": "NFT Anda mungkin berisiko"
   },
-  "yourPrivateSeedPhrase": {
-    "message": "Frasa Pemulihan Rahasia pribadi Anda"
-  },
   "zeroGasPriceOnSpeedUpError": {
     "message": "Biaya gas nol dipercepat"
   }

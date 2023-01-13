@@ -4575,9 +4575,6 @@
   "yourNFTmayBeAtRisk": {
     "message": "您的 NFT 可能面临风险"
   },
-  "yourPrivateSeedPhrase": {
-    "message": "您的个人账户助记词"
-  },
   "zeroGasPriceOnSpeedUpError": {
     "message": "加速时零燃料价格"
   }

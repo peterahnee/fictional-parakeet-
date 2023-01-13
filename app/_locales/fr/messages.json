@@ -4575,9 +4575,6 @@
   "yourNFTmayBeAtRisk": {
     "message": "Il peut y avoir des risques associés à votre NFT"
   },
-  "yourPrivateSeedPhrase": {
-    "message": "Votre phrase secrète de récupération privée"
-  },
   "zeroGasPriceOnSpeedUpError": {
     "message": "Prix de carburant zéro sur l’accélération"
   }

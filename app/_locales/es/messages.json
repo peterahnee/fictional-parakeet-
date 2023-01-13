@@ -4575,9 +4575,6 @@
   "yourNFTmayBeAtRisk": {
     "message": "Sus NFT podrían estar en riesgo"
   },
-  "yourPrivateSeedPhrase": {
-    "message": "Su frase secreta de recuperación privada"
-  },
   "zeroGasPriceOnSpeedUpError": {
     "message": "No hay entradas sobre el precio del gas al acelerar la transacción"
   }

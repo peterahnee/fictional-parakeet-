@@ -4575,9 +4575,6 @@
   "yourNFTmayBeAtRisk": {
     "message": "NFT của bạn có thể gặp rủi ro"
   },
-  "yourPrivateSeedPhrase": {
-    "message": "Cụm mật khẩu khôi phục bí mật riêng tư của bạn"
-  },
   "zeroGasPriceOnSpeedUpError": {
     "message": "Giá gas bằng 0 khi tăng tốc"
   }
