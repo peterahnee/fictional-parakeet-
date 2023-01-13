@@ -503,7 +503,7 @@ export default class Home extends PureComponent {
             </Box>
           </Popover>
         )}
-        {!openSeaTransactionSecurityProviderPopoverHasBeenShown && (
+        {!openSeaTransactionSecurityProviderPopoverHasBeenShown ? (
           <Popover
             title={
               <Typography
@@ -584,7 +584,7 @@ export default class Home extends PureComponent {
               </Typography>
             </Box>
           </Popover>
-        )}
+        ) : null}
       </MultipleNotifications>
     );
   }
