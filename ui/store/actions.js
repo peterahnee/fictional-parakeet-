@@ -3818,11 +3818,12 @@ export function setImprovedTokenAllowanceEnabled(
 export function setTransactionSecurityCheckEnabled(
   transactionSecurityCheckEnabled,
 ) {
-  return async () => {
+  return async (dispatch) => {
     try {
       await submitRequestToBackground('setTransactionSecurityCheckEnabled', [
         transactionSecurityCheckEnabled,
       ]);
+      await forceUpdateMetamaskState(dispatch);
     } catch (error) {
       log.error(error);
     }
@@ -3834,9 +3835,12 @@ export function setFirstTimeUsedNetwork(chainId) {
 }
 
 export function setOpenSeaTransactionSecurityProviderPopoverHasBeenShown() {
-  return submitRequestToBackground(
-    'setOpenSeaTransactionSecurityProviderPopoverHasBeenShown',
-  );
+  return async (dispatch) => {
+    await submitRequestToBackground(
+      'setOpenSeaTransactionSecurityProviderPopoverHasBeenShown',
+    );
+    await forceUpdateMetamaskState(dispatch);
+  };
 }
 
 // QR Hardware Wallets
