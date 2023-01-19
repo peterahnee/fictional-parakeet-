@@ -447,12 +447,13 @@ export default class SecurityTab extends PureComponent {
           <span>{t('useCollectibleDetection')}</span>
           <div className="settings-page__content-description">
             {t('useCollectibleDetectionDescription')}
-            <br />
-            {t('useCollectibleDetectionDescriptionLine2')}
             <ul className="settings-page__content-unordered-list">
+              <li>{t('useCollectibleDetectionDescriptionLine2')}</li>
               <li>{t('useCollectibleDetectionDescriptionLine3')}</li>
               <li>{t('useCollectibleDetectionDescriptionLine4')}</li>
             </ul>
+            <br />
+            {t('useCollectibleDetectionDescriptionLine5')}
           </div>
         </div>
         <div className="settings-page__content-item">
