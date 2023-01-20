@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run all hooks inside pre-commit.d
+node "$(dirname "$0")/pre-commit.d/check-assert.js"
