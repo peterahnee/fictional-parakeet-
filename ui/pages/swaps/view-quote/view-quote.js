@@ -74,7 +74,7 @@ import {
   showModal,
   setSwapsQuotesPollingLimitEnabled,
 } from '../../../store/actions';
-import { SET_SMART_TRANSACTIONS_ERROR } from '../../../store/actionConstants';
+import { ActionConstants } from '../../../store/constants/actions';
 import {
   ASSET_ROUTE,
   BUILD_QUOTE_ROUTE,
@@ -927,7 +927,7 @@ export default function ViewQuote() {
     if (currentSmartTransactionsEnabled && smartTransactionsOptInStatus) {
       // Removes a smart transactions error when the component loads.
       dispatch({
-        type: SET_SMART_TRANSACTIONS_ERROR,
+        type: ActionConstants.setSmartTransactionsError,
         payload: null,
       });
     }

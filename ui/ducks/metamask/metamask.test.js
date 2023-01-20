@@ -1,5 +1,5 @@
 import { TransactionStatus } from '../../../shared/constants/transaction';
-import * as actionConstants from '../../store/actionConstants';
+import { ActionConstants } from '../../store/constants/actions';
 import reduceMetamask, {
   getBlockGasLimit,
   getConversionRate,
@@ -122,7 +122,7 @@ describe('MetaMask Reducers', () => {
       selectedAddress: 'test address',
     };
     const lockMetaMask = reduceMetamask(unlockMetaMaskState, {
-      type: actionConstants.LOCK_METAMASK,
+      type: ActionConstants.lockMetamask,
     });
 
     expect(lockMetaMask.isUnlocked).toStrictEqual(false);
@@ -132,7 +132,7 @@ describe('MetaMask Reducers', () => {
     const state = reduceMetamask(
       {},
       {
-        type: actionConstants.SET_RPC_TARGET,
+        type: ActionConstants.setRpcTarget,
         value: 'https://custom.rpc',
       },
     );
@@ -144,7 +144,7 @@ describe('MetaMask Reducers', () => {
     const state = reduceMetamask(
       {},
       {
-        type: actionConstants.SET_PROVIDER_TYPE,
+        type: ActionConstants.setProviderType,
         value: 'provider type',
       },
     );
@@ -156,7 +156,7 @@ describe('MetaMask Reducers', () => {
     const state = reduceMetamask(
       {},
       {
-        type: actionConstants.SHOW_ACCOUNT_DETAIL,
+        type: ActionConstants.showAccountDetail,
       },
     );
 
@@ -168,7 +168,7 @@ describe('MetaMask Reducers', () => {
     const state = reduceMetamask(
       {},
       {
-        type: actionConstants.SET_ACCOUNT_LABEL,
+        type: ActionConstants.setAccountLabel,
         value: {
           account: 'test account',
           label: 'test label',
@@ -185,7 +185,7 @@ describe('MetaMask Reducers', () => {
     const state = reduceMetamask(
       {},
       {
-        type: actionConstants.TOGGLE_ACCOUNT_MENU,
+        type: ActionConstants.toggleAccountMenu,
       },
     );
 
@@ -203,7 +203,7 @@ describe('MetaMask Reducers', () => {
     };
 
     const state = reduceMetamask(oldState, {
-      type: actionConstants.UPDATE_TRANSACTION_PARAMS,
+      type: ActionConstants.updateTransactionParams,
       id: 1,
       value: 'bar',
     });
@@ -215,7 +215,7 @@ describe('MetaMask Reducers', () => {
     const state = reduceMetamask(
       {},
       {
-        type: actionConstants.SET_USE_BLOCKIE,
+        type: ActionConstants.setUseBlockie,
         value: true,
       },
     );
@@ -227,7 +227,7 @@ describe('MetaMask Reducers', () => {
     const state = reduceMetamask(
       {},
       {
-        type: actionConstants.UPDATE_FEATURE_FLAGS,
+        type: ActionConstants.updateFeatureFlags,
         value: {
           foo: true,
         },
@@ -241,7 +241,7 @@ describe('MetaMask Reducers', () => {
     const state = reduceMetamask(
       {},
       {
-        type: actionConstants.CLOSE_WELCOME_SCREEN,
+        type: ActionConstants.closeWelcomeScreen,
       },
     );
 
@@ -252,7 +252,7 @@ describe('MetaMask Reducers', () => {
     const state = reduceMetamask(
       {},
       {
-        type: actionConstants.SET_CURRENT_LOCALE,
+        type: ActionConstants.setCurrentLocale,
         value: { locale: 'ge' },
       },
     );
@@ -270,7 +270,7 @@ describe('MetaMask Reducers', () => {
     const pendingTokensState = reduceMetamask(
       {},
       {
-        type: actionConstants.SET_PENDING_TOKENS,
+        type: ActionConstants.setPendingTokens,
         payload,
       },
     );
@@ -290,7 +290,7 @@ describe('MetaMask Reducers', () => {
     };
 
     const state = reduceMetamask(pendingTokensState, {
-      type: actionConstants.CLEAR_PENDING_TOKENS,
+      type: ActionConstants.clearPendingTokens,
     });
 
     expect(state.pendingTokens).toStrictEqual({});

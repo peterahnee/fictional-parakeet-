@@ -21,7 +21,7 @@ import {
   ENS_UNKNOWN_ERROR,
 } from '../pages/send/send.constants';
 import { isValidDomainName } from '../helpers/utils/util';
-import { CHAIN_CHANGED } from '../store/actionConstants';
+import { ActionConstants } from '../store/constants/actions';
 import {
   BURN_ADDRESS,
   isBurnAddress,
@@ -118,7 +118,7 @@ const slice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(CHAIN_CHANGED, (state, action) => {
+    builder.addCase(ActionConstants.chainChanged, (state, action) => {
       if (action.payload !== state.currentChainId) {
         state.stage = 'UNINITIALIZED';
         web3Provider = null;

@@ -1,8 +1,6 @@
-import * as actionConstants from '../../store/actionConstants';
+import { ActionConstants } from '../../store/constants/actions';
 import { HardwareDeviceNames } from '../../../shared/constants/hardware-wallets';
 import reduceApp from './app';
-
-const actions = actionConstants;
 
 describe('App State', () => {
   const metamaskState = {
@@ -23,7 +21,7 @@ describe('App State', () => {
 
   it('sets networkDropdownOpen dropdown to true', () => {
     const state = reduceApp(metamaskState, {
-      type: actions.NETWORK_DROPDOWN_OPEN,
+      type: ActionConstants.networkDropdownOpen,
     });
 
     expect(state.networkDropdownOpen).toStrictEqual(true);
@@ -33,7 +31,7 @@ describe('App State', () => {
     const dropdown = { networkDropdowopen: true };
     const state = { ...metamaskState, ...dropdown };
     const newState = reduceApp(state, {
-      type: actions.NETWORK_DROPDOWN_CLOSE,
+      type: ActionConstants.networkDropdownClose,
     });
 
     expect(newState.networkDropdownOpen).toStrictEqual(false);
@@ -41,7 +39,7 @@ describe('App State', () => {
 
   it('opens alert', () => {
     const state = reduceApp(metamaskState, {
-      type: actions.ALERT_OPEN,
+      type: ActionConstants.alertOpen,
       value: 'test message',
     });
 
@@ -53,7 +51,7 @@ describe('App State', () => {
     const alert = { alertOpen: true, alertMessage: 'test message' };
     const state = { ...metamaskState, ...alert };
     const newState = reduceApp(state, {
-      type: actions.ALERT_CLOSE,
+      type: ActionConstants.alertClose,
     });
 
     expect(newState.alertOpen).toStrictEqual(false);
@@ -62,7 +60,7 @@ describe('App State', () => {
 
   it('detects qr code data', () => {
     const state = reduceApp(metamaskState, {
-      type: actions.QR_CODE_DETECTED,
+      type: ActionConstants.qrCodeDetected,
       value: 'qr data',
     });
 
@@ -71,7 +69,7 @@ describe('App State', () => {
 
   it('opens modal', () => {
     const state = reduceApp(metamaskState, {
-      type: actions.MODAL_OPEN,
+      type: ActionConstants.modalOpen,
       payload: {
         name: 'test',
       },
@@ -93,7 +91,7 @@ describe('App State', () => {
 
     const state = { ...metamaskState, appState: { ...opensModal } };
     const newState = reduceApp(state, {
-      type: actions.MODAL_CLOSE,
+      type: ActionConstants.modalClose,
     });
 
     expect(newState.modal.open).toStrictEqual(false);
@@ -102,7 +100,7 @@ describe('App State', () => {
 
   it('shows send token page', () => {
     const state = reduceApp(metamaskState, {
-      type: actions.SHOW_SEND_TOKEN_PAGE,
+      type: ActionConstants.showSendTokenPage,
     });
 
     expect(state.warning).toBeNull();
@@ -110,7 +108,7 @@ describe('App State', () => {
 
   it('locks Metamask', () => {
     const state = reduceApp(metamaskState, {
-      type: actions.LOCK_METAMASK,
+      type: ActionConstants.lockMetamask,
     });
 
     expect(state.warning).toBeNull();
@@ -118,7 +116,7 @@ describe('App State', () => {
 
   it('goes home', () => {
     const state = reduceApp(metamaskState, {
-      type: actions.GO_HOME,
+      type: ActionConstants.goHome,
     });
 
     expect(state.accountDetail.subview).toStrictEqual('transactions');
@@ -129,7 +127,7 @@ describe('App State', () => {
 
   it('shows account detail', () => {
     const state = reduceApp(metamaskState, {
-      type: actions.SHOW_ACCOUNT_DETAIL,
+      type: ActionConstants.showAccountDetail,
       value: 'context address',
     });
     expect(state.forgottenPassword).toBeNull(); // default
@@ -149,7 +147,7 @@ describe('App State', () => {
 
     const state = { ...metamaskState, appState: { ...exportPrivKeyModal } };
     const newState = reduceApp(state, {
-      type: actions.CLEAR_ACCOUNT_DETAILS,
+      type: ActionConstants.clearAccountDetails,
     });
 
     expect(newState.accountDetail).toStrictEqual({});
@@ -157,7 +155,7 @@ describe('App State', () => {
 
   it('shoes account page', () => {
     const state = reduceApp(metamaskState, {
-      type: actions.SHOW_ACCOUNTS_PAGE,
+      type: ActionConstants.showAccountsPage,
     });
 
     expect(state.isLoading).toStrictEqual(false);
@@ -179,7 +177,7 @@ describe('App State', () => {
     };
     const oldState = { ...metamaskState, ...txs };
     const state = reduceApp(oldState, {
-      type: actions.SHOW_CONF_TX_PAGE,
+      type: ActionConstants.showConfTxPage,
       id: 2,
     });
 
@@ -203,7 +201,7 @@ describe('App State', () => {
     const oldState = { ...metamaskState, ...txs };
 
     const state = reduceApp(oldState, {
-      type: actions.COMPLETED_TX,
+      type: ActionConstants.completedTx,
       value: {
         id: 1,
       },
@@ -215,7 +213,7 @@ describe('App State', () => {
 
   it('returns to account detail page when no unconf actions completed tx', () => {
     const state = reduceApp(metamaskState, {
-      type: actions.COMPLETED_TX,
+      type: ActionConstants.completedTx,
       value: {
         unconfirmedActionsCount: 0,
       },
@@ -227,7 +225,7 @@ describe('App State', () => {
 
   it('sets default warning when unlock fails', () => {
     const state = reduceApp(metamaskState, {
-      type: actions.UNLOCK_FAILED,
+      type: ActionConstants.unlockFailed,
     });
 
     expect(state.warning).toStrictEqual('Incorrect password. Try again.');
@@ -235,7 +233,7 @@ describe('App State', () => {
 
   it('sets errors when unlock fails', () => {
     const state = reduceApp(metamaskState, {
-      type: actions.UNLOCK_FAILED,
+      type: ActionConstants.unlockFailed,
       value: 'errors',
     });
 
@@ -246,7 +244,7 @@ describe('App State', () => {
     const errorState = { warning: 'errors' };
     const oldState = { ...metamaskState, ...errorState };
     const state = reduceApp(oldState, {
-      type: actions.UNLOCK_SUCCEEDED,
+      type: ActionConstants.unlockSucceeded,
     });
 
     expect(state.warning).toStrictEqual('');
@@ -259,7 +257,7 @@ describe('App State', () => {
       lattice: "m/44'/60'/0'/0",
     };
     const state = reduceApp(metamaskState, {
-      type: actions.SET_HARDWARE_WALLET_DEFAULT_HD_PATH,
+      type: ActionConstants.setHardwareWalletDefaultHdPath,
       value: {
         device: HardwareDeviceNames.ledger,
         path: "m/44'/60'/0'",
@@ -271,7 +269,7 @@ describe('App State', () => {
 
   it('shows loading message', () => {
     const state = reduceApp(metamaskState, {
-      type: actions.SHOW_LOADING,
+      type: ActionConstants.showLoadingIndication,
       value: 'loading',
     });
 
@@ -284,7 +282,7 @@ describe('App State', () => {
     const oldState = { ...metamaskState, ...loadingState };
 
     const state = reduceApp(oldState, {
-      type: actions.HIDE_LOADING,
+      type: ActionConstants.hideLoadingIndication,
     });
 
     expect(state.isLoading).toStrictEqual(false);
@@ -292,7 +290,7 @@ describe('App State', () => {
 
   it('displays warning', () => {
     const state = reduceApp(metamaskState, {
-      type: actions.DISPLAY_WARNING,
+      type: ActionConstants.displayWarning,
       value: 'warning',
     });
 
@@ -304,7 +302,7 @@ describe('App State', () => {
     const displayWarningState = { warning: 'warning' };
     const oldState = { ...metamaskState, ...displayWarningState };
     const state = reduceApp(oldState, {
-      type: actions.HIDE_WARNING,
+      type: ActionConstants.hideWarning,
     });
 
     expect(state.warning).toBeUndefined();
@@ -312,7 +310,7 @@ describe('App State', () => {
 
   it('shows private key', () => {
     const state = reduceApp(metamaskState, {
-      type: actions.SHOW_PRIVATE_KEY,
+      type: ActionConstants.showPrivateKey,
       value: 'private key',
     });
 
@@ -323,16 +321,16 @@ describe('App State', () => {
 
   it('set mouse user state', () => {
     const state = reduceApp(metamaskState, {
-      type: actions.SET_MOUSE_USER_STATE,
+      type: ActionConstants.setMouseUserState,
       value: true,
     });
 
     expect(state.isMouseUser).toStrictEqual(true);
   });
 
-  it('smart transactions - SET_SMART_TRANSACTIONS_ERROR', () => {
+  it('smart transactions - setSmartTransactionsError', () => {
     const state = reduceApp(metamaskState, {
-      type: actions.SET_SMART_TRANSACTIONS_ERROR,
+      type: ActionConstants.setSmartTransactionsError,
       payload: 'Server Side Error',
     });
     expect(state.smartTransactionsError).toStrictEqual('Server Side Error');

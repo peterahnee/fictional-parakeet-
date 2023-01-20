@@ -1069,7 +1069,7 @@ describe('Send Slice', () => {
 
       it('should set the recipient address to the scanned address value if they are not equal', () => {
         const action = {
-          type: 'UI_QR_CODE_DETECTED',
+          type: 'uiQrCodeDetected',
           value: {
             type: 'address',
             values: {
@@ -1089,7 +1089,7 @@ describe('Send Slice', () => {
 
       it('should not set the recipient address to invalid scanned address and errors', () => {
         const badQRAddressAction = {
-          type: 'UI_QR_CODE_DETECTED',
+          type: 'uiQrCodeDetected',
           value: {
             type: 'address',
             values: {
@@ -1120,7 +1120,7 @@ describe('Send Slice', () => {
         };
 
         const action = {
-          type: 'SELECTED_ACCOUNT_CHANGED',
+          type: 'selectedAccountChanged',
           payload: {
             account: {
               address: '0xDifferentAddress',
@@ -1149,7 +1149,7 @@ describe('Send Slice', () => {
         };
 
         const action = {
-          type: 'SELECTED_ACCOUNT_CHANGED',
+          type: 'selectedAccountChanged',
           payload: {
             account: undefined,
           },
@@ -1179,7 +1179,7 @@ describe('Send Slice', () => {
         };
 
         const action = {
-          type: 'ACCOUNT_CHANGED',
+          type: 'accountChanged',
           payload: {
             account: {
               address: '0xAddress',
@@ -1213,7 +1213,7 @@ describe('Send Slice', () => {
         };
 
         const action = {
-          type: 'ACCOUNT_CHANGED',
+          type: 'accountChanged',
           payload: {
             account: undefined,
           },
@@ -1237,7 +1237,7 @@ describe('Send Slice', () => {
         };
 
         const action = {
-          type: 'ACCOUNT_CHANGED',
+          type: 'accountChanged',
           payload: {
             account: {
               address: '0xDifferentAddress',
@@ -1363,7 +1363,7 @@ describe('Send Slice', () => {
         };
 
         const action = {
-          type: 'GAS_FEE_ESTIMATES_UPDATED',
+          type: 'gasFeeEstimatesUpdated',
           payload: {
             gasEstimateType: GasEstimateTypes.legacy,
             gasFeeEstimates: {
@@ -1680,8 +1680,8 @@ describe('Send Slice', () => {
         const actionResult = store.getActions();
 
         expect(actionResult).toHaveLength(6);
-        expect(actionResult[0].type).toStrictEqual('SHOW_LOADING_INDICATION');
-        expect(actionResult[1].type).toStrictEqual('HIDE_LOADING_INDICATION');
+        expect(actionResult[0].type).toStrictEqual('showLoadingIndication');
+        expect(actionResult[1].type).toStrictEqual('hideLoadingIndication');
         expect(actionResult[2]).toMatchObject({
           type: 'send/addHistoryEntry',
           payload: `sendFlow - user set asset to ERC20 token with symbol TokenSymbol and address tokenAddress`,
@@ -1731,14 +1731,14 @@ describe('Send Slice', () => {
         ).rejects.toThrow('invalidAssetType');
         const actionResult = store.getActions();
         expect(actionResult).toHaveLength(3);
-        expect(actionResult[0].type).toStrictEqual('SHOW_LOADING_INDICATION');
-        expect(actionResult[1].type).toStrictEqual('HIDE_LOADING_INDICATION');
+        expect(actionResult[0].type).toStrictEqual('showLoadingIndication');
+        expect(actionResult[1].type).toStrictEqual('hideLoadingIndication');
         expect(actionResult[2]).toStrictEqual({
           payload: {
             name: 'CONVERT_TOKEN_TO_NFT',
             tokenAddress: 'tokenAddress',
           },
-          type: 'UI_MODAL_OPEN',
+          type: 'uiModalOpen',
         });
         process.env.NFTS_V1 = false;
       });
@@ -2269,7 +2269,7 @@ describe('Send Slice', () => {
           payload:
             'sendFlow - user clicked next and transaction should be added to controller',
         });
-        expect(actionResult[1].type).toStrictEqual('SHOW_CONF_TX_PAGE');
+        expect(actionResult[1].type).toStrictEqual('showConfTxPage');
       });
 
       describe('with token transfers', () => {
@@ -2616,8 +2616,8 @@ describe('Send Slice', () => {
               editTransactionState.metamask.unapprovedTxs[1].txParams.data,
           },
         });
-        expect(actionResult[2].type).toStrictEqual('SHOW_LOADING_INDICATION');
-        expect(actionResult[3].type).toStrictEqual('HIDE_LOADING_INDICATION');
+        expect(actionResult[2].type).toStrictEqual('showLoadingIndication');
+        expect(actionResult[3].type).toStrictEqual('hideLoadingIndication');
         expect(actionResult[4]).toStrictEqual({
           type: 'send/addHistoryEntry',
           payload:
@@ -2807,8 +2807,8 @@ describe('Send Slice', () => {
             editTransactionState.metamask.unapprovedTxs[1].txParams.data,
         },
       });
-      expect(actionResult[2].type).toStrictEqual('SHOW_LOADING_INDICATION');
-      expect(actionResult[3].type).toStrictEqual('HIDE_LOADING_INDICATION');
+      expect(actionResult[2].type).toStrictEqual('showLoadingIndication');
+      expect(actionResult[3].type).toStrictEqual('hideLoadingIndication');
       expect(actionResult[4]).toMatchObject({
         type: 'send/addHistoryEntry',
         payload:

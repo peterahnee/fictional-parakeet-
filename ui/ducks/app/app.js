@@ -2,7 +2,7 @@ import {
   WebHIDConnectedStatuses,
   HardwareTransportStates,
 } from '../../../shared/constants/hardware-wallets';
-import * as actionConstants from '../../store/actionConstants';
+import { ActionConstants } from '../../store/constants/actions';
 
 export default function reduceApp(state = {}, action) {
   // default state
@@ -65,27 +65,27 @@ export default function reduceApp(state = {}, action) {
 
   switch (action.type) {
     // dropdown methods
-    case actionConstants.NETWORK_DROPDOWN_OPEN:
+    case ActionConstants.networkDropdownOpen:
       return {
         ...appState,
         networkDropdownOpen: true,
       };
 
-    case actionConstants.NETWORK_DROPDOWN_CLOSE:
+    case ActionConstants.networkDropdownClose:
       return {
         ...appState,
         networkDropdownOpen: false,
       };
 
     // alert methods
-    case actionConstants.ALERT_OPEN:
+    case ActionConstants.alertOpen:
       return {
         ...appState,
         alertOpen: true,
         alertMessage: action.value,
       };
 
-    case actionConstants.ALERT_CLOSE:
+    case ActionConstants.alertClose:
       return {
         ...appState,
         alertOpen: false,
@@ -93,27 +93,27 @@ export default function reduceApp(state = {}, action) {
       };
 
     // qr scanner methods
-    case actionConstants.QR_CODE_DETECTED:
+    case ActionConstants.qrCodeDetected:
       return {
         ...appState,
         qrCodeData: action.value,
       };
 
     // Smart Transactions errors.
-    case actionConstants.SET_SMART_TRANSACTIONS_ERROR:
+    case ActionConstants.setSmartTransactionsError:
       return {
         ...appState,
         smartTransactionsError: action.payload,
       };
 
-    case actionConstants.DISMISS_SMART_TRANSACTIONS_ERROR_MESSAGE:
+    case ActionConstants.dismissSmartTransactionsError:
       return {
         ...appState,
         smartTransactionsErrorMessageDismissed: true,
       };
 
     // modal methods:
-    case actionConstants.MODAL_OPEN: {
+    case ActionConstants.modalOpen: {
       const { name, ...modalProps } = action.payload;
 
       return {
@@ -129,7 +129,7 @@ export default function reduceApp(state = {}, action) {
       };
     }
 
-    case actionConstants.MODAL_CLOSE:
+    case ActionConstants.modalClose:
       return {
         ...appState,
         modal: Object.assign(
@@ -140,25 +140,25 @@ export default function reduceApp(state = {}, action) {
         ),
       };
 
-    case actionConstants.CLEAR_ACCOUNT_DETAILS:
+    case ActionConstants.clearAccountDetails:
       return {
         ...appState,
         accountDetail: {},
       };
 
-    case actionConstants.FORGOT_PASSWORD:
+    case ActionConstants.forgotPassword:
       return {
         ...appState,
         forgottenPassword: action.value,
       };
 
-    case actionConstants.SHOW_SEND_TOKEN_PAGE:
+    case ActionConstants.showSendTokenPage:
       return {
         ...appState,
         warning: null,
       };
 
-    case actionConstants.LOCK_METAMASK:
+    case ActionConstants.lockMetamask:
       return {
         ...appState,
         warning: null,
@@ -166,7 +166,7 @@ export default function reduceApp(state = {}, action) {
 
     // accounts
 
-    case actionConstants.GO_HOME:
+    case ActionConstants.goHome:
       return {
         ...appState,
         accountDetail: {
@@ -177,7 +177,7 @@ export default function reduceApp(state = {}, action) {
         warning: null,
       };
 
-    case actionConstants.SHOW_ACCOUNT_DETAIL:
+    case ActionConstants.showAccountDetail:
       return {
         ...appState,
         forgottenPassword: appState.forgottenPassword
@@ -190,7 +190,7 @@ export default function reduceApp(state = {}, action) {
         },
       };
 
-    case actionConstants.SHOW_ACCOUNTS_PAGE:
+    case ActionConstants.showAccountsPage:
       return {
         ...appState,
         isLoading: false,
@@ -199,7 +199,7 @@ export default function reduceApp(state = {}, action) {
         forgottenPassword: false,
       };
 
-    case actionConstants.SHOW_CONF_TX_PAGE:
+    case ActionConstants.showConfTxPage:
       return {
         ...appState,
         txId: action.id,
@@ -207,7 +207,7 @@ export default function reduceApp(state = {}, action) {
         isLoading: false,
       };
 
-    case actionConstants.COMPLETED_TX:
+    case ActionConstants.completedTx:
       if (action.value.unconfirmedActionsCount > 0) {
         return {
           ...appState,
@@ -226,24 +226,24 @@ export default function reduceApp(state = {}, action) {
         },
       };
 
-    case actionConstants.TRANSACTION_ERROR:
+    case ActionConstants.transactionError:
       return {
         ...appState,
       };
 
-    case actionConstants.UNLOCK_FAILED:
+    case ActionConstants.unlockFailed:
       return {
         ...appState,
         warning: action.value || 'Incorrect password. Try again.',
       };
 
-    case actionConstants.UNLOCK_SUCCEEDED:
+    case ActionConstants.unlockSucceeded:
       return {
         ...appState,
         warning: '',
       };
 
-    case actionConstants.SET_HARDWARE_WALLET_DEFAULT_HD_PATH: {
+    case ActionConstants.setHardwareWalletDefaultHdPath: {
       const { device, path } = action.value;
       const newDefaults = { ...appState.defaultHdPaths };
       newDefaults[device] = path;
@@ -254,33 +254,33 @@ export default function reduceApp(state = {}, action) {
       };
     }
 
-    case actionConstants.SHOW_LOADING:
+    case ActionConstants.showLoadingIndication:
       return {
         ...appState,
         isLoading: true,
         loadingMessage: action.value,
       };
 
-    case actionConstants.HIDE_LOADING:
+    case ActionConstants.hideLoadingIndication:
       return {
         ...appState,
         isLoading: false,
       };
 
-    case actionConstants.DISPLAY_WARNING:
+    case ActionConstants.displayWarning:
       return {
         ...appState,
         warning: action.value,
         isLoading: false,
       };
 
-    case actionConstants.HIDE_WARNING:
+    case ActionConstants.hideWarning:
       return {
         ...appState,
         warning: undefined,
       };
 
-    case actionConstants.SHOW_PRIVATE_KEY:
+    case ActionConstants.showPrivateKey:
       return {
         ...appState,
         accountDetail: {
@@ -290,85 +290,85 @@ export default function reduceApp(state = {}, action) {
         },
       };
 
-    case actionConstants.SET_MOUSE_USER_STATE:
+    case ActionConstants.setMouseUserState:
       return {
         ...appState,
         isMouseUser: action.value,
       };
 
-    case actionConstants.SET_SELECTED_SETTINGS_RPC_URL:
+    case ActionConstants.setSelectedSettingsRpcUrl:
       return {
         ...appState,
         networksTabSelectedRpcUrl: action.value,
       };
 
-    case actionConstants.SET_NEW_NETWORK_ADDED:
+    case ActionConstants.setNewNetworkAdded:
       return {
         ...appState,
         newNetworkAdded: action.value,
       };
 
-    case actionConstants.SET_NEW_TOKENS_IMPORTED:
+    case ActionConstants.setNewTokensImported:
       return {
         ...appState,
         newTokensImported: action.value,
       };
 
-    case actionConstants.SET_NEW_COLLECTIBLE_ADDED_MESSAGE:
+    case ActionConstants.setNewCollectibleAddedMessage:
       return {
         ...appState,
         newCollectibleAddedMessage: action.value,
       };
 
-    case actionConstants.SET_REMOVE_COLLECTIBLE_MESSAGE:
+    case ActionConstants.setRemoveCollectibleMessage:
       return {
         ...appState,
         removeCollectibleMessage: action.value,
       };
 
-    case actionConstants.PORTFOLIO_TOOLTIP_WAS_SHOWN_IN_THIS_SESSION:
+    case ActionConstants.portfolioTooltipWasShownInThisSession:
       return {
         ...appState,
         portfolioTooltipWasShownInThisSession: true,
       };
 
-    case actionConstants.LOADING_METHOD_DATA_STARTED:
+    case ActionConstants.loadingMethodDataStarted:
       return {
         ...appState,
         loadingMethodData: true,
       };
 
-    case actionConstants.LOADING_METHOD_DATA_FINISHED:
+    case ActionConstants.loadingMethodDataFinished:
       return {
         ...appState,
         loadingMethodData: false,
       };
 
-    case actionConstants.SET_REQUEST_ACCOUNT_TABS:
+    case ActionConstants.setRequestAccountTabs:
       return {
         ...appState,
         requestAccountTabs: action.value,
       };
 
-    case actionConstants.SET_OPEN_METAMASK_TAB_IDS:
+    case ActionConstants.setOpenMetamaskTabIds:
       return {
         ...appState,
         openMetaMaskTabs: action.value,
       };
 
-    case actionConstants.SET_CURRENT_WINDOW_TAB:
+    case ActionConstants.setCurrentWindowTab:
       return {
         ...appState,
         currentWindowTab: action.value,
       };
 
-    case actionConstants.HIDE_WHATS_NEW_POPUP:
+    case ActionConstants.hideWhatsNewPopup:
       return {
         ...appState,
         showWhatsNewPopup: false,
       };
 
-    case actionConstants.CAPTURE_SINGLE_EXCEPTION:
+    case ActionConstants.captureSingleException:
       return {
         ...appState,
         singleExceptions: {
@@ -377,39 +377,39 @@ export default function reduceApp(state = {}, action) {
         },
       };
 
-    case actionConstants.TOGGLE_GAS_LOADING_ANIMATION:
+    case ActionConstants.toggleGasLoadingAnimation:
       return {
         ...appState,
         gasLoadingAnimationIsShowing: action.value,
       };
 
-    case actionConstants.SET_WEBHID_CONNECTED_STATUS:
+    case ActionConstants.setWebhidConnectedStatus:
       return {
         ...appState,
         ledgerWebHidConnectedStatus: action.value,
       };
 
-    case actionConstants.SET_LEDGER_TRANSPORT_STATUS:
+    case ActionConstants.setLedgerTransportStatus:
       return {
         ...appState,
         ledgerTransportStatus: action.value,
       };
-    case actionConstants.TOGGLE_CURRENCY_INPUT_SWITCH:
+    case ActionConstants.toggleCurrencyInputSwitch:
       return {
         ...appState,
         sendInputCurrencySwitched: !appState.sendInputCurrencySwitched,
       };
-    case actionConstants.SET_NEW_CUSTOM_NETWORK_ADDED:
+    case ActionConstants.setNewCustomNetworkAdded:
       return {
         ...appState,
         newCustomNetworkAdded: action.value,
       };
-    case actionConstants.ONBOARDED_IN_THIS_UI_SESSION:
+    case ActionConstants.onboardedInThisUiSession:
       return {
         ...appState,
         onboardedInThisUISession: action.value,
       };
-    case actionConstants.SET_CUSTOM_TOKEN_AMOUNT:
+    case ActionConstants.setCustomTokenAmount:
       return {
         ...appState,
         customTokenAmount: action.value,
@@ -422,26 +422,26 @@ export default function reduceApp(state = {}, action) {
 // Action Creators
 export function hideWhatsNewPopup() {
   return {
-    type: actionConstants.HIDE_WHATS_NEW_POPUP,
+    type: ActionConstants.hideWhatsNewPopup,
   };
 }
 
 export function setPortfolioTooltipWasShownInThisSession() {
   return {
-    type: actionConstants.PORTFOLIO_TOOLTIP_WAS_SHOWN_IN_THIS_SESSION,
+    type: ActionConstants.portfolioTooltipWasShownInThisSession,
   };
 }
 
 export function toggleGasLoadingAnimation(value) {
-  return { type: actionConstants.TOGGLE_GAS_LOADING_ANIMATION, value };
+  return { type: ActionConstants.toggleGasLoadingAnimation, value };
 }
 
 export function setLedgerWebHidConnectedStatus(value) {
-  return { type: actionConstants.SET_WEBHID_CONNECTED_STATUS, value };
+  return { type: ActionConstants.setWebhidConnectedStatus, value };
 }
 
 export function setLedgerTransportStatus(value) {
-  return { type: actionConstants.SET_LEDGER_TRANSPORT_STATUS, value };
+  return { type: ActionConstants.setLedgerTransportStatus, value };
 }
 
 // Selectors
@@ -466,17 +466,17 @@ export function getPortfolioTooltipWasShownInThisSession(state) {
 }
 
 export function toggleCurrencySwitch() {
-  return { type: actionConstants.TOGGLE_CURRENCY_INPUT_SWITCH };
+  return { type: ActionConstants.toggleCurrencyInputSwitch };
 }
 
 export function setNewCustomNetworkAdded(value) {
-  return { type: actionConstants.SET_NEW_CUSTOM_NETWORK_ADDED, value };
+  return { type: ActionConstants.setNewCustomNetworkAdded, value };
 }
 
 export function setOnBoardedInThisUISession(value) {
-  return { type: actionConstants.ONBOARDED_IN_THIS_UI_SESSION, value };
+  return { type: ActionConstants.onboardedInThisUiSession, value };
 }
 
 export function setCustomTokenAmount(value) {
-  return { type: actionConstants.SET_CUSTOM_TOKEN_AMOUNT, value };
+  return { type: ActionConstants.setCustomTokenAmount, value };
 }

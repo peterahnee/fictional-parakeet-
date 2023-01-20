@@ -46,7 +46,7 @@ import {
   loadRelativeTimeFormatLocaleData,
 } from '../helpers/utils/i18n-helper';
 import { decimalToHex } from '../../shared/modules/conversion.utils';
-import * as actionConstants from './actionConstants';
+import { ActionConstants } from './constants/actions';
 import {
   generateActionId,
   callBackgroundMethod,
@@ -55,7 +55,7 @@ import {
 
 export function goHome() {
   return {
-    type: actionConstants.GO_HOME,
+    type: ActionConstants.goHome,
   };
 }
 // async actions
@@ -337,7 +337,7 @@ export function importNewAccount(strategy, args) {
     dispatch(updateMetamaskState(newState));
     if (newState.selectedAddress) {
       dispatch({
-        type: actionConstants.SHOW_ACCOUNT_DETAIL,
+        type: ActionConstants.showAccountDetail,
         value: newState.selectedAddress,
       });
     }
@@ -684,7 +684,7 @@ export function signTypedMsg(msgData) {
 
 export function updateCustomNonce(value) {
   return {
-    type: actionConstants.UPDATE_CUSTOM_NONCE,
+    type: ActionConstants.updateCustomNonce,
     value,
   };
 }
@@ -1009,7 +1009,7 @@ export function completedTx(id) {
       (tx) => tx.id !== id,
     );
     dispatch({
-      type: actionConstants.COMPLETED_TX,
+      type: ActionConstants.completedTx,
       value: {
         id,
         unconfirmedActionsCount: otherUnconfirmedActions.length,
@@ -1020,7 +1020,7 @@ export function completedTx(id) {
 
 export function updateTransactionParams(id, txParams) {
   return {
-    type: actionConstants.UPDATE_TRANSACTION_PARAMS,
+    type: ActionConstants.updateTransactionParams,
     id,
     value: txParams,
   };
@@ -1028,7 +1028,7 @@ export function updateTransactionParams(id, txParams) {
 
 export function txError(err) {
   return {
-    type: actionConstants.TRANSACTION_ERROR,
+    type: ActionConstants.transactionError,
     message: err.message,
   };
 }
@@ -1411,14 +1411,14 @@ export function unMarkPasswordForgotten() {
 
 export function forgotPassword(forgotPasswordState = true) {
   return {
-    type: actionConstants.FORGOT_PASSWORD,
+    type: ActionConstants.forgotPassword,
     value: forgotPasswordState,
   };
 }
 
 export function closeWelcomeScreen() {
   return {
-    type: actionConstants.CLOSE_WELCOME_SCREEN,
+    type: ActionConstants.closeWelcomeScreen,
   };
 }
 
@@ -1428,20 +1428,20 @@ export function closeWelcomeScreen() {
 
 export function unlockInProgress() {
   return {
-    type: actionConstants.UNLOCK_IN_PROGRESS,
+    type: ActionConstants.unlockInProgress,
   };
 }
 
 export function unlockFailed(message) {
   return {
-    type: actionConstants.UNLOCK_FAILED,
+    type: ActionConstants.unlockFailed,
     value: message,
   };
 }
 
 export function unlockSucceeded(message) {
   return {
-    type: actionConstants.UNLOCK_SUCCEEDED,
+    type: ActionConstants.unlockSucceeded,
     value: message,
   };
 }
@@ -1462,7 +1462,7 @@ export function updateMetamaskState(newState) {
     }
 
     if (selectedAddress !== newSelectedAddress) {
-      dispatch({ type: actionConstants.SELECTED_ADDRESS_CHANGED });
+      dispatch({ type: ActionConstants.selectedAddressChanged });
     }
 
     const newAddressBook = newState.addressBook?.[newProvider?.chainId] ?? {};
@@ -1476,7 +1476,7 @@ export function updateMetamaskState(newState) {
     Object.entries(oldAccounts).forEach(([address, oldAccount]) => {
       if (!isEqual(oldAccount, newAccounts[address])) {
         dispatch({
-          type: actionConstants.ACCOUNT_CHANGED,
+          type: ActionConstants.accountChanged,
           payload: { account: newAccounts[address] },
         });
       }
@@ -1485,14 +1485,14 @@ export function updateMetamaskState(newState) {
     // property update or if the entire account changes.
     if (isEqual(oldSelectedAccount, newSelectedAccount) === false) {
       dispatch({
-        type: actionConstants.SELECTED_ACCOUNT_CHANGED,
+        type: ActionConstants.selectedAccountChanged,
         payload: { account: newSelectedAccount },
       });
     }
     // We need to keep track of changing address book entries
     if (isEqual(oldAddressBook, newAddressBook) === false) {
       dispatch({
-        type: actionConstants.ADDRESS_BOOK_UPDATED,
+        type: ActionConstants.addressBookUpdated,
         payload: { addressBook: newAddressBook },
       });
     }
@@ -1502,7 +1502,7 @@ export function updateMetamaskState(newState) {
       isEqual(currentState.gasFeeEstimates, newState.gasFeeEstimates) === false
     ) {
       dispatch({
-        type: actionConstants.GAS_FEE_ESTIMATES_UPDATED,
+        type: ActionConstants.gasFeeEstimatesUpdated,
         payload: {
           gasFeeEstimates: newState.gasFeeEstimates,
           gasEstimateType: newState.gasEstimateType,
@@ -1510,12 +1510,12 @@ export function updateMetamaskState(newState) {
       });
     }
     dispatch({
-      type: actionConstants.UPDATE_METAMASK_STATE,
+      type: ActionConstants.updateMetamaskState,
       value: newState,
     });
     if (provider.chainId !== newProvider.chainId) {
       dispatch({
-        type: actionConstants.CHAIN_CHANGED,
+        type: ActionConstants.chainChanged,
         payload: newProvider.chainId,
       });
       // We dispatch this action to ensure that the send state stays up to date
@@ -1554,11 +1554,11 @@ export function lockMetamask() {
       .then((newState) => {
         dispatch(updateMetamaskState(newState));
         dispatch(hideLoadingIndication());
-        dispatch({ type: actionConstants.LOCK_METAMASK });
+        dispatch({ type: ActionConstants.lockMetamask });
       })
       .catch(() => {
         dispatch(hideLoadingIndication());
-        dispatch({ type: actionConstants.LOCK_METAMASK });
+        dispatch({ type: ActionConstants.lockMetamask });
       });
   };
 }
@@ -1616,7 +1616,7 @@ export function showAccountDetail(address) {
     }
 
     dispatch({
-      type: actionConstants.SHOW_ACCOUNT_DETAIL,
+      type: ActionConstants.showAccountDetail,
       value: address,
     });
     if (
@@ -1669,13 +1669,13 @@ export function removePermittedAccount(origin, address) {
 
 export function showAccountsPage() {
   return {
-    type: actionConstants.SHOW_ACCOUNTS_PAGE,
+    type: ActionConstants.showAccountsPage,
   };
 }
 
 export function showConfTxPage({ id } = {}) {
   return {
-    type: actionConstants.SHOW_CONF_TX_PAGE,
+    type: ActionConstants.showConfTxPage,
     id,
   };
 }
@@ -1978,7 +1978,7 @@ export function acceptWatchAsset(suggestedAssetID) {
 
 export function clearPendingTokens() {
   return {
-    type: actionConstants.CLEAR_PENDING_TOKENS,
+    type: ActionConstants.clearPendingTokens,
   };
 }
 
@@ -2093,7 +2093,7 @@ export function setProviderType(type) {
 
 export function updateProviderType(type) {
   return {
-    type: actionConstants.SET_PROVIDER_TYPE,
+    type: ActionConstants.setProviderType,
     value: type,
   };
 }
@@ -2125,7 +2125,7 @@ export function updateAndSetCustomRpc(
     }
 
     dispatch({
-      type: actionConstants.SET_RPC_TARGET,
+      type: ActionConstants.setRpcTarget,
       value: newRpc,
     });
   };
@@ -2164,7 +2164,7 @@ export function editRpc(
     }
 
     dispatch({
-      type: actionConstants.SET_RPC_TARGET,
+      type: ActionConstants.setRpcTarget,
       value: newRpc,
     });
   };
@@ -2262,26 +2262,26 @@ export function removeFromAddressBook(chainId, addressToRemove) {
 
 export function showNetworkDropdown() {
   return {
-    type: actionConstants.NETWORK_DROPDOWN_OPEN,
+    type: ActionConstants.networkDropdownOpen,
   };
 }
 
 export function hideNetworkDropdown() {
   return {
-    type: actionConstants.NETWORK_DROPDOWN_CLOSE,
+    type: ActionConstants.networkDropdownClose,
   };
 }
 
 export function showModal(payload) {
   return {
-    type: actionConstants.MODAL_OPEN,
+    type: ActionConstants.modalOpen,
     payload,
   };
 }
 
 export function hideModal(payload) {
   return {
-    type: actionConstants.MODAL_CLOSE,
+    type: ActionConstants.modalClose,
     payload,
   };
 }
@@ -2299,14 +2299,14 @@ export function closeCurrentNotificationWindow() {
 
 export function showAlert(msg) {
   return {
-    type: actionConstants.ALERT_OPEN,
+    type: ActionConstants.alertOpen,
     value: msg,
   };
 }
 
 export function hideAlert() {
   return {
-    type: actionConstants.ALERT_CLOSE,
+    type: ActionConstants.alertClose,
   };
 }
 
@@ -2327,7 +2327,7 @@ export function updateCollectibleDropDownState(value) {
 export function qrCodeDetected(qrCodeData) {
   return async (dispatch) => {
     await dispatch({
-      type: actionConstants.QR_CODE_DETECTED,
+      type: ActionConstants.qrCodeDetected,
       value: qrCodeData,
     });
 
@@ -2340,21 +2340,21 @@ export function qrCodeDetected(qrCodeData) {
 
 export function showLoadingIndication(message) {
   return {
-    type: actionConstants.SHOW_LOADING,
+    type: ActionConstants.showLoadingIndication,
     value: message,
   };
 }
 
 export function setHardwareWalletDefaultHdPath({ device, path }) {
   return {
-    type: actionConstants.SET_HARDWARE_WALLET_DEFAULT_HD_PATH,
+    type: ActionConstants.setHardwareWalletDefaultHdPath,
     value: { device, path },
   };
 }
 
 export function hideLoadingIndication() {
   return {
-    type: actionConstants.HIDE_LOADING,
+    type: ActionConstants.hideLoadingIndication,
   };
 }
 
@@ -2370,14 +2370,14 @@ export function hideLoadingIndication() {
  */
 export function displayWarning(text) {
   return {
-    type: actionConstants.DISPLAY_WARNING,
+    type: ActionConstants.displayWarning,
     value: text,
   };
 }
 
 export function hideWarning() {
   return {
-    type: actionConstants.HIDE_WARNING,
+    type: ActionConstants.hideWarning,
   };
 }
 
@@ -2457,7 +2457,7 @@ export function exportAccounts(password, addresses) {
 
 export function showPrivateKey(key) {
   return {
-    type: actionConstants.SHOW_PRIVATE_KEY,
+    type: ActionConstants.showPrivateKey,
     value: key,
   };
 }
@@ -2478,7 +2478,7 @@ export function setAccountLabel(account, label) {
         }
 
         dispatch({
-          type: actionConstants.SET_ACCOUNT_LABEL,
+          type: ActionConstants.setAccountLabel,
           value: { account, label },
         });
         resolve(account);
@@ -2489,13 +2489,13 @@ export function setAccountLabel(account, label) {
 
 export function clearAccountDetails() {
   return {
-    type: actionConstants.CLEAR_ACCOUNT_DETAILS,
+    type: ActionConstants.clearAccountDetails,
   };
 }
 
 export function showSendTokenPage() {
   return {
-    type: actionConstants.SHOW_SEND_TOKEN_PAGE,
+    type: ActionConstants.showSendTokenPage,
   };
 }
 
@@ -2505,7 +2505,7 @@ export function buy(opts) {
     if (url) {
       global.platform.openTab({ url });
       dispatch({
-        type: actionConstants.BUY,
+        type: ActionConstants.buy,
       });
     }
   };
@@ -2536,7 +2536,7 @@ export function setFeatureFlag(feature, activated, notificationType) {
 
 export function updateFeatureFlags(updatedFeatureFlags) {
   return {
-    type: actionConstants.UPDATE_FEATURE_FLAGS,
+    type: ActionConstants.updateFeatureFlags,
     value: updatedFeatureFlags,
   };
 }
@@ -2567,7 +2567,7 @@ export function setPreference(preference, value) {
 
 export function updatePreferences(value) {
   return {
-    type: actionConstants.UPDATE_PREFERENCES,
+    type: ActionConstants.updatePreferences,
     value,
   };
 }
@@ -2617,13 +2617,13 @@ export function setCompletedOnboarding() {
 
 export function completeOnboarding() {
   return {
-    type: actionConstants.COMPLETE_ONBOARDING,
+    type: ActionConstants.completeOnboarding,
   };
 }
 
 export function setMouseUserState(isMouseUser) {
   return {
-    type: actionConstants.SET_MOUSE_USER_STATE,
+    type: ActionConstants.setMouseUserState,
     value: isMouseUser,
   };
 }
@@ -2645,7 +2645,7 @@ export async function forceUpdateMetamaskState(dispatch) {
 
 export function toggleAccountMenu() {
   return {
-    type: actionConstants.TOGGLE_ACCOUNT_MENU,
+    type: ActionConstants.toggleAccountMenu,
   };
 }
 
@@ -2665,7 +2665,7 @@ export function setParticipateInMetaMetrics(val) {
           }
 
           dispatch({
-            type: actionConstants.SET_PARTICIPATE_IN_METAMETRICS,
+            type: ActionConstants.setParticipateInMetametrics,
             value: val,
           });
           resolve([val, metaMetricsId]);
@@ -2686,7 +2686,7 @@ export function setUseBlockie(val) {
       }
     });
     dispatch({
-      type: actionConstants.SET_USE_BLOCKIE,
+      type: ActionConstants.setUseBlockie,
       value: val,
     });
   };
@@ -2703,7 +2703,7 @@ export function setUseNonceField(val) {
     }
     dispatch(hideLoadingIndication());
     dispatch({
-      type: actionConstants.SET_USE_NONCEFIELD,
+      type: ActionConstants.setUseNoncefield,
       value: val,
     });
   };
@@ -2830,7 +2830,7 @@ export function setIpfsGateway(val) {
         dispatch(displayWarning(err.message));
       } else {
         dispatch({
-          type: actionConstants.SET_IPFS_GATEWAY,
+          type: ActionConstants.setIpfsGateway,
           value: val,
         });
       }
@@ -2862,7 +2862,7 @@ export function updateCurrentLocale(key) {
 
 export function setCurrentLocale(locale, messages) {
   return {
-    type: actionConstants.SET_CURRENT_LOCALE,
+    type: ActionConstants.setCurrentLocale,
     value: {
       locale,
       messages,
@@ -2895,7 +2895,7 @@ export function setPendingTokens(pendingTokens) {
   });
 
   return {
-    type: actionConstants.SET_PENDING_TOKENS,
+    type: ActionConstants.setPendingTokens,
     payload: tokens,
   };
 }
@@ -3190,7 +3190,7 @@ export function setFirstTimeFlowType(type) {
       }
     });
     dispatch({
-      type: actionConstants.SET_FIRST_TIME_FLOW_TYPE,
+      type: ActionConstants.setFirstTimeFlowType,
       value: type,
     });
   };
@@ -3198,35 +3198,35 @@ export function setFirstTimeFlowType(type) {
 
 export function setSelectedSettingsRpcUrl(newRpcUrl) {
   return {
-    type: actionConstants.SET_SELECTED_SETTINGS_RPC_URL,
+    type: ActionConstants.setSelectedSettingsRpcUrl,
     value: newRpcUrl,
   };
 }
 
 export function setNewNetworkAdded(newNetworkAdded) {
   return {
-    type: actionConstants.SET_NEW_NETWORK_ADDED,
+    type: ActionConstants.setNewNetworkAdded,
     value: newNetworkAdded,
   };
 }
 
 export function setNewCollectibleAddedMessage(newCollectibleAddedMessage) {
   return {
-    type: actionConstants.SET_NEW_COLLECTIBLE_ADDED_MESSAGE,
+    type: ActionConstants.setNewCollectibleAddedMessage,
     value: newCollectibleAddedMessage,
   };
 }
 
 export function setRemoveCollectibleMessage(removeCollectibleMessage) {
   return {
-    type: actionConstants.SET_REMOVE_COLLECTIBLE_MESSAGE,
+    type: ActionConstants.setRemoveCollectibleMessage,
     value: removeCollectibleMessage,
   };
 }
 
 export function setNewTokensImported(newTokensImported) {
   return {
-    type: actionConstants.SET_NEW_TOKENS_IMPORTED,
+    type: ActionConstants.setNewTokensImported,
     value: newTokensImported,
   };
 }
@@ -3285,13 +3285,13 @@ export function setRecoveryPhraseReminderLastShown(lastShown) {
 
 export function loadingMethodDataStarted() {
   return {
-    type: actionConstants.LOADING_METHOD_DATA_STARTED,
+    type: ActionConstants.loadingMethodDataStarted,
   };
 }
 
 export function loadingMethodDataFinished() {
   return {
-    type: actionConstants.LOADING_METHOD_DATA_FINISHED,
+    type: ActionConstants.loadingMethodDataFinished,
   };
 }
 
@@ -3332,13 +3332,13 @@ export function getContractMethodData(data = '') {
 
 export function loadingTokenParamsStarted() {
   return {
-    type: actionConstants.LOADING_TOKEN_PARAMS_STARTED,
+    type: ActionConstants.loadingTokenParamsStarted,
   };
 }
 
 export function loadingTokenParamsFinished() {
   return {
-    type: actionConstants.LOADING_TOKEN_PARAMS_FINISHED,
+    type: ActionConstants.loadingTokenParamsFinished,
   };
 }
 
@@ -3364,7 +3364,7 @@ export function setSeedPhraseBackedUp(seedPhraseBackupState) {
 
 export function setNextNonce(nextNonce) {
   return {
-    type: actionConstants.SET_NEXT_NONCE,
+    type: ActionConstants.setNextNonce,
     value: nextNonce,
   };
 }
@@ -3386,7 +3386,7 @@ export function getNextNonce() {
 
 export function setRequestAccountTabIds(requestAccountTabIds) {
   return {
-    type: actionConstants.SET_REQUEST_ACCOUNT_TABS,
+    type: ActionConstants.setRequestAccountTabs,
     value: requestAccountTabIds,
   };
 }
@@ -3402,7 +3402,7 @@ export function getRequestAccountTabIds() {
 
 export function setOpenMetamaskTabsIDs(openMetaMaskTabIDs) {
   return {
-    type: actionConstants.SET_OPEN_METAMASK_TAB_IDS,
+    type: ActionConstants.setOpenMetamaskTabIds,
     value: openMetaMaskTabIDs,
   };
 }
@@ -3418,7 +3418,7 @@ export function getOpenMetamaskTabsIds() {
 
 export function setCurrentWindowTab(currentWindowTab) {
   return {
-    type: actionConstants.SET_CURRENT_WINDOW_TAB,
+    type: ActionConstants.setCurrentWindowTab,
     value: currentWindowTab,
   };
 }
@@ -3447,7 +3447,7 @@ export function captureSingleException(error) {
     const { singleExceptions } = getState().appState;
     if (!(error in singleExceptions)) {
       dispatch({
-        type: actionConstants.CAPTURE_SINGLE_EXCEPTION,
+        type: ActionConstants.captureSingleException,
         value: error,
       });
       captureException(Error(error));
@@ -3642,7 +3642,7 @@ export function fetchSmartTransactionFees(
         [unsignedTransaction, approveTxParams],
       );
       dispatch({
-        type: actionConstants.SET_SMART_TRANSACTIONS_ERROR,
+        type: ActionConstants.setSmartTransactionsError,
         payload: null,
       });
       return smartTransactionFees;
@@ -3651,7 +3651,7 @@ export function fetchSmartTransactionFees(
       if (e.message.startsWith('Fetch error:')) {
         const errorObj = parseSmartTransactionsError(e.message);
         dispatch({
-          type: actionConstants.SET_SMART_TRANSACTIONS_ERROR,
+          type: ActionConstants.setSmartTransactionsError,
           payload: errorObj,
         });
       }
@@ -3719,7 +3719,7 @@ export function signAndSendSmartTransaction({
       if (e.message.startsWith('Fetch error:')) {
         const errorObj = parseSmartTransactionsError(e.message);
         dispatch({
-          type: actionConstants.SET_SMART_TRANSACTIONS_ERROR,
+          type: ActionConstants.setSmartTransactionsError,
           payload: errorObj,
         });
       }
@@ -3742,7 +3742,7 @@ export function updateSmartTransaction(uuid, txData) {
       if (e.message.startsWith('Fetch error:')) {
         const errorObj = parseSmartTransactionsError(e.message);
         dispatch({
-          type: actionConstants.SET_SMART_TRANSACTIONS_ERROR,
+          type: ActionConstants.setSmartTransactionsError,
           payload: errorObj,
         });
       }
@@ -3772,7 +3772,7 @@ export function cancelSmartTransaction(uuid) {
       if (e.message.startsWith('Fetch error:')) {
         const errorObj = parseSmartTransactionsError(e.message);
         dispatch({
-          type: actionConstants.SET_SMART_TRANSACTIONS_ERROR,
+          type: ActionConstants.setSmartTransactionsError,
           payload: errorObj,
         });
       }
@@ -3793,7 +3793,7 @@ export function fetchSmartTransactionsLiveness() {
 
 export function dismissSmartTransactionsErrorMessage() {
   return {
-    type: actionConstants.DISMISS_SMART_TRANSACTIONS_ERROR_MESSAGE,
+    type: ActionConstants.dismissSmartTransactionsError,
   };
 }
 

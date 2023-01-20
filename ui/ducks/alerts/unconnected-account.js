@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { captureException } from '@sentry/browser';
 
 import { AlertTypes } from '../../../shared/constants/alerts';
-import * as actionConstants from '../../store/actionConstants';
+import { ActionConstants } from '../../store/constants/actions';
 import {
   addPermittedAccount,
   setAlertEnabledness,
@@ -60,7 +60,7 @@ const slice = createSlice({
     },
   },
   extraReducers: {
-    [actionConstants.SELECTED_ADDRESS_CHANGED]: (state) => {
+    [ActionConstants.selectedAddressChanged]: (state) => {
       // close the alert if the account is switched while it's open
       if (state.state === ALERT_STATE.OPEN) {
         state.state = ALERT_STATE.CLOSED;

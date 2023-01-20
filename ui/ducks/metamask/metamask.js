@@ -1,6 +1,6 @@
 import { addHexPrefix, isHexString } from 'ethereumjs-util';
-import * as actionConstants from '../../store/actionConstants';
 import { AlertTypes } from '../../../shared/constants/alerts';
+import { ActionConstants } from '../../store/constants/actions';
 import {
   GasEstimateTypes,
   NetworkCongestionThresholds,
@@ -57,16 +57,16 @@ export default function reduceMetamask(state = {}, action) {
   };
 
   switch (action.type) {
-    case actionConstants.UPDATE_METAMASK_STATE:
+    case ActionConstants.updateMetamaskState:
       return { ...metamaskState, ...action.value };
 
-    case actionConstants.LOCK_METAMASK:
+    case ActionConstants.lockMetamask:
       return {
         ...metamaskState,
         isUnlocked: false,
       };
 
-    case actionConstants.SET_RPC_TARGET:
+    case ActionConstants.setRpcTarget:
       return {
         ...metamaskState,
         provider: {
@@ -75,7 +75,7 @@ export default function reduceMetamask(state = {}, action) {
         },
       };
 
-    case actionConstants.SET_PROVIDER_TYPE:
+    case ActionConstants.setProviderType:
       return {
         ...metamaskState,
         provider: {
@@ -83,7 +83,7 @@ export default function reduceMetamask(state = {}, action) {
         },
       };
 
-    case actionConstants.SHOW_ACCOUNT_DETAIL:
+    case ActionConstants.showAccountDetail:
       return {
         ...metamaskState,
         isUnlocked: true,
@@ -91,7 +91,7 @@ export default function reduceMetamask(state = {}, action) {
         selectedAddress: action.value,
       };
 
-    case actionConstants.SET_ACCOUNT_LABEL: {
+    case ActionConstants.setAccountLabel: {
       const { account } = action.value;
       const name = action.value.label;
       const id = {};
@@ -100,19 +100,19 @@ export default function reduceMetamask(state = {}, action) {
       return Object.assign(metamaskState, { identities });
     }
 
-    case actionConstants.UPDATE_CUSTOM_NONCE:
+    case ActionConstants.updateCustomNonce:
       return {
         ...metamaskState,
         customNonceValue: action.value,
       };
 
-    case actionConstants.TOGGLE_ACCOUNT_MENU:
+    case ActionConstants.toggleAccountMenu:
       return {
         ...metamaskState,
         isAccountMenuOpen: !metamaskState.isAccountMenuOpen,
       };
 
-    case actionConstants.UPDATE_TRANSACTION_PARAMS: {
+    case ActionConstants.updateTransactionParams: {
       const { id: txId, value } = action;
       let { currentNetworkTxList } = metamaskState;
       currentNetworkTxList = currentNetworkTxList.map((tx) => {
@@ -130,50 +130,50 @@ export default function reduceMetamask(state = {}, action) {
       };
     }
 
-    case actionConstants.SET_PARTICIPATE_IN_METAMETRICS:
+    case ActionConstants.setParticipateInMetametrics:
       return {
         ...metamaskState,
         participateInMetaMetrics: action.value,
       };
 
-    case actionConstants.SET_USE_BLOCKIE:
+    case ActionConstants.setUseBlockie:
       return {
         ...metamaskState,
         useBlockie: action.value,
       };
 
-    case actionConstants.UPDATE_FEATURE_FLAGS:
+    case ActionConstants.updateFeatureFlags:
       return {
         ...metamaskState,
         featureFlags: action.value,
       };
 
-    case actionConstants.CLOSE_WELCOME_SCREEN:
+    case ActionConstants.closeWelcomeScreen:
       return {
         ...metamaskState,
         welcomeScreenSeen: true,
       };
 
-    case actionConstants.SET_CURRENT_LOCALE:
+    case ActionConstants.setCurrentLocale:
       return {
         ...metamaskState,
         currentLocale: action.value.locale,
       };
 
-    case actionConstants.SET_PENDING_TOKENS:
+    case ActionConstants.setPendingTokens:
       return {
         ...metamaskState,
         pendingTokens: { ...action.payload },
       };
 
-    case actionConstants.CLEAR_PENDING_TOKENS: {
+    case ActionConstants.clearPendingTokens: {
       return {
         ...metamaskState,
         pendingTokens: {},
       };
     }
 
-    case actionConstants.UPDATE_PREFERENCES: {
+    case ActionConstants.updatePreferences: {
       return {
         ...metamaskState,
         preferences: {
@@ -183,21 +183,21 @@ export default function reduceMetamask(state = {}, action) {
       };
     }
 
-    case actionConstants.COMPLETE_ONBOARDING: {
+    case ActionConstants.completeOnboarding: {
       return {
         ...metamaskState,
         completedOnboarding: true,
       };
     }
 
-    case actionConstants.SET_FIRST_TIME_FLOW_TYPE: {
+    case ActionConstants.setFirstTimeFlowType: {
       return {
         ...metamaskState,
         firstTimeFlowType: action.value,
       };
     }
 
-    case actionConstants.SET_NEXT_NONCE: {
+    case ActionConstants.setNextNonce: {
       return {
         ...metamaskState,
         nextNonce: action.value,

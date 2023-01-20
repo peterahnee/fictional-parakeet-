@@ -1,10 +1,10 @@
 import freeze from 'deep-freeze-strict';
-import reducers from '../ducks';
-import { NETWORK_TYPES } from '../../shared/constants/network';
-import * as actionConstants from './actionConstants';
+import reducers from '../../ducks';
+import { NETWORK_TYPES } from '../../../shared/constants/network';
+import { ActionConstants } from './actions';
 
-describe('Redux actionConstants', () => {
-  describe('SET_RPC_TARGET', () => {
+describe('Redux ActionConstants', () => {
+  describe('setRpcTarget', () => {
     const initialState = {
       metamask: {
         frequentRpcList: [],
@@ -21,7 +21,7 @@ describe('Redux actionConstants', () => {
     freeze(initialState);
     it('sets the state.metamask.rpcUrl property of the state to the action.value', () => {
       const action = {
-        type: actionConstants.SET_RPC_TARGET,
+        type: ActionConstants.setRpcTarget,
         value: 'foo',
       };
 
@@ -31,7 +31,7 @@ describe('Redux actionConstants', () => {
     });
   });
 
-  describe('SET_ACCOUNT_LABEL', () => {
+  describe('setAccountLabel', () => {
     it('updates the state.metamask.identities[:i].name property of the state to the action.value.label', () => {
       const initialState = {
         metamask: {
@@ -45,7 +45,7 @@ describe('Redux actionConstants', () => {
       freeze(initialState);
 
       const action = {
-        type: actionConstants.SET_ACCOUNT_LABEL,
+        type: ActionConstants.setAccountLabel,
         value: {
           account: 'foo',
           label: 'baz',
@@ -60,7 +60,7 @@ describe('Redux actionConstants', () => {
     });
   });
 
-  describe('SHOW_ACCOUNT_DETAIL', () => {
+  describe('showAccountDetail', () => {
     it('updates metamask state', () => {
       const initialState = {
         metamask: {},
@@ -68,7 +68,7 @@ describe('Redux actionConstants', () => {
       freeze(initialState);
 
       const action = {
-        type: actionConstants.SHOW_ACCOUNT_DETAIL,
+        type: ActionConstants.showAccountDetail,
         value: 'bar',
       };
       freeze(action);

@@ -66,7 +66,7 @@ describe('TokenOverview', () => {
 
       const actions = store.getActions();
       expect(actions).toHaveLength(1);
-      expect(actions[0].type).toBe('UI_MODAL_OPEN');
+      expect(actions[0].type).toBe('uiModalOpen');
       expect(actions[0].payload).toStrictEqual({
         name: 'CONVERT_TOKEN_TO_NFT',
         tokenAddress: '0x01',

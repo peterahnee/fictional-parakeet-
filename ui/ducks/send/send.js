@@ -57,13 +57,7 @@ import {
   updateTransactionSendFlowHistory,
 } from '../../store/actions';
 import { setCustomGasLimit } from '../gas/gas.duck';
-import {
-  QR_CODE_DETECTED,
-  SELECTED_ACCOUNT_CHANGED,
-  ACCOUNT_CHANGED,
-  ADDRESS_BOOK_UPDATED,
-  GAS_FEE_ESTIMATES_UPDATED,
-} from '../../store/actionConstants';
+import { ActionConstants } from '../../store/constants/actions';
 import {
   getTokenAddressParam,
   getTokenMetadata,
@@ -1476,7 +1470,7 @@ const slice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(ACCOUNT_CHANGED, (state, action) => {
+      .addCase(ActionConstants.accountChanged, (state, action) => {
         // This event occurs when the user's account details update due to
         // background state changes. If the account that is being updated is
         // the current from account on the edit flow we need to update
@@ -1503,7 +1497,7 @@ const slice = createSlice({
           }
         }
       })
-      .addCase(ADDRESS_BOOK_UPDATED, (state, action) => {
+      .addCase(ActionConstants.addressBookUpdated, (state, action) => {
         // When the address book updates from background state changes we need
         // to check to see if an entry exists for the current address or if the
         // entry changed.
@@ -1546,7 +1540,7 @@ const slice = createSlice({
         // because it is no longer loading
         state.gasEstimateIsLoading = false;
       })
-      .addCase(GAS_FEE_ESTIMATES_UPDATED, (state, action) => {
+      .addCase(ActionConstants.gasFeeEstimatesUpdated, (state, action) => {
         // When the gasFeeController updates its gas fee estimates we need to
         // update and validate state based on those new values
         slice.caseReducers.updateGasFeeEstimates(state, {
@@ -1609,7 +1603,7 @@ const slice = createSlice({
         slice.caseReducers.validateGasField(state);
         slice.caseReducers.validateSendState(state);
       })
-      .addCase(SELECTED_ACCOUNT_CHANGED, (state, action) => {
+      .addCase(ActionConstants.selectedAccountChanged, (state, action) => {
         // This event occurs when the user selects a new account from the
         // account menu, or the currently active account's balance updates.
         // We only care about new transactions, not edits, here, because we use
@@ -1635,7 +1629,7 @@ const slice = createSlice({
           }
         }
       })
-      .addCase(QR_CODE_DETECTED, (state, action) => {
+      .addCase(ActionConstants.qrCodeDetected, (state, action) => {
         // When data is received from the QR Code Scanner we set the recipient
         // as long as a valid address can be pulled from the data. If an
         // address is pulled but it is invalid, we display an error.
