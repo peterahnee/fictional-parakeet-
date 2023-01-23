@@ -243,6 +243,7 @@ export default function PrivacySettings() {
                 <Box paddingTop={2}>
                   <TextField
                     style={{ width: '100%' }}
+                    inputProps={{ 'data-testid': 'ipfs-input' }}
                     onChange={(e) => {
                       handleIPFSChange(e.target.value);
                     }}
