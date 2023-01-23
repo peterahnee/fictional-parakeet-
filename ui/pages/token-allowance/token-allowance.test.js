@@ -8,7 +8,7 @@ import TokenAllowance from './token-allowance';
 const testTokenAddress = '0xC011a73ee8576Fb46F5E1c5751cA3B9Fe0af2a6F';
 const state = {
   appState: {
-    customTokenAmount: 1,
+    customTokenAmount: '1',
   },
   metamask: {
     accounts: {
@@ -84,6 +84,7 @@ const state = {
         isERC721: false,
       },
     ],
+    unapprovedTxs: {},
   },
   history: {
     mostRecentOverviewPage: '/',
