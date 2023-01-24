@@ -429,10 +429,6 @@ export default class SecurityTab extends PureComponent {
   }
 
   renderCollectibleDetectionToggle() {
-    if (!process.env.NFTS_V1) {
-      return null;
-    }
-
     const { t } = this.context;
     const {
       useNftDetection,

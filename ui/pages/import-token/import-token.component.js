@@ -306,8 +306,7 @@ class ImportToken extends Component {
         });
 
         break;
-      case process.env.NFTS_V1 &&
-        (standard === 'ERC1155' || standard === 'ERC721'):
+      case standard === 'ERC1155' || standard === 'ERC721':
         this.setState({
           collectibleAddressError: this.context.t('collectibleAddressError', [
             <a

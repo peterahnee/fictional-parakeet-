@@ -219,13 +219,11 @@ export default class Routes extends Component {
           component={ImportTokenPage}
           exact
         />
-        {process.env.NFTS_V1 ? (
-          <Authenticated
-            path={ADD_COLLECTIBLE_ROUTE}
-            component={AddCollectiblePage}
-            exact
-          />
-        ) : null}
+        <Authenticated
+          path={ADD_COLLECTIBLE_ROUTE}
+          component={AddCollectiblePage}
+          exact
+        />
         <Authenticated
           path={CONFIRM_IMPORT_TOKEN_ROUTE}
           component={ConfirmImportTokenPage}

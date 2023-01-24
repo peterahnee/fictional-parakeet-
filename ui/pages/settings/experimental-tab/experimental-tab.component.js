@@ -50,9 +50,6 @@ export default class ExperimentalTab extends PureComponent {
   }
 
   renderOpenSeaEnabledToggle() {
-    if (!process.env.NFTS_V1) {
-      return null;
-    }
     const { t } = this.context;
     const {
       openSeaEnabled,

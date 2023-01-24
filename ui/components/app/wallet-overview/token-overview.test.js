@@ -55,7 +55,6 @@ describe('TokenOverview', () => {
     });
 
     it('should show ConvertTokenToNFT modal when token passed in props is an ERC721', () => {
-      process.env.NFTS_V1 = true;
       const token = {
         name: 'test',
         isERC721: true,
@@ -71,7 +70,6 @@ describe('TokenOverview', () => {
         name: 'CONVERT_TOKEN_TO_NFT',
         tokenAddress: '0x01',
       });
-      process.env.NFTS_V1 = false;
     });
   });
 });

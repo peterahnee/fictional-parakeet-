@@ -210,7 +210,6 @@ export const SETTINGS_CONSTANTS = [
     descriptionMessage: (t) => t('useCollectibleDetectionDescription'),
     route: `${SECURITY_ROUTE}#autodetect-nfts`,
     icon: 'fa fa-flask',
-    featureFlag: 'NFTS_V1',
   },
   {
     tabMessage: (t) => t('securityAndPrivacy'),
@@ -334,7 +333,6 @@ export const SETTINGS_CONSTANTS = [
     descriptionMessage: (t) => t('enableOpenSeaAPIDescription'),
     route: `${EXPERIMENTAL_ROUTE}#opensea-api`,
     icon: 'fa fa-flask',
-    featureFlag: 'NFTS_V1',
   },
   {
     tabMessage: (t) => t('advanced'),
