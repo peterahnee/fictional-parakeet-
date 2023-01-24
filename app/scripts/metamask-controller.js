@@ -694,18 +694,22 @@ export default class MetamaskController extends EventEmitter {
         name: 'ExecutionService',
       });
 
-    this.snapExecutionService = isManifestV3
-      ? new OffscreenExecutionService({
-          documentUrl: browser.runtime.getURL('./snaps/index.html'),
-          frameUrl: executionEnvironmentUrl,
-          messenger: executionEnvironmentMessenger,
-          setupSnapProvider: this.setupSnapProvider.bind(this),
-        })
-      : new IframeExecutionService({
-          iframeUrl: executionEnvironmentUrl,
-          messenger: executionEnvironmentMessenger,
-          setupSnapProvider: this.setupSnapProvider.bind(this),
-        });
+    this.snapExecutionService =
+      isManifestV3 &&
+      typeof chrome !== 'undefined' &&
+      // eslint-disable-next-line no-undef
+      typeof chrome.offscreen !== 'undefined'
+        ? new OffscreenExecutionService({
+            documentUrl: browser.runtime.getURL('./snaps/index.html'),
+            frameUrl: executionEnvironmentUrl,
+            messenger: executionEnvironmentMessenger,
+            setupSnapProvider: this.setupSnapProvider.bind(this),
+          })
+        : new IframeExecutionService({
+            iframeUrl: executionEnvironmentUrl,
+            messenger: executionEnvironmentMessenger,
+            setupSnapProvider: this.setupSnapProvider.bind(this),
+          });
 
     const snapControllerMessenger = this.controllerMessenger.getRestricted({
       name: 'SnapController',
