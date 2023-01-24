@@ -32,6 +32,7 @@ import { DEFAULT_ROUTE, SEND_ROUTE } from '../../../helpers/constants/routes';
 import {
   checkAndUpdateSingleNftOwnershipStatus,
   removeAndIgnoreNft,
+  setRemoveCollectibleMessage,
 } from '../../../store/actions';
 import { CHAIN_IDS } from '../../../../shared/constants/network';
 import { getEnvironmentType } from '../../../../app/scripts/lib/util';
@@ -85,6 +86,7 @@ export default function CollectibleDetails({ collectible }) {
 
   const onRemove = () => {
     dispatch(removeAndIgnoreNft(address, tokenId));
+    dispatch(setRemoveCollectibleMessage('success'));
     history.push(DEFAULT_ROUTE);
   };
 
@@ -173,7 +175,10 @@ export default function CollectibleDetails({ collectible }) {
             className="collectible-details__card"
           >
             {image ? (
-              <img className="collectible-details__image" src={image} />
+              <img
+                className="collectible-details__image"
+                src={collectibleImageURL}
+              />
             ) : (
               <CollectibleDefaultImage name={name} tokenId={tokenId} />
             )}
