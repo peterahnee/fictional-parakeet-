@@ -182,28 +182,6 @@ async function addEthereumChainHandler(
     return end();
   }
 
-  let endpointChainId;
-
-  try {
-    endpointChainId = await jsonRpcRequest(firstValidRPCUrl, 'eth_chainId');
-  } catch (err) {
-    return end(
-      ethErrors.rpc.internal({
-        message: `Request for method 'eth_chainId on ${firstValidRPCUrl} failed`,
-        data: { networkErr: err },
-      }),
-    );
-  }
-
-  if (_chainId !== endpointChainId) {
-    return end(
-      ethErrors.rpc.invalidParams({
-        message: `Chain ID returned by RPC URL ${firstValidRPCUrl} does not match ${_chainId}`,
-        data: { chainId: endpointChainId },
-      }),
-    );
-  }
-
   if (typeof chainName !== 'string' || !chainName) {
     return end(
       ethErrors.rpc.invalidParams({
@@ -297,6 +275,27 @@ async function addEthereumChainHandler(
     res.result = null;
   } catch (error) {
     return end(error);
+  }
+  let endpointChainId;
+
+  try {
+    endpointChainId = await jsonRpcRequest(firstValidRPCUrl, 'eth_chainId');
+  } catch (err) {
+    return end(
+      ethErrors.rpc.internal({
+        message: `Request for method 'eth_chainId on ${firstValidRPCUrl} failed`,
+        data: { networkErr: err },
+      }),
+    );
+  }
+
+  if (_chainId !== endpointChainId) {
+    return end(
+      ethErrors.rpc.invalidParams({
+        message: `Chain ID returned by RPC URL ${firstValidRPCUrl} does not match ${_chainId}`,
+        data: { chainId: endpointChainId },
+      }),
+    );
   }
 
   // Ask the user to switch the network
