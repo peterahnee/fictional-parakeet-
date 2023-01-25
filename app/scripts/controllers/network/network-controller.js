@@ -14,6 +14,7 @@ import {
 import EthQuery from 'eth-query';
 import createFilterMiddleware from 'eth-json-rpc-filters';
 import createSubscriptionManager from 'eth-json-rpc-filters/subscriptionManager';
+import { v4 as random } from 'uuid';
 import {
   INFURA_PROVIDER_TYPES,
   BUILT_IN_NETWORKS,
@@ -29,6 +30,15 @@ import {
 import getFetchWithTimeout from '../../../../shared/modules/fetch-with-timeout';
 import createInfuraClient from './createInfuraClient';
 import createJsonRpcClient from './createJsonRpcClient';
+
+/**
+ * @typedef {object} NetworkConfiguration
+ * @property {string} rpcUrl - RPC target URL.
+ * @property {string} chainId - Network ID as per EIP-155
+ * @property {string} nickname - Personalized network name.
+ * @property {string} ticker - Currency ticker.
+ * @property {object} rpcPrefs - Personalized preferences.
+ */
 
 const env = process.env.METAMASK_ENV;
 const fetchWithTimeout = getFetchWithTimeout();
@@ -105,11 +115,16 @@ export default class NetworkController extends EventEmitter {
         ...defaultNetworkDetailsState,
       },
     );
+
+    this.networkConfigurations = new ObservableStore(
+      state.networkConfigurations || {},
+    );
     this.store = new ComposedStore({
       provider: this.providerStore,
       previousProviderStore: this.previousProviderStore,
       network: this.networkStore,
       networkDetails: this.networkDetails,
+      networkConfigurations: this.networkConfigurations,
     });
 
     // provider and block tracker
@@ -501,5 +516,68 @@ export default class NetworkController extends EventEmitter {
     // set new provider and blockTracker
     this._provider = provider;
     this._blockTracker = blockTracker;
+  }
+
+  /**
+   * Network Configuration management functions
+   */
+
+  /**
+   * Adds a network configuration if the rpcUrl is not already present on an
+   * existing network configuration. Otherwise updates the entry with the matching rpcUrl.
+   *
+   * @param config - The network configuration.
+   * @param config.rpcUrl - The network configuration RPC URL.
+   * @param config.chainId - The chain ID of the network, as per EIP-155.
+   * @param config.ticker - Currency ticker.
+   * @param config.nickname - Personalized network name.
+   * @param config.rpcPrefs - Personalized preferences.
+   * @returns uuid for the added or updated network configuration
+   */
+  upsertNetworkConfiguration({ rpcUrl, chainId, ticker, nickname, rpcPrefs }) {
+    const networkConfigurations = this.networkConfigurations.getState();
+    const newNetworkConfiguration = {
+      rpcUrl,
+      chainId,
+      ticker,
+      nickname,
+      rpcPrefs,
+    };
+
+    for (const [configUUID, networkConfiguration] of Object.entries(
+      networkConfigurations,
+    )) {
+      if (networkConfiguration.rpcUrl.toLowerCase() === rpcUrl.toLowerCase()) {
+        networkConfigurations[configUUID] = newNetworkConfiguration;
+        this.networkConfigurations.updateState(networkConfigurations);
+        return configUUID;
+      }
+    }
+
+    const uuid = random();
+    networkConfigurations[uuid] = newNetworkConfiguration;
+    this.networkConfigurations.updateState(networkConfigurations);
+
+    return uuid;
+  }
+
+  /**
+   * Removes network configuration from state.
+   *
+   * @param uuid - Custom RPC URL.
+   */
+  removeNetworkConfiguration(uuid) {
+    const networkConfigs = this.networkConfigurations.getState();
+    delete networkConfigs[uuid];
+    this.networkConfigurations.updateState(networkConfigs);
+  }
+
+  /**
+   * Getter for the `frequentRpcListDetail` property.
+   *
+   * @returns {Object<string, NetworkConfiguration>} An object of network configurations.
+   */
+  getNetworkConfigurations() {
+    return this.networkConfigurations.getState();
   }
 }
