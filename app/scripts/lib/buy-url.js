@@ -148,9 +148,9 @@ const createCoinbasePayUrl = (walletAddress, chainId, symbol) => {
  *
  * @param {object} opts - Options required to determine the correct url
  * @param {string} opts.chainId - The chainId for which to return a url
- * @param {string} opts.address - The address the bought ETH should be sent to.  Only relevant if chainId === '0x1'.
- * @param opts.service
- * @param {string|undefined} opts.symbol - The symbol of the token to buy. Only relevant if buying a token.
+ * @param {string} [opts.address] - The address the bought ETH should be sent to.  Only relevant if chainId === '0x1'.
+ * @param {string} [opts.service] - On ramp service to use
+ * @param {string} [opts.symbol] - The symbol of the token to buy. Only relevant if buying a token.
  * @returns {string|undefined} The url at which the user can access ETH, while in the given chain. If the passed
  * chainId does not match any of the specified cases, or if no chainId is given, returns undefined.
  */

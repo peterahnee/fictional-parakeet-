@@ -24,7 +24,7 @@ export default function reduceApp(state = {}, action) {
     qrCodeData: null,
     networkDropdownOpen: false,
     accountDetail: {
-      subview: 'transactions',
+      privateKey: '',
     },
     // Used to display loading indicator
     isLoading: false,
@@ -38,7 +38,6 @@ export default function reduceApp(state = {}, action) {
       lattice: `m/44'/60'/0'/0`,
     },
     networksTabSelectedRpcUrl: '',
-    loadingMethodData: false,
     requestAccountTabs: {},
     openMetaMaskTabs: {},
     currentWindowTab: {},
@@ -82,7 +81,7 @@ export default function reduceApp(state = {}, action) {
       return {
         ...appState,
         alertOpen: true,
-        alertMessage: action.value,
+        alertMessage: action.payload,
       };
 
     case actionConstants.ALERT_CLOSE:
@@ -143,13 +142,9 @@ export default function reduceApp(state = {}, action) {
     case actionConstants.CLEAR_ACCOUNT_DETAILS:
       return {
         ...appState,
-        accountDetail: {},
-      };
-
-    case actionConstants.FORGOT_PASSWORD:
-      return {
-        ...appState,
-        forgottenPassword: action.value,
+        accountDetail: {
+          privateKey: '',
+        },
       };
 
     case actionConstants.SHOW_SEND_TOKEN_PAGE:
@@ -170,24 +165,9 @@ export default function reduceApp(state = {}, action) {
       return {
         ...appState,
         accountDetail: {
-          subview: 'transactions',
-          accountExport: 'none',
           privateKey: '',
         },
         warning: null,
-      };
-
-    case actionConstants.SHOW_ACCOUNT_DETAIL:
-      return {
-        ...appState,
-        forgottenPassword: appState.forgottenPassword
-          ? !appState.forgottenPassword
-          : null,
-        accountDetail: {
-          subview: 'transactions',
-          accountExport: 'none',
-          privateKey: '',
-        },
       };
 
     case actionConstants.SHOW_ACCOUNTS_PAGE:
@@ -196,7 +176,6 @@ export default function reduceApp(state = {}, action) {
         isLoading: false,
         warning: null,
         scrollToBottom: false,
-        forgottenPassword: false,
       };
 
     case actionConstants.SHOW_CONF_TX_PAGE:
@@ -221,14 +200,6 @@ export default function reduceApp(state = {}, action) {
         shouldClose: true,
         warning: null,
         txId: null,
-        accountDetail: {
-          subview: 'transactions',
-        },
-      };
-
-    case actionConstants.TRANSACTION_ERROR:
-      return {
-        ...appState,
       };
 
     case actionConstants.UNLOCK_FAILED:
@@ -244,7 +215,7 @@ export default function reduceApp(state = {}, action) {
       };
 
     case actionConstants.SET_HARDWARE_WALLET_DEFAULT_HD_PATH: {
-      const { device, path } = action.value;
+      const { device, path } = action.payload;
       const newDefaults = { ...appState.defaultHdPaths };
       newDefaults[device] = path;
 
@@ -258,7 +229,7 @@ export default function reduceApp(state = {}, action) {
       return {
         ...appState,
         isLoading: true,
-        loadingMessage: action.value,
+        loadingMessage: action.payload,
       };
 
     case actionConstants.HIDE_LOADING:
@@ -270,7 +241,7 @@ export default function reduceApp(state = {}, action) {
     case actionConstants.DISPLAY_WARNING:
       return {
         ...appState,
-        warning: action.value,
+        warning: action.payload,
         isLoading: false,
       };
 
@@ -284,64 +255,50 @@ export default function reduceApp(state = {}, action) {
       return {
         ...appState,
         accountDetail: {
-          subview: 'export',
-          accountExport: 'completed',
-          privateKey: action.value,
+          privateKey: action.payload,
         },
       };
 
     case actionConstants.SET_MOUSE_USER_STATE:
       return {
         ...appState,
-        isMouseUser: action.value,
+        isMouseUser: action.payload,
       };
 
     case actionConstants.SET_SELECTED_SETTINGS_RPC_URL:
       return {
         ...appState,
-        networksTabSelectedRpcUrl: action.value,
+        networksTabSelectedRpcUrl: action.payload,
       };
 
     case actionConstants.SET_NEW_NETWORK_ADDED:
       return {
         ...appState,
-        newNetworkAdded: action.value,
+        newNetworkAdded: action.payload,
       };
 
     case actionConstants.SET_NEW_TOKENS_IMPORTED:
       return {
         ...appState,
-        newTokensImported: action.value,
+        newTokensImported: action.payload,
       };
 
     case actionConstants.SET_NEW_COLLECTIBLE_ADDED_MESSAGE:
       return {
         ...appState,
-        newCollectibleAddedMessage: action.value,
+        newCollectibleAddedMessage: action.payload,
       };
 
     case actionConstants.SET_REMOVE_COLLECTIBLE_MESSAGE:
       return {
         ...appState,
-        removeCollectibleMessage: action.value,
+        removeCollectibleMessage: action.payload,
       };
 
     case actionConstants.PORTFOLIO_TOOLTIP_WAS_SHOWN_IN_THIS_SESSION:
       return {
         ...appState,
         portfolioTooltipWasShownInThisSession: true,
-      };
-
-    case actionConstants.LOADING_METHOD_DATA_STARTED:
-      return {
-        ...appState,
-        loadingMethodData: true,
-      };
-
-    case actionConstants.LOADING_METHOD_DATA_FINISHED:
-      return {
-        ...appState,
-        loadingMethodData: false,
       };
 
     case actionConstants.SET_REQUEST_ACCOUNT_TABS:
@@ -353,7 +310,7 @@ export default function reduceApp(state = {}, action) {
     case actionConstants.SET_OPEN_METAMASK_TAB_IDS:
       return {
         ...appState,
-        openMetaMaskTabs: action.value,
+        openMetaMaskTabs: action.payload,
       };
 
     case actionConstants.SET_CURRENT_WINDOW_TAB:

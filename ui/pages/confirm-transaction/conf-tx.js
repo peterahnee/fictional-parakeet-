@@ -138,10 +138,10 @@ class ConfirmTxScreen extends Component {
 
   signMessage(msgData, event) {
     log.info('conf-tx.js: signing message');
-    const params = msgData.msgParams;
-    params.metamaskId = msgData.id;
     this.stopPropagation(event);
-    return this.props.dispatch(actions.signMsg(params));
+    return this.props.dispatch(
+      actions.signMsg({ ...msgData.msgParams, metamaskId: msgData.id }),
+    );
   }
 
   stopPropagation(event) {
@@ -152,18 +152,18 @@ class ConfirmTxScreen extends Component {
 
   signPersonalMessage(msgData, event) {
     log.info('conf-tx.js: signing personal message');
-    const params = msgData.msgParams;
-    params.metamaskId = msgData.id;
     this.stopPropagation(event);
-    return this.props.dispatch(actions.signPersonalMsg(params));
+    return this.props.dispatch(
+      actions.signPersonalMsg({ ...msgData.msgParams, metamaskId: msgData.id }),
+    );
   }
 
   signTypedMessage(msgData, event) {
     log.info('conf-tx.js: signing typed message');
-    const params = msgData.msgParams;
-    params.metamaskId = msgData.id;
     this.stopPropagation(event);
-    return this.props.dispatch(actions.signTypedMsg(params));
+    return this.props.dispatch(
+      actions.signTypedMsg({ ...msgData.msgParams, metamaskId: msgData.id }),
+    );
   }
 
   cancelMessage(msgData, event) {

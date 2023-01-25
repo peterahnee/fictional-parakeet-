@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import { renderWithProvider } from '../../../../test/lib/render-helpers';
 import ConfirmSeedPhrase from './confirm-seed-phrase';
 
-jest.mock('../../../store/actions.js', () => ({
+jest.mock('../../../store/actions.ts', () => ({
   setSeedPhraseBackedUp: () => jest.fn().mockResolvedValue(),
 }));
 
