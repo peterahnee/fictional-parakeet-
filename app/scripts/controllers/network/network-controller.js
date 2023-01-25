@@ -573,7 +573,7 @@ export default class NetworkController extends EventEmitter {
   }
 
   /**
-   * Getter for the `frequentRpcListDetail` property.
+   * Getter for the NetworkConfigurations
    *
    * @returns {Object<string, NetworkConfiguration>} An object of network configurations.
    */

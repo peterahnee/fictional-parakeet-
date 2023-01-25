@@ -941,14 +941,19 @@ export default class MetamaskController extends EventEmitter {
         status === TransactionStatus.failed
       ) {
         const txMeta = this.txController.txStateManager.getTransaction(txId);
-        const frequentRpcListDetail =
-          this.preferencesController.getFrequentRpcListDetail();
         let rpcPrefs = {};
         if (txMeta.chainId) {
-          const rpcSettings = frequentRpcListDetail.find(
-            (rpc) => txMeta.chainId === rpc.chainId,
-          );
-          rpcPrefs = rpcSettings?.rpcPrefs ?? {};
+          const networkConfigurations =
+            this.networkController.getNetworkConfigurations();
+          let matchingNetworkConfig;
+          for (const [uuid, networkConfig] of Object.entries(
+            networkConfigurations,
+          )) {
+            if (networkConfig.chainId === txMeta.chainId) {
+              matchingNetworkConfig = networkConfig;
+            }
+          }
+          rpcPrefs = matchingNetworkConfig?.rpcPrefs ?? {};
         }
         this.platform.showTransactionNotification(txMeta, rpcPrefs);
 
@@ -2211,7 +2216,7 @@ export default class MetamaskController extends EventEmitter {
   async addCustomNetwork(customRpc, actionId) {
     const { chainId, chainName, rpcUrl, ticker, blockExplorerUrl } = customRpc;
 
-    this.preferencesController.upsertToFrequentRpcList(
+    this.networkController.upsertNetworkConfiguration(
       rpcUrl,
       chainId,
       ticker,
@@ -2360,18 +2365,17 @@ export default class MetamaskController extends EventEmitter {
    */
   async fetchInfoToSync() {
     // Preferences
-    const {
-      currentLocale,
-      frequentRpcList,
-      identities,
-      selectedAddress,
-      useTokenDetection,
-    } = this.preferencesController.store.getState();
+    const { currentLocale, identities, selectedAddress, useTokenDetection } =
+      this.preferencesController.store.getState();
 
     const isTokenDetectionInactiveInMainnet =
       !useTokenDetection &&
       this.networkController.store.getState().provider.chainId ===
         CHAIN_IDS.MAINNET;
+
+    const networkConfigurations =
+      this.networkController.store.getState().networkConfigurations;
+
     const { tokenList } = this.tokenListController.state;
     const caseInSensitiveTokenList = isTokenDetectionInactiveInMainnet
       ? STATIC_MAINNET_TOKEN_LIST
@@ -2379,7 +2383,6 @@ export default class MetamaskController extends EventEmitter {
 
     const preferences = {
       currentLocale,
-      frequentRpcList,
       identities,
       selectedAddress,
     };
@@ -2455,6 +2458,7 @@ export default class MetamaskController extends EventEmitter {
       transactions,
       tokens: { allTokens: allERC20Tokens, allIgnoredTokens },
       network: this.networkController.store.getState(),
+      networkConfigurations,
     };
   }
 
@@ -3914,7 +3918,7 @@ export default class MetamaskController extends EventEmitter {
           chainName,
           rpcUrl,
         } = {}) => {
-          await this.preferencesController.upsertToFrequentRpcList(
+          await this.networkController.upsertNetworkConfiguration(
             rpcUrl,
             chainId,
             ticker,
@@ -4322,7 +4326,7 @@ export default class MetamaskController extends EventEmitter {
       nickname,
       rpcPrefs,
     );
-    await this.preferencesController.upsertToFrequentRpcList(
+    await this.networkController.upsertNetworkConfiguration(
       rpcUrl,
       chainId,
       ticker,
@@ -4371,7 +4375,7 @@ export default class MetamaskController extends EventEmitter {
         nickname,
         rpcPrefs,
       );
-      await this.preferencesController.upsertToFrequentRpcList(
+      await this.networkController.upsertNetworkConfiguration(
         rpcUrl,
         chainId,
         ticker,
@@ -4385,10 +4389,10 @@ export default class MetamaskController extends EventEmitter {
   /**
    * A method for deleting a selected custom URL.
    *
-   * @param {string} rpcUrl - A RPC URL to delete.
+   * @param {string} rpcUrl - UUID of network configuration to delete.
    */
-  async delCustomRpc(rpcUrl) {
-    await this.preferencesController.removeFromFrequentRpcList(rpcUrl);
+  async delCustomRpc(uuid) {
+    await this.networkController.removeNetworkConfiguration(uuid);
   }
 
   /**
