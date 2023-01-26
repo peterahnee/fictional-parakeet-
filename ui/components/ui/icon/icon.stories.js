@@ -13,7 +13,6 @@ import README from './README.mdx';
 
 import Approve from './approve-icon.component';
 import BuyIcon from './overview-buy-icon.component';
-import CopyIcon from './copy-icon.component';
 import InfoIcon from './info-icon.component';
 import InfoIconInverted from './info-icon-inverted.component';
 import Interaction from './interaction-icon.component';
@@ -165,7 +164,6 @@ export const DefaultStory = (args) => (
         <IconItem Component={<BuyIcon {...args} />} />
         <IconItem Component={<SwapIcon {...args} />} />
         <IconItem Component={<SwapIconComponent {...args} />} />
-        <IconItem Component={<CopyIcon {...args} />} />
         <IconItem Component={<Preloader {...args} />} />
         <IconItem Component={<IconEye {...args} />} />
         <IconItem Component={<IconEyeSlash {...args} />} />
@@ -310,13 +308,6 @@ SendSwapIconStory.args = {
   color: 'var(--color-icon-default)',
 };
 SendSwapIconStory.storyName = 'Send/SwapIcon';
-
-export const CopyIconStory = (args) => <CopyIcon {...args} />;
-CopyIconStory.args = {
-  size: 40,
-  color: 'var(--color-icon-default)',
-};
-CopyIconStory.storyName = 'CopyIcon';
 
 export const PreloaderStory = (args) => <Preloader {...args} />;
 PreloaderStory.args = {
