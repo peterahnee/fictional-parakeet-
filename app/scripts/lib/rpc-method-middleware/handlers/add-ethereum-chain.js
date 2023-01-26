@@ -17,6 +17,7 @@ const addEthereumChain = {
   implementation: addEthereumChainHandler,
   hookNames: {
     addCustomRpc: true,
+    delCustomRpc: true,
     getCurrentChainId: true,
     getCurrentRpcUrl: true,
     findCustomRpcBy: true,
@@ -34,6 +35,7 @@ async function addEthereumChainHandler(
   end,
   {
     addCustomRpc,
+    delCustomRpc,
     getCurrentChainId,
     getCurrentRpcUrl,
     findCustomRpcBy,
@@ -155,6 +157,7 @@ async function addEthereumChainHandler(
     if (currentChainId === _chainId && currentRpcUrl === firstValidRPCUrl) {
       return end();
     }
+
     // If this network is already added with but is not the currently selected network
     // Ask the user to switch the network
     try {
@@ -276,11 +279,13 @@ async function addEthereumChainHandler(
   } catch (error) {
     return end(error);
   }
+
   let endpointChainId;
 
   try {
     endpointChainId = await jsonRpcRequest(firstValidRPCUrl, 'eth_chainId');
   } catch (err) {
+    delCustomRpc(firstValidRPCUrl);
     return end(
       ethErrors.rpc.internal({
         message: `Request for method 'eth_chainId on ${firstValidRPCUrl} failed`,
@@ -290,6 +295,7 @@ async function addEthereumChainHandler(
   }
 
   if (_chainId !== endpointChainId) {
+    delCustomRpc(firstValidRPCUrl);
     return end(
       ethErrors.rpc.invalidParams({
         message: `Chain ID returned by RPC URL ${firstValidRPCUrl} does not match ${_chainId}`,
