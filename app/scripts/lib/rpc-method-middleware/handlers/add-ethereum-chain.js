@@ -17,7 +17,6 @@ const addEthereumChain = {
   implementation: addEthereumChainHandler,
   hookNames: {
     addCustomRpc: true,
-    delCustomRpc: true,
     getCurrentChainId: true,
     getCurrentRpcUrl: true,
     findCustomRpcBy: true,
@@ -35,7 +34,6 @@ async function addEthereumChainHandler(
   end,
   {
     addCustomRpc,
-    delCustomRpc,
     getCurrentChainId,
     getCurrentRpcUrl,
     findCustomRpcBy,
@@ -246,21 +244,47 @@ async function addEthereumChainHandler(
     );
   }
 
+  let customRpc;
   try {
-    await addCustomRpc(
-      await requestUserApproval({
-        origin,
-        type: MESSAGE_TYPE.ADD_ETHEREUM_CHAIN,
-        requestData: {
-          chainId: _chainId,
-          blockExplorerUrl: firstValidBlockExplorerUrl,
-          chainName: _chainName,
-          rpcUrl: firstValidRPCUrl,
-          ticker,
-        },
+    customRpc = await requestUserApproval({
+      origin,
+      type: MESSAGE_TYPE.ADD_ETHEREUM_CHAIN,
+      requestData: {
+        chainId: _chainId,
+        blockExplorerUrl: firstValidBlockExplorerUrl,
+        chainName: _chainName,
+        rpcUrl: firstValidRPCUrl,
+        ticker,
+      },
+    });
+  } catch (error) {
+    return end(error);
+  }
+
+  let endpointChainId;
+
+  try {
+    endpointChainId = await jsonRpcRequest(firstValidRPCUrl, 'eth_chainId');
+  } catch (err) {
+    return end(
+      ethErrors.rpc.internal({
+        message: `Request for method 'eth_chainId on ${firstValidRPCUrl} failed`,
+        data: { networkErr: err },
       }),
     );
+  }
 
+  if (_chainId !== endpointChainId) {
+    return end(
+      ethErrors.rpc.invalidParams({
+        message: `Chain ID returned by RPC URL ${firstValidRPCUrl} does not match ${_chainId}`,
+        data: { chainId: endpointChainId },
+      }),
+    );
+  }
+
+  try {
+    await addCustomRpc(customRpc);
     sendMetrics({
       event: 'Custom Network Added',
       category: EVENT.CATEGORIES.NETWORK,
@@ -278,30 +302,6 @@ async function addEthereumChainHandler(
     res.result = null;
   } catch (error) {
     return end(error);
-  }
-
-  let endpointChainId;
-
-  try {
-    endpointChainId = await jsonRpcRequest(firstValidRPCUrl, 'eth_chainId');
-  } catch (err) {
-    delCustomRpc(firstValidRPCUrl);
-    return end(
-      ethErrors.rpc.internal({
-        message: `Request for method 'eth_chainId on ${firstValidRPCUrl} failed`,
-        data: { networkErr: err },
-      }),
-    );
-  }
-
-  if (_chainId !== endpointChainId) {
-    delCustomRpc(firstValidRPCUrl);
-    return end(
-      ethErrors.rpc.invalidParams({
-        message: `Chain ID returned by RPC URL ${firstValidRPCUrl} does not match ${_chainId}`,
-        data: { chainId: endpointChainId },
-      }),
-    );
   }
 
   // Ask the user to switch the network
