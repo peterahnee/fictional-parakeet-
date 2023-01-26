@@ -66,6 +66,7 @@ export default class ConfirmApproveContent extends Component {
     isSetApproveForAll: PropTypes.bool,
     isApprovalOrRejection: PropTypes.bool,
     userAddress: PropTypes.string,
+    useCurrencyRateCheck: PropTypes.bool,
   };
 
   state = {
@@ -140,6 +141,7 @@ export default class ConfirmApproveContent extends Component {
       txData,
       isMultiLayerFeeNetwork,
       supportsEIP1559,
+      useCurrencyRateCheck,
     } = this.props;
     if (!isMultiLayerFeeNetwork && supportsEIP1559) {
       return <GasDetailsItem />;
@@ -166,7 +168,8 @@ export default class ConfirmApproveContent extends Component {
             </div>
             <div className="confirm-approve-content__transaction-details-content__fee">
               <div className="confirm-approve-content__transaction-details-content__primary-fee">
-                {formatCurrency(fiatTransactionTotal, currentCurrency)}
+                {useCurrencyRateCheck &&
+                  formatCurrency(fiatTransactionTotal, currentCurrency)}
               </div>
               <div className="confirm-approve-content__transaction-details-content__secondary-fee">
                 {`${ethTransactionTotal} ${nativeCurrency}`}
