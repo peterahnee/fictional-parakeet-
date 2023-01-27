@@ -59,6 +59,7 @@ const accountModalStyle = {
     left: '0',
     right: '0',
     margin: '0 auto',
+    zIndex: 10000,
   },
   laptopModalStyle: {
     width: '335px',
@@ -70,6 +71,7 @@ const accountModalStyle = {
     left: '0',
     right: '0',
     margin: '0 auto',
+    zIndex: 10000,
   },
   contentStyle: {
     borderRadius: '4px',

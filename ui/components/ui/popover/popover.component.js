@@ -43,6 +43,7 @@ const Popover = ({
   onClose,
   className,
   contentClassName,
+  containerCustomStyle,
   showArrow,
   CustomBackground,
   popoverRef,
@@ -92,7 +93,7 @@ const Popover = ({
   };
 
   return (
-    <div className="popover-container">
+    <div className="popover-container" style={containerCustomStyle}>
       {CustomBackground ? (
         <CustomBackground onClose={onClose} />
       ) : (
@@ -159,6 +160,10 @@ Popover.propTypes = {
    * Add custom CSS class for content
    */
   contentClassName: PropTypes.string,
+  /**
+   * Add custom CSS for container
+   */
+  containerCustomStyle: PropTypes.string,
   /**
    * Add custom CSS class
    */

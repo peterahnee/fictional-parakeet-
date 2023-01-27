@@ -73,6 +73,7 @@ const NewNetworkInfo = () => {
     <Popover
       onClose={onCloseClick}
       className="new-network-info__wrapper"
+      containerCustomStyle={{ zIndex: 10000 }}
       footer={
         <Button type="primary" onClick={onCloseClick}>
           {t('recoveryPhraseReminderConfirm')}
