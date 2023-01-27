@@ -705,12 +705,6 @@
   "reset": {
     "message": "Resetuj"
   },
-  "resetAccount": {
-    "message": "Resetuj konto"
-  },
-  "resetAccountDescription": {
-    "message": "Zresetowanie konta wyczyści Twoją historię transakcji."
-  },
   "restore": {
     "message": "Przywróć"
   },

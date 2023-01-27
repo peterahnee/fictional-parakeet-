@@ -689,12 +689,6 @@
   "reset": {
     "message": "Restableix"
   },
-  "resetAccount": {
-    "message": "Reiniciar Compte"
-  },
-  "resetAccountDescription": {
-    "message": "Reiniciar el teu compte esborrarà el teu historial de transaccions."
-  },
   "restore": {
     "message": "Restaura"
   },

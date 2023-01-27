@@ -226,9 +226,9 @@ export default class AdvancedTab extends PureComponent {
         data-testid="advanced-setting-reset-account"
       >
         <div className="settings-page__content-item">
-          <span>{t('resetAccount')}</span>
+          <span>{t('clearActivity')}</span>
           <span className="settings-page__content-description">
-            {t('resetAccountDescription')}
+            {t('clearActivityDescription')}
           </span>
         </div>
         <div className="settings-page__content-item">
@@ -247,7 +247,7 @@ export default class AdvancedTab extends PureComponent {
                 showResetAccountConfirmationModal();
               }}
             >
-              {t('resetAccount')}
+              {t('clearActivityButton')}
             </Button>
           </div>
         </div>

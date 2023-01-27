@@ -353,9 +353,6 @@
   "required": {
     "message": "จำเป็น"
   },
-  "resetAccount": {
-    "message": "รีเซ็ตบัญชี"
-  },
   "revealSeedWords": {
     "message": "เปิดเผยกลุ่มคำชีด"
   },
