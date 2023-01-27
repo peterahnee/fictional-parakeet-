@@ -43,6 +43,7 @@ export default function ApproveContentCard({
   isSetApproveForAll,
   isApprovalOrRejection,
   data,
+  useCurrencyRateCheck,
 }) {
   const t = useContext(I18nContext);
 
@@ -152,15 +153,20 @@ export default function ApproveContentCard({
                     alignItems={ALIGN_ITEMS.FLEX_END}
                     textAlign={TEXT_ALIGN.RIGHT}
                   >
-                    <Box>
-                      <Typography
-                        variant={TYPOGRAPHY.H4}
-                        fontWeight={FONT_WEIGHT.BOLD}
-                        color={COLORS.TEXT_DEFAULT}
-                      >
-                        {formatCurrency(fiatTransactionTotal, currentCurrency)}
-                      </Typography>
-                    </Box>
+                    {useCurrencyRateCheck && (
+                      <Box>
+                        <Typography
+                          variant={TYPOGRAPHY.H4}
+                          fontWeight={FONT_WEIGHT.BOLD}
+                          color={COLORS.TEXT_DEFAULT}
+                        >
+                          {formatCurrency(
+                            fiatTransactionTotal,
+                            currentCurrency,
+                          )}
+                        </Typography>
+                      </Box>
+                    )}
                     <Box>
                       <Typography
                         variant={TYPOGRAPHY.H6}
@@ -301,4 +307,8 @@ ApproveContentCard.propTypes = {
    * Current transaction data
    */
   data: PropTypes.string,
+  /**
+   * Fiat conversion control
+   */
+  useCurrencyRateCheck: PropTypes.bool,
 };

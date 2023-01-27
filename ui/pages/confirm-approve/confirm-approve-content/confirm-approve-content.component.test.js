@@ -32,7 +32,6 @@ const props = {
   chainId: '1337',
   rpcPrefs: {},
   isContract: true,
-  useCurrencyRateCheck: true,
 };
 
 describe('ConfirmApproveContent Component', () => {
