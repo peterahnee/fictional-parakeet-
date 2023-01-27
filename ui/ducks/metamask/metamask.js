@@ -22,46 +22,53 @@ import {
   hexToDecimal,
 } from '../../../shared/modules/conversion.utils';
 
-export default function reduceMetamask(state = {}, action) {
-  const metamaskState = {
-    isInitialized: false,
-    isUnlocked: false,
-    isAccountMenuOpen: false,
-    identities: {},
-    unapprovedTxs: {},
-    frequentRpcList: [],
-    addressBook: [],
-    contractExchangeRates: {},
-    pendingTokens: {},
-    customNonceValue: '',
-    useBlockie: false,
-    featureFlags: {},
-    welcomeScreenSeen: false,
-    currentLocale: '',
-    currentBlockGasLimit: '',
-    preferences: {
-      autoLockTimeLimit: undefined,
-      showFiatInTestnets: false,
-      showTestNetworks: false,
-      useNativeCurrencyAsPrimaryCurrency: true,
-    },
-    firstTimeFlowType: null,
-    completedOnboarding: false,
-    knownMethodData: {},
-    participateInMetaMetrics: null,
-    nextNonce: null,
-    conversionRate: null,
-    nativeCurrency: 'ETH',
-    ...state,
-  };
+const initialState = {
+  isInitialized: false,
+  isUnlocked: false,
+  isAccountMenuOpen: false,
+  identities: {},
+  unapprovedTxs: {},
+  frequentRpcList: [],
+  addressBook: [],
+  contractExchangeRates: {},
+  pendingTokens: {},
+  customNonceValue: '',
+  useBlockie: false,
+  featureFlags: {},
+  welcomeScreenSeen: false,
+  currentLocale: '',
+  currentBlockGasLimit: '',
+  preferences: {
+    autoLockTimeLimit: undefined,
+    showFiatInTestnets: false,
+    showTestNetworks: false,
+    useNativeCurrencyAsPrimaryCurrency: true,
+  },
+  firstTimeFlowType: null,
+  completedOnboarding: false,
+  knownMethodData: {},
+  participateInMetaMetrics: null,
+  nextNonce: null,
+  conversionRate: null,
+  nativeCurrency: 'ETH',
+};
 
+/**
+ * Temporary types for this slice so that inferrence of MetaMask state tree can
+ * occur
+ *
+ * @param {typeof initialState} state - State
+ * @param {any} action
+ * @returns {typeof initialState}
+ */
+export default function reduceMetamask(state = initialState, action) {
   switch (action.type) {
     case actionConstants.UPDATE_METAMASK_STATE:
-      return { ...metamaskState, ...action.value };
+      return { ...state, ...action.value };
 
     case actionConstants.LOCK_METAMASK:
       return {
-        ...metamaskState,
+        ...state,
         isUnlocked: false,
       };
 
@@ -69,26 +76,26 @@ export default function reduceMetamask(state = {}, action) {
       const { account } = action.value;
       const name = action.value.label;
       const id = {};
-      id[account] = { ...metamaskState.identities[account], name };
-      const identities = { ...metamaskState.identities, ...id };
-      return Object.assign(metamaskState, { identities });
+      id[account] = { ...state.identities[account], name };
+      const identities = { ...state.identities, ...id };
+      return Object.assign(state, { identities });
     }
 
     case actionConstants.UPDATE_CUSTOM_NONCE:
       return {
-        ...metamaskState,
+        ...state,
         customNonceValue: action.value,
       };
 
     case actionConstants.TOGGLE_ACCOUNT_MENU:
       return {
-        ...metamaskState,
-        isAccountMenuOpen: !metamaskState.isAccountMenuOpen,
+        ...state,
+        isAccountMenuOpen: !state.isAccountMenuOpen,
       };
 
     case actionConstants.UPDATE_TRANSACTION_PARAMS: {
       const { id: txId, value } = action;
-      let { currentNetworkTxList } = metamaskState;
+      let { currentNetworkTxList } = state;
       currentNetworkTxList = currentNetworkTxList.map((tx) => {
         if (tx.id === txId) {
           const newTx = { ...tx };
@@ -99,59 +106,59 @@ export default function reduceMetamask(state = {}, action) {
       });
 
       return {
-        ...metamaskState,
+        ...state,
         currentNetworkTxList,
       };
     }
 
     case actionConstants.SET_PARTICIPATE_IN_METAMETRICS:
       return {
-        ...metamaskState,
+        ...state,
         participateInMetaMetrics: action.value,
       };
 
     case actionConstants.CLOSE_WELCOME_SCREEN:
       return {
-        ...metamaskState,
+        ...state,
         welcomeScreenSeen: true,
       };
 
     case actionConstants.SET_PENDING_TOKENS:
       return {
-        ...metamaskState,
+        ...state,
         pendingTokens: { ...action.payload },
       };
 
     case actionConstants.CLEAR_PENDING_TOKENS: {
       return {
-        ...metamaskState,
+        ...state,
         pendingTokens: {},
       };
     }
 
     case actionConstants.COMPLETE_ONBOARDING: {
       return {
-        ...metamaskState,
+        ...state,
         completedOnboarding: true,
       };
     }
 
     case actionConstants.SET_FIRST_TIME_FLOW_TYPE: {
       return {
-        ...metamaskState,
+        ...state,
         firstTimeFlowType: action.value,
       };
     }
 
     case actionConstants.SET_NEXT_NONCE: {
       return {
-        ...metamaskState,
+        ...state,
         nextNonce: action.payload,
       };
     }
 
     default:
-      return metamaskState;
+      return state;
   }
 }
 

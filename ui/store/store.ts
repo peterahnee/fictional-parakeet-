@@ -1,7 +1,83 @@
 import { StoreEnhancer } from 'redux';
 import { configureStore as baseConfigureStore } from '@reduxjs/toolkit';
 import devtoolsEnhancer from 'remote-redux-devtools';
+import { ApprovalControllerState } from '@metamask/approval-controller';
+import { GasEstimateType, GasFeeEstimates } from '@metamask/gas-fee-controller';
 import rootReducer from '../ducks';
+import { LedgerTransportTypes } from '../../shared/constants/hardware-wallets';
+import { TransactionMeta } from '../../shared/constants/transaction';
+
+/**
+ * This interface is temporary and is copied from the message-manager.js file
+ * and is the 'msgParams' key of the interface declared there. We should get a
+ * universal Message type to use for this, the Message manager and all
+ * the other types of messages.
+ *
+ * TODO: Replace this
+ */
+export interface TemporaryMessageDataType {
+  id: number;
+  type: string;
+  msgParams: {
+    metamaskId: number;
+    data: string;
+  };
+}
+
+interface MessagesIndexedById {
+  [id: string]: TemporaryMessageDataType;
+}
+
+/**
+ * This interface is a temporary interface to describe the state tree that is
+ * sent from the background. Ideally we can build this using Types in the
+ * backend when we compose the stores, then we can import it here and use it.
+ *
+ * Some of this is duplicated in the metamask redux duck. In *most* cases the
+ * state received from the background takes precedence over anything in the
+ * metamask reducer.
+ */
+interface TemporaryBackgroundState {
+  addressBook: {
+    [chainId: string]: {
+      name: string;
+    }[];
+  };
+  provider: {
+    chainId: string;
+  };
+  currentNetworkTxList: TransactionMeta[];
+  selectedAddress: string;
+  identities: {
+    [address: string]: {
+      balance: string;
+    };
+  };
+  ledgerTransportType: LedgerTransportTypes;
+  unapprovedDecryptMsgs: MessagesIndexedById;
+  unapprovedTxs: {
+    [transactionId: string]: TransactionMeta;
+  };
+  unapprovedMsgs: MessagesIndexedById;
+  unapprovedPersonalMsgs: MessagesIndexedById;
+  unapprovedTypedMessages: MessagesIndexedById;
+  network: string;
+  pendingApprovals: ApprovalControllerState['pendingApprovals'];
+  knownMethodData?: {
+    [fourBytePrefix: string]: Record<string, unknown>;
+  };
+  gasFeeEstimates: GasFeeEstimates;
+  gasEstimateType: GasEstimateType;
+}
+
+type RootReducerReturnType = ReturnType<typeof rootReducer>;
+
+type CombinedBackgroundAndReduxState = RootReducerReturnType & {
+  activeTab: {
+    origin: string;
+  };
+  metamask: RootReducerReturnType['metamask'] & TemporaryBackgroundState;
+};
 
 export default function configureStore(preloadedState: any) {
   const debugModeEnabled = Boolean(process.env.METAMASK_DEBUG);
@@ -19,9 +95,8 @@ export default function configureStore(preloadedState: any) {
     );
   }
 
-  // return createStore(rootReducer, initialState, storeEnhancers);
   return baseConfigureStore({
-    reducer: rootReducer,
+    reducer: rootReducer as () => CombinedBackgroundAndReduxState,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         /**
@@ -52,7 +127,6 @@ export default function configureStore(preloadedState: any) {
     preloadedState,
   });
 }
-
 type Store = ReturnType<typeof configureStore>;
 export type MetaMaskReduxState = ReturnType<Store['getState']>;
 export type MetaMaskReduxDispatch = Store['dispatch'];

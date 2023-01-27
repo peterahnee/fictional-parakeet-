@@ -93,7 +93,11 @@ import {
   callBackgroundMethod,
   submitRequestToBackground,
 } from './action-queue';
-import { MetaMaskReduxDispatch, MetaMaskReduxState } from './store';
+import {
+  MetaMaskReduxDispatch,
+  MetaMaskReduxState,
+  TemporaryMessageDataType,
+} from './store';
 
 export function goHome() {
   return {
@@ -399,7 +403,7 @@ export function importNewAccount(
   strategy: string,
   args: any[],
 ): ThunkAction<
-  Promise<MetaMaskReduxState>,
+  Promise<MetaMaskReduxState['metamask']>,
   MetaMaskReduxState,
   unknown,
   AnyAction
@@ -416,9 +420,9 @@ export function importNewAccount(
         args,
       ]);
       log.debug(`background.getState`);
-      newState = await submitRequestToBackground<MetaMaskReduxState>(
-        'getState',
-      );
+      newState = await submitRequestToBackground<
+        MetaMaskReduxState['metamask']
+      >('getState');
     } catch (err) {
       dispatch(displayWarning(err));
       throw err;
@@ -657,23 +661,6 @@ export function setCurrentCurrency(
   };
 }
 
-/**
- * This interface is temporary and is copied from the message-manager.js file
- * and is the 'msgParams' key of the interface declared there. We should get a
- * universal Message type to use for this, the Message manager and all
- * the other types of messages.
- *
- * TODO: Replace this
- */
-interface TemporaryMessageDataType {
-  id: number;
-  type: string;
-  msgParams: {
-    metamaskId: number;
-    data: string;
-  };
-}
-
 export function signMsg(
   msgData: TemporaryMessageDataType['msgParams'],
 ): ThunkAction<
@@ -688,10 +675,9 @@ export function signMsg(
     log.debug(`actions calling background.signMessage`);
     let newState;
     try {
-      newState = await submitRequestToBackground<MetaMaskReduxState>(
-        'signMessage',
-        [msgData],
-      );
+      newState = await submitRequestToBackground<
+        MetaMaskReduxState['metamask']
+      >('signMessage', [msgData]);
     } catch (error) {
       logErrorWithMessage(error);
       dispatch(displayWarning(error));
@@ -722,10 +708,9 @@ export function signPersonalMsg(
 
     let newState;
     try {
-      newState = await submitRequestToBackground<MetaMaskReduxState>(
-        'signPersonalMessage',
-        [msgData],
-      );
+      newState = await submitRequestToBackground<
+        MetaMaskReduxState['metamask']
+      >('signPersonalMessage', [msgData]);
     } catch (error) {
       logErrorWithMessage(error);
       dispatch(displayWarning(error));
@@ -744,7 +729,7 @@ export function signPersonalMsg(
 export function decryptMsgInline(
   decryptedMsgData: TemporaryMessageDataType['msgParams'],
 ): ThunkAction<
-  Promise<TemporaryMessageDataType['msgParams']>,
+  Promise<TemporaryMessageDataType>,
   MetaMaskReduxState,
   unknown,
   AnyAction
@@ -755,10 +740,9 @@ export function decryptMsgInline(
 
     let newState;
     try {
-      newState = await submitRequestToBackground<MetaMaskReduxState>(
-        'decryptMessageInline',
-        [decryptedMsgData],
-      );
+      newState = await submitRequestToBackground<
+        MetaMaskReduxState['metamask']
+      >('decryptMessageInline', [decryptedMsgData]);
     } catch (error) {
       logErrorWithMessage(error);
       dispatch(displayWarning(error));
@@ -783,12 +767,11 @@ export function decryptMsg(
     dispatch(showLoadingIndication());
     log.debug(`actions calling background.decryptMessage`);
 
-    let newState;
+    let newState: MetaMaskReduxState['metamask'];
     try {
-      newState = await submitRequestToBackground<MetaMaskReduxState>(
-        'decryptMessage',
-        [decryptedMsgData],
-      );
+      newState = await submitRequestToBackground<
+        MetaMaskReduxState['metamask']
+      >('decryptMessage', [decryptedMsgData]);
     } catch (error) {
       logErrorWithMessage(error);
       dispatch(displayWarning(error));
@@ -817,12 +800,11 @@ export function encryptionPublicKeyMsg(
     dispatch(showLoadingIndication());
     log.debug(`actions calling background.encryptionPublicKey`);
 
-    let newState;
+    let newState: MetaMaskReduxState['metamask'];
     try {
-      newState = await submitRequestToBackground<MetaMaskReduxState>(
-        'encryptionPublicKey',
-        [msgData],
-      );
+      newState = await submitRequestToBackground<
+        MetaMaskReduxState['metamask']
+      >('encryptionPublicKey', [msgData]);
     } catch (error) {
       logErrorWithMessage(error);
       dispatch(displayWarning(error));
@@ -851,12 +833,11 @@ export function signTypedMsg(
     dispatch(showLoadingIndication());
     log.debug(`actions calling background.signTypedMessage`);
 
-    let newState;
+    let newState: MetaMaskReduxState['metamask'];
     try {
-      newState = await submitRequestToBackground<MetaMaskReduxState>(
-        'signTypedMessage',
-        [msgData],
-      );
+      newState = await submitRequestToBackground<
+        MetaMaskReduxState['metamask']
+      >('signTypedMessage', [msgData]);
     } catch (error) {
       logErrorWithMessage(error);
       dispatch(displayWarning(error));
@@ -879,11 +860,13 @@ export function updateCustomNonce(value: string) {
   };
 }
 
-const updateMetamaskStateFromBackground = (): Promise<MetaMaskReduxState> => {
+const updateMetamaskStateFromBackground = (): Promise<
+  MetaMaskReduxState['metamask']
+> => {
   log.debug(`background.getState`);
 
   return new Promise((resolve, reject) => {
-    callBackgroundMethod<MetaMaskReduxState>(
+    callBackgroundMethod<MetaMaskReduxState['metamask']>(
       'getState',
       [],
       (error, newState) => {
@@ -892,7 +875,7 @@ const updateMetamaskStateFromBackground = (): Promise<MetaMaskReduxState> => {
           return;
         }
 
-        resolve(newState as MetaMaskReduxState);
+        resolve(newState as MetaMaskReduxState['metamask']);
       },
     );
   });
@@ -1413,10 +1396,9 @@ export function cancelMsg(
 
     let newState;
     try {
-      newState = await submitRequestToBackground<MetaMaskReduxState>(
-        'cancelMessage',
-        [msgData.id],
-      );
+      newState = await submitRequestToBackground<
+        MetaMaskReduxState['metamask']
+      >('cancelMessage', [msgData.id]);
     } finally {
       dispatch(hideLoadingIndication());
     }
@@ -1537,10 +1519,9 @@ export function cancelPersonalMsg(
 
     let newState;
     try {
-      newState = await submitRequestToBackground<MetaMaskReduxState>(
-        'cancelPersonalMessage',
-        [msgData.id],
-      );
+      newState = await submitRequestToBackground<
+        MetaMaskReduxState['metamask']
+      >('cancelPersonalMessage', [msgData.id]);
     } finally {
       dispatch(hideLoadingIndication());
     }
@@ -1565,10 +1546,9 @@ export function cancelDecryptMsg(
 
     let newState;
     try {
-      newState = await submitRequestToBackground<MetaMaskReduxState>(
-        'cancelDecryptMessage',
-        [msgData.id],
-      );
+      newState = await submitRequestToBackground<
+        MetaMaskReduxState['metamask']
+      >('cancelDecryptMessage', [msgData.id]);
     } finally {
       dispatch(hideLoadingIndication());
     }
@@ -1593,10 +1573,9 @@ export function cancelEncryptionPublicKeyMsg(
 
     let newState;
     try {
-      newState = await submitRequestToBackground<MetaMaskReduxState>(
-        'cancelEncryptionPublicKey',
-        [msgData.id],
-      );
+      newState = await submitRequestToBackground<
+        MetaMaskReduxState['metamask']
+      >('cancelEncryptionPublicKey', [msgData.id]);
     } finally {
       dispatch(hideLoadingIndication());
     }
@@ -1621,10 +1600,9 @@ export function cancelTypedMsg(
 
     let newState;
     try {
-      newState = await submitRequestToBackground<MetaMaskReduxState>(
-        'cancelTypedMessage',
-        [msgData.id],
-      );
+      newState = await submitRequestToBackground<
+        MetaMaskReduxState['metamask']
+      >('cancelTypedMessage', [msgData.id]);
     } finally {
       dispatch(hideLoadingIndication());
     }
@@ -1798,7 +1776,7 @@ export function unlockSucceeded(message?: string) {
 }
 
 export function updateMetamaskState(
-  newState: MetaMaskReduxState,
+  newState: MetaMaskReduxState['metamask'],
 ): ThunkAction<void, MetaMaskReduxState, unknown, AnyAction> {
   return (dispatch, getState) => {
     const { metamask: currentState } = getState();
@@ -2368,17 +2346,17 @@ export function clearPendingTokens(): Action {
 }
 
 export function createCancelTransaction(
-  txId: string,
+  txId: number,
   customGasSettings: CustomGasSettings,
   options: { estimatedBaseFee?: string } = {},
 ): ThunkAction<void, MetaMaskReduxState, unknown, AnyAction> {
   log.debug('background.cancelTransaction');
-  let newTxId: string;
+  let newTxId: number;
 
   return (dispatch) => {
     const actionId = generateActionId();
-    return new Promise<MetaMaskReduxState>((resolve, reject) => {
-      callBackgroundMethod<MetaMaskReduxState>(
+    return new Promise<MetaMaskReduxState['metamask']>((resolve, reject) => {
+      callBackgroundMethod<MetaMaskReduxState['metamask']>(
         'createCancelTransaction',
         [txId, customGasSettings, { ...options, actionId }],
         (err, newState) => {
@@ -2409,12 +2387,12 @@ export function createSpeedUpTransaction(
   options: { estimatedBaseFee?: string } = {},
 ): ThunkAction<void, MetaMaskReduxState, unknown, AnyAction> {
   log.debug('background.createSpeedUpTransaction');
-  let newTx: string;
+  let newTx: TransactionMeta;
 
   return (dispatch) => {
     const actionId = generateActionId();
-    return new Promise<MetaMaskReduxState>((resolve, reject) => {
-      callBackgroundMethod<MetaMaskReduxState>(
+    return new Promise<MetaMaskReduxState['metamask']>((resolve, reject) => {
+      callBackgroundMethod<MetaMaskReduxState['metamask']>(
         'createSpeedUpTransaction',
         [txId, customGasSettings, { ...options, actionId }],
         (err, newState) => {
@@ -2442,12 +2420,12 @@ export function createRetryTransaction(
   txId: string,
   customGasSettings: CustomGasSettings,
 ): ThunkAction<void, MetaMaskReduxState, unknown, AnyAction> {
-  let newTx: string;
+  let newTx: TransactionMeta;
 
   return (dispatch) => {
-    return new Promise<MetaMaskReduxState>((resolve, reject) => {
+    return new Promise<MetaMaskReduxState['metamask']>((resolve, reject) => {
       const actionId = generateActionId();
-      callBackgroundMethod<MetaMaskReduxState>(
+      callBackgroundMethod<MetaMaskReduxState['metamask']>(
         'createSpeedUpTransaction',
         [txId, customGasSettings, { actionId }],
         (err, newState) => {
@@ -3106,7 +3084,9 @@ export async function forceUpdateMetamaskState(
 
   let newState;
   try {
-    newState = await submitRequestToBackground<MetaMaskReduxState>('getState');
+    newState = await submitRequestToBackground<MetaMaskReduxState['metamask']>(
+      'getState',
+    );
   } catch (error) {
     dispatch(displayWarning(error));
     throw error;
