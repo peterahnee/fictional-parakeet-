@@ -42,7 +42,7 @@ describe('App State', () => {
   it('opens alert', () => {
     const state = reduceApp(metamaskState, {
       type: actions.ALERT_OPEN,
-      value: 'test message',
+      payload: 'test message',
     });
 
     expect(state.alertOpen).toStrictEqual(true);
@@ -63,7 +63,7 @@ describe('App State', () => {
   it('detects qr code data', () => {
     const state = reduceApp(metamaskState, {
       type: actions.QR_CODE_DETECTED,
-      value: 'qr data',
+      payload: 'qr data',
     });
 
     expect(state.qrCodeData).toStrictEqual('qr data');
@@ -130,7 +130,7 @@ describe('App State', () => {
   it('shows account detail', () => {
     const state = reduceApp(metamaskState, {
       type: actions.SHOW_ACCOUNT_DETAIL,
-      value: 'context address',
+      payload: 'context address',
     });
     expect(state.forgottenPassword).toBeNull(); // default
     expect(state.accountDetail.subview).toStrictEqual('transactions'); // default
@@ -204,7 +204,7 @@ describe('App State', () => {
 
     const state = reduceApp(oldState, {
       type: actions.COMPLETED_TX,
-      value: {
+      payload: {
         id: 1,
       },
     });
@@ -216,7 +216,7 @@ describe('App State', () => {
   it('returns to account detail page when no unconf actions completed tx', () => {
     const state = reduceApp(metamaskState, {
       type: actions.COMPLETED_TX,
-      value: {
+      payload: {
         unconfirmedActionsCount: 0,
       },
     });
@@ -236,7 +236,7 @@ describe('App State', () => {
   it('sets errors when unlock fails', () => {
     const state = reduceApp(metamaskState, {
       type: actions.UNLOCK_FAILED,
-      value: 'errors',
+      payload: 'errors',
     });
 
     expect(state.warning).toStrictEqual('errors');
@@ -260,7 +260,7 @@ describe('App State', () => {
     };
     const state = reduceApp(metamaskState, {
       type: actions.SET_HARDWARE_WALLET_DEFAULT_HD_PATH,
-      value: {
+      payload: {
         device: HardwareDeviceNames.ledger,
         path: "m/44'/60'/0'",
       },
@@ -272,7 +272,7 @@ describe('App State', () => {
   it('shows loading message', () => {
     const state = reduceApp(metamaskState, {
       type: actions.SHOW_LOADING,
-      value: 'loading',
+      payload: 'loading',
     });
 
     expect(state.isLoading).toStrictEqual(true);
@@ -293,7 +293,7 @@ describe('App State', () => {
   it('displays warning', () => {
     const state = reduceApp(metamaskState, {
       type: actions.DISPLAY_WARNING,
-      value: 'warning',
+      payload: 'warning',
     });
 
     expect(state.isLoading).toStrictEqual(false);
@@ -313,7 +313,7 @@ describe('App State', () => {
   it('shows private key', () => {
     const state = reduceApp(metamaskState, {
       type: actions.SHOW_PRIVATE_KEY,
-      value: 'private key',
+      payload: 'private key',
     });
 
     expect(state.accountDetail.subview).toStrictEqual('export');
@@ -324,7 +324,7 @@ describe('App State', () => {
   it('set mouse user state', () => {
     const state = reduceApp(metamaskState, {
       type: actions.SET_MOUSE_USER_STATE,
-      value: true,
+      payload: true,
     });
 
     expect(state.isMouseUser).toStrictEqual(true);

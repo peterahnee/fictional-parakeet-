@@ -1,12 +1,86 @@
+import { AnyAction, Action } from 'redux';
+import { PayloadAction } from '@reduxjs/toolkit';
 import {
   WebHIDConnectedStatuses,
   HardwareTransportStates,
 } from '../../../shared/constants/hardware-wallets';
+import { RPCDefinition } from '../../../shared/constants/network';
 import * as actionConstants from '../../store/actionConstants';
 
-export default function reduceApp(state = {}, action) {
+interface AppState {
+  shouldClose: boolean;
+  menuOpen: boolean;
+  modal: {
+    open: boolean;
+    modalState: {
+      name: string | null;
+      props: Record<string, any>;
+    };
+    previousModalState: {
+      name: string | null;
+    };
+  };
+  alertOpen: boolean;
+  alertMessage: string | null;
+  qrCodeData: {
+    type?: string | null;
+    values?: { address?: string | null };
+  } | null;
+  networkDropdownOpen: boolean;
+  accountDetail: {
+    subview?: string;
+    accountExport?: string;
+    privateKey?: string;
+  };
+  isLoading: boolean;
+  loadingMessage: string | null;
+  scrollToBottom: boolean;
+  warning: string | null | undefined;
+  buyView: Record<string, any>;
+  isMouseUser: boolean;
+  defaultHdPaths: {
+    trezor: string;
+    ledger: string;
+    lattice: string;
+  };
+  networksTabSelectedRpcUrl: string | null;
+  loadingMethodData: boolean;
+  requestAccountTabs: Record<string, number>; // [url.origin]: tab.id
+  openMetaMaskTabs: Record<string, boolean>; // openMetamaskTabsIDs[tab.id]): true/false
+  currentWindowTab: Record<string, any>; // tabs.tab https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/tabs/Tab
+  showWhatsNewPopup: boolean;
+  singleExceptions: {
+    testKey: string | null;
+  };
+  gasLoadingAnimationIsShowing: boolean;
+  smartTransactionsError: string | null;
+  smartTransactionsErrorMessageDismissed: boolean;
+  ledgerWebHidConnectedStatus: WebHIDConnectedStatuses;
+  ledgerTransportStatus: HardwareTransportStates;
+  newNetworkAdded: string;
+  newCollectibleAddedMessage: string;
+  removeCollectibleMessage: string;
+  portfolioTooltipWasShownInThisSession: boolean;
+  sendInputCurrencySwitched: boolean;
+  newTokensImported: string;
+  newCustomNetworkAdded: RPCDefinition | Record<string, any>;
+  onboardedInThisUISession: boolean;
+  customTokenAmount: string;
+  forgottenPassword: boolean | null;
+  txId: number | null;
+}
+
+interface AppSliceState {
+  appState: AppState;
+}
+
+export default function reduceApp(
+  state: AppState,
+  action: AnyAction,
+): AppState {
   // default state
-  const appState = {
+  const appState: AppState = {
+    ...state,
     shouldClose: false,
     menuOpen: false,
     modal: {
@@ -28,6 +102,7 @@ export default function reduceApp(state = {}, action) {
     },
     // Used to display loading indicator
     isLoading: false,
+    loadingMessage: null,
     // Used to display error text
     warning: null,
     buyView: {},
@@ -60,9 +135,10 @@ export default function reduceApp(state = {}, action) {
     newCustomNetworkAdded: {},
     onboardedInThisUISession: false,
     customTokenAmount: '',
-    ...state,
+    forgottenPassword: false,
+    scrollToBottom: true,
+    txId: null,
   };
-
   switch (action.type) {
     // dropdown methods
     case actionConstants.NETWORK_DROPDOWN_OPEN:
@@ -82,7 +158,7 @@ export default function reduceApp(state = {}, action) {
       return {
         ...appState,
         alertOpen: true,
-        alertMessage: action.value,
+        alertMessage: action.payload,
       };
 
     case actionConstants.ALERT_CLOSE:
@@ -96,7 +172,7 @@ export default function reduceApp(state = {}, action) {
     case actionConstants.QR_CODE_DETECTED:
       return {
         ...appState,
-        qrCodeData: action.value,
+        qrCodeData: action.payload,
       };
 
     // Smart Transactions errors.
@@ -149,7 +225,7 @@ export default function reduceApp(state = {}, action) {
     case actionConstants.FORGOT_PASSWORD:
       return {
         ...appState,
-        forgottenPassword: action.value,
+        forgottenPassword: action.payload,
       };
 
     case actionConstants.SHOW_SEND_TOKEN_PAGE:
@@ -208,7 +284,7 @@ export default function reduceApp(state = {}, action) {
       };
 
     case actionConstants.COMPLETED_TX:
-      if (action.value.unconfirmedActionsCount > 0) {
+      if (action.payload.unconfirmedActionsCount > 0) {
         return {
           ...appState,
           txId: null,
@@ -234,7 +310,7 @@ export default function reduceApp(state = {}, action) {
     case actionConstants.UNLOCK_FAILED:
       return {
         ...appState,
-        warning: action.value || 'Incorrect password. Try again.',
+        warning: action.payload || 'Incorrect password. Try again.',
       };
 
     case actionConstants.UNLOCK_SUCCEEDED:
@@ -244,8 +320,8 @@ export default function reduceApp(state = {}, action) {
       };
 
     case actionConstants.SET_HARDWARE_WALLET_DEFAULT_HD_PATH: {
-      const { device, path } = action.value;
-      const newDefaults = { ...appState.defaultHdPaths };
+      const { device, path } = action.payload;
+      const newDefaults = { ...appState.defaultHdPaths } as any;
       newDefaults[device] = path;
 
       return {
@@ -258,7 +334,7 @@ export default function reduceApp(state = {}, action) {
       return {
         ...appState,
         isLoading: true,
-        loadingMessage: action.value,
+        loadingMessage: action.payload,
       };
 
     case actionConstants.HIDE_LOADING:
@@ -270,7 +346,7 @@ export default function reduceApp(state = {}, action) {
     case actionConstants.DISPLAY_WARNING:
       return {
         ...appState,
-        warning: action.value,
+        warning: action.payload,
         isLoading: false,
       };
 
@@ -286,44 +362,44 @@ export default function reduceApp(state = {}, action) {
         accountDetail: {
           subview: 'export',
           accountExport: 'completed',
-          privateKey: action.value,
+          privateKey: action.payload,
         },
       };
 
     case actionConstants.SET_MOUSE_USER_STATE:
       return {
         ...appState,
-        isMouseUser: action.value,
+        isMouseUser: action.payload,
       };
 
     case actionConstants.SET_SELECTED_SETTINGS_RPC_URL:
       return {
         ...appState,
-        networksTabSelectedRpcUrl: action.value,
+        networksTabSelectedRpcUrl: action.payload,
       };
 
     case actionConstants.SET_NEW_NETWORK_ADDED:
       return {
         ...appState,
-        newNetworkAdded: action.value,
+        newNetworkAdded: action.payload,
       };
 
     case actionConstants.SET_NEW_TOKENS_IMPORTED:
       return {
         ...appState,
-        newTokensImported: action.value,
+        newTokensImported: action.payload,
       };
 
     case actionConstants.SET_NEW_COLLECTIBLE_ADDED_MESSAGE:
       return {
         ...appState,
-        newCollectibleAddedMessage: action.value,
+        newCollectibleAddedMessage: action.payload,
       };
 
     case actionConstants.SET_REMOVE_COLLECTIBLE_MESSAGE:
       return {
         ...appState,
-        removeCollectibleMessage: action.value,
+        removeCollectibleMessage: action.payload,
       };
 
     case actionConstants.PORTFOLIO_TOOLTIP_WAS_SHOWN_IN_THIS_SESSION:
@@ -347,19 +423,19 @@ export default function reduceApp(state = {}, action) {
     case actionConstants.SET_REQUEST_ACCOUNT_TABS:
       return {
         ...appState,
-        requestAccountTabs: action.value,
+        requestAccountTabs: action.payload,
       };
 
     case actionConstants.SET_OPEN_METAMASK_TAB_IDS:
       return {
         ...appState,
-        openMetaMaskTabs: action.value,
+        openMetaMaskTabs: action.payload,
       };
 
     case actionConstants.SET_CURRENT_WINDOW_TAB:
       return {
         ...appState,
-        currentWindowTab: action.value,
+        currentWindowTab: action.payload,
       };
 
     case actionConstants.HIDE_WHATS_NEW_POPUP:
@@ -373,26 +449,26 @@ export default function reduceApp(state = {}, action) {
         ...appState,
         singleExceptions: {
           ...appState.singleExceptions,
-          [action.value]: null,
+          [action.payload]: null,
         },
       };
 
     case actionConstants.TOGGLE_GAS_LOADING_ANIMATION:
       return {
         ...appState,
-        gasLoadingAnimationIsShowing: action.value,
+        gasLoadingAnimationIsShowing: action.payload,
       };
 
     case actionConstants.SET_WEBHID_CONNECTED_STATUS:
       return {
         ...appState,
-        ledgerWebHidConnectedStatus: action.value,
+        ledgerWebHidConnectedStatus: action.payload,
       };
 
     case actionConstants.SET_LEDGER_TRANSPORT_STATUS:
       return {
         ...appState,
-        ledgerTransportStatus: action.value,
+        ledgerTransportStatus: action.payload,
       };
     case actionConstants.TOGGLE_CURRENCY_INPUT_SWITCH:
       return {
@@ -402,17 +478,17 @@ export default function reduceApp(state = {}, action) {
     case actionConstants.SET_NEW_CUSTOM_NETWORK_ADDED:
       return {
         ...appState,
-        newCustomNetworkAdded: action.value,
+        newCustomNetworkAdded: action.payload,
       };
     case actionConstants.ONBOARDED_IN_THIS_UI_SESSION:
       return {
         ...appState,
-        onboardedInThisUISession: action.value,
+        onboardedInThisUISession: action.payload,
       };
     case actionConstants.SET_CUSTOM_TOKEN_AMOUNT:
       return {
         ...appState,
-        customTokenAmount: action.value,
+        customTokenAmount: action.payload,
       };
     default:
       return appState;
@@ -420,63 +496,81 @@ export default function reduceApp(state = {}, action) {
 }
 
 // Action Creators
-export function hideWhatsNewPopup() {
+export function hideWhatsNewPopup(): Action {
   return {
     type: actionConstants.HIDE_WHATS_NEW_POPUP,
   };
 }
 
-export function setPortfolioTooltipWasShownInThisSession() {
+export function setPortfolioTooltipWasShownInThisSession(): Action {
   return {
     type: actionConstants.PORTFOLIO_TOOLTIP_WAS_SHOWN_IN_THIS_SESSION,
   };
 }
 
-export function toggleGasLoadingAnimation(value) {
-  return { type: actionConstants.TOGGLE_GAS_LOADING_ANIMATION, value };
+export function toggleGasLoadingAnimation(
+  payload: boolean,
+): PayloadAction<boolean> {
+  return { type: actionConstants.TOGGLE_GAS_LOADING_ANIMATION, payload };
 }
 
-export function setLedgerWebHidConnectedStatus(value) {
-  return { type: actionConstants.SET_WEBHID_CONNECTED_STATUS, value };
+export function setLedgerWebHidConnectedStatus(
+  payload: WebHIDConnectedStatuses,
+): PayloadAction<WebHIDConnectedStatuses> {
+  return { type: actionConstants.SET_WEBHID_CONNECTED_STATUS, payload };
 }
 
-export function setLedgerTransportStatus(value) {
-  return { type: actionConstants.SET_LEDGER_TRANSPORT_STATUS, value };
+export function setLedgerTransportStatus(
+  payload: HardwareTransportStates,
+): PayloadAction<HardwareTransportStates> {
+  return { type: actionConstants.SET_LEDGER_TRANSPORT_STATUS, payload };
 }
 
-// Selectors
-export function getQrCodeData(state) {
-  return state.appState.qrCodeData;
-}
-
-export function getGasLoadingAnimationIsShowing(state) {
-  return state.appState.gasLoadingAnimationIsShowing;
-}
-
-export function getLedgerWebHidConnectedStatus(state) {
-  return state.appState.ledgerWebHidConnectedStatus;
-}
-
-export function getLedgerTransportStatus(state) {
-  return state.appState.ledgerTransportStatus;
-}
-
-export function getPortfolioTooltipWasShownInThisSession(state) {
-  return state.appState.portfolioTooltipWasShownInThisSession;
-}
-
-export function toggleCurrencySwitch() {
+export function toggleCurrencySwitch(): Action {
   return { type: actionConstants.TOGGLE_CURRENCY_INPUT_SWITCH };
 }
 
-export function setNewCustomNetworkAdded(value) {
-  return { type: actionConstants.SET_NEW_CUSTOM_NETWORK_ADDED, value };
+export function setNewCustomNetworkAdded(
+  // can pass in a valid network or empty one
+  payload: RPCDefinition | Record<string, never>,
+): PayloadAction<RPCDefinition | Record<string, never>> {
+  return { type: actionConstants.SET_NEW_CUSTOM_NETWORK_ADDED, payload };
 }
 
-export function setOnBoardedInThisUISession(value) {
-  return { type: actionConstants.ONBOARDED_IN_THIS_UI_SESSION, value };
+export function setOnBoardedInThisUISession(
+  payload: boolean,
+): PayloadAction<boolean> {
+  return { type: actionConstants.ONBOARDED_IN_THIS_UI_SESSION, payload };
 }
 
-export function setCustomTokenAmount(value) {
-  return { type: actionConstants.SET_CUSTOM_TOKEN_AMOUNT, value };
+export function setCustomTokenAmount(payload: string): PayloadAction<string> {
+  return { type: actionConstants.SET_CUSTOM_TOKEN_AMOUNT, payload };
+}
+
+// Selectors
+export function getQrCodeData(state: AppSliceState): {
+  type?: string | null;
+  values?: { address?: string | null };
+} | null {
+  return state.appState.qrCodeData;
+}
+
+export function getGasLoadingAnimationIsShowing(state: AppSliceState): boolean {
+  return state.appState.gasLoadingAnimationIsShowing;
+}
+
+export function getLedgerWebHidConnectedStatus(
+  state: AppSliceState,
+): string | null {
+  return state.appState.ledgerWebHidConnectedStatus;
+}
+
+export function getLedgerTransportStatus(state: AppSliceState): string | null {
+  return state.appState.ledgerTransportStatus;
+}
+
+export function getPortfolioTooltipWasShownInThisSession(
+  state: AppSliceState,
+): boolean {
+  return state.appState.portfolioTooltipWasShownInThisSession;
 }

@@ -77,7 +77,7 @@ type RPCPreferences = {
 /**
  * An object that describes a network to be used inside of MetaMask
  */
-type RPCDefinition = {
+export type RPCDefinition = {
   /**
    * The hex encoded ChainId for the network
    */
