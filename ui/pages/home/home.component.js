@@ -141,8 +141,8 @@ export default class Home extends PureComponent {
     closeNotificationPopup: PropTypes.func.isRequired,
     newTokensImported: PropTypes.string,
     setNewTokensImported: PropTypes.func.isRequired,
-    newCustomNetworkAdded: PropTypes.object,
-    clearNewCustomNetworkAdded: PropTypes.func,
+    newCustomNetworkAddedUUID: PropTypes.object,
+    clearNewCustomNetworkAddedUUID: PropTypes.func,
     setRpcTarget: PropTypes.func,
     onboardedInThisUISession: PropTypes.bool,
   };
@@ -270,9 +270,9 @@ export default class Home extends PureComponent {
       setRemoveCollectibleMessage,
       newTokensImported,
       setNewTokensImported,
-      newCustomNetworkAdded,
-      clearNewCustomNetworkAdded,
-      setRpcTarget,
+      newCustomNetworkAddedUUID,
+      clearNewCustomNetworkAddedUUID,
+      setNetworkTarget
     } = this.props;
     return (
       <MultipleNotifications>
@@ -476,7 +476,7 @@ export default class Home extends PureComponent {
             key="home-infuraBlockedNotification"
           />
         ) : null}
-        {Object.keys(newCustomNetworkAdded).length !== 0 && (
+        {newCustomNetworkAddedUUID && (
           <Popover className="home__new-network-added">
             <i className="fa fa-check-circle fa-2x home__new-network-added__check-circle" />
             <Typography
@@ -494,13 +494,8 @@ export default class Home extends PureComponent {
                 type="primary"
                 className="home__new-network-added__switch-to-button"
                 onClick={() => {
-                  setRpcTarget(
-                    newCustomNetworkAdded.rpcUrl,
-                    newCustomNetworkAdded.chainId,
-                    newCustomNetworkAdded.ticker,
-                    newCustomNetworkAdded.chainName,
-                  );
-                  clearNewCustomNetworkAdded();
+                  setNetworkTarget(newCustomNetworkAddedUUID);
+                  clearNewCustomNetworkAddedUUID();
                 }}
               >
                 <Typography
@@ -508,12 +503,12 @@ export default class Home extends PureComponent {
                   fontWeight={FONT_WEIGHT.NORMAL}
                   color={COLORS.PRIMARY_INVERSE}
                 >
-                  {t('switchToNetwork', [newCustomNetworkAdded.chainName])}
+                  {t('switchToNetwork', [newCustomNetworkAddedUUID])}
                 </Typography>
               </Button>
               <Button
                 type="secondary"
-                onClick={() => clearNewCustomNetworkAdded()}
+                onClick={() => clearNewCustomNetworkAddedUUID()}
               >
                 <Typography
                   variant={TYPOGRAPHY.H6}
@@ -597,7 +592,7 @@ export default class Home extends PureComponent {
       completedOnboarding,
       shouldShowSeedPhraseReminder,
       onboardedInThisUISession,
-      newCustomNetworkAdded,
+      newCustomNetworkAddedUUID,
     } = this.props;
 
     if (forgottenPassword) {
@@ -613,7 +608,7 @@ export default class Home extends PureComponent {
       showWhatsNewPopup &&
       !showPortfolioTooltip &&
       !portfolioTooltipWasShownInThisSession &&
-      Object.keys(newCustomNetworkAdded).length === 0;
+      Object.keys(newCustomNetworkAddedUUID).length === 0;
     return (
       <div className="main-container">
         <Route path={CONNECTED_ROUTE} component={ConnectedSites} exact />

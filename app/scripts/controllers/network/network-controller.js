@@ -273,6 +273,15 @@ export default class NetworkController extends EventEmitter {
     });
   }
 
+  setNetworkTarget(uuid) {
+    const targetNetwork = this.networkConfigurations.getState()[uuid];
+
+    this._setProviderConfig({
+      type: NETWORK_TYPES.RPC,
+      ...targetNetwork,
+    });
+  }
+
   setProviderType(type) {
     assert.notStrictEqual(
       type,

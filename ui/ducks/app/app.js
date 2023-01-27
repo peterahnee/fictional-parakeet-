@@ -57,7 +57,7 @@ export default function reduceApp(state = {}, action) {
     portfolioTooltipWasShownInThisSession: false,
     sendInputCurrencySwitched: false,
     newTokensImported: '',
-    newCustomNetworkAdded: {},
+    newCustomNetworkAddedUUID: {},
     onboardedInThisUISession: false,
     customTokenAmount: '',
     ...state,
@@ -402,7 +402,7 @@ export default function reduceApp(state = {}, action) {
     case actionConstants.SET_NEW_CUSTOM_NETWORK_ADDED:
       return {
         ...appState,
-        newCustomNetworkAdded: action.value,
+        newCustomNetworkAddedUUID: action.value,
       };
     case actionConstants.ONBOARDED_IN_THIS_UI_SESSION:
       return {
@@ -469,7 +469,7 @@ export function toggleCurrencySwitch() {
   return { type: actionConstants.TOGGLE_CURRENCY_INPUT_SWITCH };
 }
 
-export function setNewCustomNetworkAdded(value) {
+export function setNewCustomNetworkAddedUUID(value) {
   return { type: actionConstants.SET_NEW_CUSTOM_NETWORK_ADDED, value };
 }
 

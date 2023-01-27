@@ -43,11 +43,12 @@ import {
   setRpcTarget,
   ///: BEGIN:ONLY_INCLUDE_IN(flask)
   removeSnapError,
+  setNetworkTarget,
   ///: END:ONLY_INCLUDE_IN
 } from '../../store/actions';
 import {
   hideWhatsNewPopup,
-  setNewCustomNetworkAdded,
+  setNewCustomNetworkAddedUUID,
   getPortfolioTooltipWasShownInThisSession,
   setPortfolioTooltipWasShownInThisSession,
 } from '../../ducks/app/app';
@@ -184,11 +185,14 @@ const mapDispatchToProps = (dispatch) => ({
   setNewTokensImported: (newTokens) => {
     dispatch(setNewTokensImported(newTokens));
   },
-  clearNewCustomNetworkAdded: () => {
-    dispatch(setNewCustomNetworkAdded({}));
+  clearNewCustomNetworkAddedUUID: () => {
+    dispatch(setNewCustomNetworkAddedUUID(''));
   },
   setRpcTarget: (rpcUrl, chainId, ticker, nickname) => {
     dispatch(setRpcTarget(rpcUrl, chainId, ticker, nickname));
+  },
+  setNetworkTarget: (uuid) => {
+    dispatch(setNetworkTarget(uuid));
   },
   setPortfolioTooltipWasShownInThisSession: () =>
     dispatch(setPortfolioTooltipWasShownInThisSession()),

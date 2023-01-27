@@ -2216,7 +2216,7 @@ export default class MetamaskController extends EventEmitter {
   async addCustomNetwork(customRpc, actionId) {
     const { chainId, chainName, rpcUrl, ticker, blockExplorerUrl } = customRpc;
 
-    this.networkController.upsertNetworkConfiguration(
+    const networkConfigUUID = this.networkController.upsertNetworkConfiguration(
       rpcUrl,
       chainId,
       ticker,
@@ -2239,6 +2239,8 @@ export default class MetamaskController extends EventEmitter {
       },
       actionId,
     });
+
+    return networkConfigUUID;
   }
 
   /**
@@ -4353,37 +4355,32 @@ export default class MetamaskController extends EventEmitter {
     nickname = '',
     rpcPrefs = {},
   ) {
-    const frequentRpcListDetail =
-      this.preferencesController.getFrequentRpcListDetail();
-    const rpcSettings = frequentRpcListDetail.find(
-      (rpc) => rpcUrl === rpc.rpcUrl,
-    );
+    // Is this function called anywhere where it should be expected to add the network configuration?
+    // action setRpcTarget
+    // network-dropdown (no)
+    // home.component new network added popover (no)
+    // home.component new network added popover (no)
+    // checking if it already exists
 
-    if (rpcSettings) {
-      this.networkController.setRpcTarget(
-        rpcSettings.rpcUrl,
-        rpcSettings.chainId,
-        rpcSettings.ticker,
-        rpcSettings.nickname,
-        rpcPrefs,
-      );
-    } else {
-      this.networkController.setRpcTarget(
-        rpcUrl,
-        chainId,
-        ticker,
-        nickname,
-        rpcPrefs,
-      );
-      await this.networkController.upsertNetworkConfiguration(
-        rpcUrl,
-        chainId,
-        ticker,
-        nickname,
-        rpcPrefs,
-      );
-    }
+    this.networkController.setRpcTarget(
+      rpcUrl,
+      chainId,
+      ticker,
+      nickname,
+      rpcPrefs,
+    );
+    await this.networkController.upsertNetworkConfiguration(
+      rpcUrl,
+      chainId,
+      ticker,
+      nickname,
+      rpcPrefs,
+    );
     return rpcUrl;
+  }
+
+  setNetworkTarget(uuid) {
+    this.networkController.setNetworkTarget(uuid);
   }
 
   /**
@@ -4403,11 +4400,10 @@ export default class MetamaskController extends EventEmitter {
    * @returns {object} rpcInfo found in the frequentRpcList
    */
   findCustomRpcBy(rpcInfo) {
-    const frequentRpcListDetail =
-      this.preferencesController.getFrequentRpcListDetail();
-    for (const existingRpcInfo of frequentRpcListDetail) {
+    const networkConfigurations = this.networkController.getNetworkConfigurations();
+    for (const [_, networkDetails] of networkConfigurations) {
       for (const key of Object.keys(rpcInfo)) {
-        if (existingRpcInfo[key] === rpcInfo[key]) {
+        if (networkDetails[key] === rpcInfo[key]) {
           return existingRpcInfo;
         }
       }

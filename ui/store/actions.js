@@ -40,7 +40,7 @@ import { isEqualCaseInsensitive } from '../../shared/modules/string-utils';
 ///: BEGIN:ONLY_INCLUDE_IN(flask)
 import { NOTIFICATIONS_EXPIRATION_DELAY } from '../helpers/constants/notifications';
 ///: END:ONLY_INCLUDE_IN
-import { setNewCustomNetworkAdded } from '../ducks/app/app';
+import { setNewCustomNetworkAddedUUID } from '../ducks/app/app';
 import {
   fetchLocale,
   loadRelativeTimeFormatLocaleData,
@@ -2190,6 +2190,19 @@ export function setRpcTarget(newRpc, chainId, ticker = 'ETH', nickname) {
   };
 }
 
+export function setNetworkTarget(uuid) {
+  return async (dispatch) => {
+    log.debug(`background.setNetworkTarget: ${uuid}`);
+
+    try {
+      await submitRequestToBackground('setNetworkTarget', [uuid]);
+    } catch (error) {
+      log.error(error);
+      dispatch(displayWarning('Had a problem changing networks!'));
+    }
+  };
+}
+
 export function rollbackToPreviousProvider() {
   return async (dispatch) => {
     try {
@@ -3856,14 +3869,14 @@ export function cancelQRHardwareSignRequest() {
 export function addCustomNetwork(customRpc) {
   return async (dispatch) => {
     try {
-      dispatch(setNewCustomNetworkAdded(customRpc));
-      await submitRequestToBackground('addCustomNetwork', [
+      const uuid = await submitRequestToBackground('addCustomNetwork', [
         customRpc,
         generateActionId(),
       ]);
+      dispatch(setNewCustomNetworkAddedUUID(uuid));
     } catch (error) {
       log.error(error);
-      dispatch(displayWarning('Had a problem changing networks!'));
+      dispatch(displayWarning('Had a problem adding a new network'));
     }
   };
 }
