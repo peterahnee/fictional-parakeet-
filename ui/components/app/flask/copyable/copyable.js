@@ -5,13 +5,13 @@ import IconCopied from '../../../ui/icon/icon-copied';
 import IconCopy from '../../../ui/icon/icon-copy';
 import Typography from '../../../ui/typography';
 import {
-  ALIGN_ITEMS,
-  BORDER_RADIUS,
-  COLORS,
-  JUSTIFY_CONTENT,
+  AlignItems,
+  BorderRadius,
+  JustifyContent,
   OVERFLOW_WRAP,
   FLEX_DIRECTION,
-  TYPOGRAPHY,
+  TypographyType,
+  BACKGROUND_COLORS, TEXT_COLORS,
 } from '../../../../helpers/constants/design-system';
 import { useCopyToClipboard } from '../../../../hooks/useCopyToClipboard';
 
@@ -20,18 +20,18 @@ export const Copyable = ({ text }) => {
   return (
     <Box
       className="copyable"
-      backgroundColor={COLORS.BACKGROUND_ALTERNATIVE}
-      alignItems={ALIGN_ITEMS.STRETCH}
-      justifyContent={JUSTIFY_CONTENT.SPACE_BETWEEN}
-      borderRadius={BORDER_RADIUS.SM}
+      backgroundColor={BACKGROUND_COLORS.backgroundAlternative}
+      alignItems={AlignItems.stretch}
+      justifyContent={JustifyContent.spaceBetween}
+      borderRadius={BorderRadius.SM}
       paddingLeft={4}
       paddingRight={4}
       paddingTop={2}
       paddingBottom={2}
     >
       <Typography
-        variant={TYPOGRAPHY.H6}
-        color={COLORS.TEXT_ALTERNATIVE}
+        variant={TypographyType.H6}
+        color={TEXT_COLORS.textAlternative}
         marginRight={2}
         overflowWrap={OVERFLOW_WRAP.ANYWHERE}
       >
@@ -39,8 +39,8 @@ export const Copyable = ({ text }) => {
       </Typography>
       <Box
         flexDirection={FLEX_DIRECTION.COLUMN}
-        alignItems={ALIGN_ITEMS.CENTER}
-        justifyContent={JUSTIFY_CONTENT.FLEX_START}
+        alignItems={AlignItems.center}
+        justifyContent={JustifyContent.flexStart}
         marginTop={2}
         marginBottom={1}
       >

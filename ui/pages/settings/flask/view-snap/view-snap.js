@@ -5,10 +5,10 @@ import Button from '../../../../components/ui/button';
 import Typography from '../../../../components/ui/typography';
 import { useI18nContext } from '../../../../hooks/useI18nContext';
 import {
-  TYPOGRAPHY,
-  COLORS,
+  TypographyType,
   TEXT_ALIGN,
   FRACTIONS,
+  TEXT_COLORS,
 } from '../../../../helpers/constants/design-system';
 import SnapsAuthorshipPill from '../../../../components/app/flask/snaps-authorship-pill';
 import Box from '../../../../components/ui/box';
@@ -86,7 +86,7 @@ function ViewSnap() {
         <div className="view-snap__subheader">
           <Typography
             className="view-snap__title"
-            variant={TYPOGRAPHY.H3}
+            variant={TypographyType.H3}
             boxProps={{ textAlign: TEXT_ALIGN.CENTER }}
           >
             {snap.manifest.proposedName}
@@ -114,14 +114,17 @@ function ViewSnap() {
           padding={2}
         >
           {firstInstall && (
-            <Typography variant={TYPOGRAPHY.H8}>
+            <Typography variant={TypographyType.H8}>
               {t('snapAdded', [
                 formatDate(firstInstall.date, 'MMMM d, y'),
                 firstInstall.origin,
               ])}
             </Typography>
           )}
-          <Typography className="view-snap__version" variant={TYPOGRAPHY.H7}>
+          <Typography
+            className="view-snap__version"
+            variant={TypographyType.H7}
+          >
             {t('shorthandVersion', [snap.version])}
           </Typography>
         </Box>
@@ -131,16 +134,21 @@ function ViewSnap() {
         >
           <div className="view-snap__section">
             <Typography
-              variant={TYPOGRAPHY.H6}
-              color={COLORS.TEXT_ALTERNATIVE}
+              variant={TypographyType.H6}
+              color={TEXT_COLORS.textAlternative}
               boxProps={{ marginTop: 5 }}
             >
               {snap.manifest.description}
             </Typography>
           </div>
           <div className="view-snap__section view-snap__permission-list">
-            <Typography variant={TYPOGRAPHY.H4}>{t('permissions')}</Typography>
-            <Typography variant={TYPOGRAPHY.H6} color={COLORS.TEXT_ALTERNATIVE}>
+            <Typography variant={TypographyType.H4}>
+              {t('permissions')}
+            </Typography>
+            <Typography
+              variant={TypographyType.H6}
+              color={TEXT_COLORS.textAlternative}
+            >
               {t('snapAccess', [snap.manifest.proposedName])}
             </Typography>
             <Box width={FRACTIONS.TEN_TWELFTHS}>
@@ -151,12 +159,12 @@ function ViewSnap() {
           </div>
           <div className="view-snap__section">
             <Box width="11/12">
-              <Typography variant={TYPOGRAPHY.H4}>
+              <Typography variant={TypographyType.H4}>
                 {t('connectedSites')}
               </Typography>
               <Typography
-                variant={TYPOGRAPHY.H6}
-                color={COLORS.TEXT_ALTERNATIVE}
+                variant={TypographyType.H6}
+                color={TEXT_COLORS.textAlternative}
               >
                 {t('connectedSnapSites', [snap.manifest.proposedName])}
               </Typography>
@@ -169,10 +177,12 @@ function ViewSnap() {
             </Box>
           </div>
           <div className="view-snap__section">
-            <Typography variant={TYPOGRAPHY.H4}>{t('removeSnap')}</Typography>
+            <Typography variant={TypographyType.H4}>
+              {t('removeSnap')}
+            </Typography>
             <Typography
-              variant={TYPOGRAPHY.H6}
-              color={COLORS.TEXT_ALTERNATIVE}
+              variant={TypographyType.H6}
+              color={TEXT_COLORS.textAlternative}
               boxProps={{ paddingBottom: 3 }}
             >
               {t('removeSnapDescription')}

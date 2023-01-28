@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import {
-  COLORS,
+  BORDER_COLORS,
   SEVERITIES,
-  TYPOGRAPHY,
+  TypographyType,
 } from '../../../helpers/constants/design-system';
 import Box from '../box';
 import Typography from '../typography';
@@ -22,10 +22,10 @@ export default {
 };
 
 export const PersistentCallout = (args) => (
-  <Box borderColor={COLORS.BORDER_DEFAULT} paddingTop={8}>
+  <Box borderColor={BORDER_COLORS.borderDefault} paddingTop={8}>
     <Box margin={2}>
-      <Typography variant={TYPOGRAPHY.H4}>This is your private key:</Typography>
-      <Typography variant={TYPOGRAPHY.H6}>
+      <Typography variant={TypographyType.H4}>This is your private key:</Typography>
+      <Typography variant={TypographyType.H6}>
         some seed words that are super important and probably deserve a callout
       </Typography>
     </Box>
@@ -36,12 +36,12 @@ export const PersistentCallout = (args) => (
 export const DismissibleCallout = (args) => {
   const [dismissed, setDismissed] = useState(false);
   return (
-    <Box borderColor={COLORS.BORDER_DEFAULT} paddingTop={8}>
+    <Box borderColor={BORDER_COLORS.borderDefault} paddingTop={8}>
       <Box margin={2}>
-        <Typography variant={TYPOGRAPHY.H4}>
+        <Typography variant={TypographyType.H4}>
           This is your private key:
         </Typography>
-        <Typography variant={TYPOGRAPHY.H6}>
+        <Typography variant={TypographyType.H6}>
           some seed words that are super important and probably deserve a
           callout
         </Typography>
@@ -81,12 +81,12 @@ export const MultipleDismissibleCallouts = () => {
   };
 
   return (
-    <Box borderColor={COLORS.BORDER_DEFAULT} paddingTop={8}>
+    <Box borderColor={BORDER_COLORS.borderDefault}  paddingTop={8}>
       <Box margin={2}>
-        <Typography variant={TYPOGRAPHY.H4}>
+        <Typography variant={TypographyType.H4}>
           This is your private key:
         </Typography>
-        <Typography variant={TYPOGRAPHY.H6}>
+        <Typography variant={TypographyType.H6}>
           some seed words that are super important and probably deserve a
           callout
         </Typography>

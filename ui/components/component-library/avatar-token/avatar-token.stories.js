@@ -1,9 +1,8 @@
 import React from 'react';
 import {
-  COLORS,
-  SIZES,
+  Size as SizeType,
   DISPLAY,
-  ALIGN_ITEMS,
+  AlignItems,
   TEXT_COLORS,
   BACKGROUND_COLORS,
   BORDER_COLORS,
@@ -54,7 +53,7 @@ export default {
   args: {
     name: 'eth',
     src: './images/eth_logo.svg',
-    size: SIZES.MD,
+    size: SizeType.MD,
     showHalo: false,
   },
 };
@@ -67,12 +66,12 @@ export const DefaultStory = Template.bind({});
 DefaultStory.storyName = 'Default';
 
 export const Size = (args) => (
-  <Box display={DISPLAY.FLEX} alignItems={ALIGN_ITEMS.BASELINE} gap={1}>
-    <AvatarToken {...args} size={SIZES.XS} />
-    <AvatarToken {...args} size={SIZES.SM} />
-    <AvatarToken {...args} size={SIZES.MD} />
-    <AvatarToken {...args} size={SIZES.LG} />
-    <AvatarToken {...args} size={SIZES.XL} />
+  <Box display={DISPLAY.FLEX} alignItems={AlignItems.baseline} gap={1}>
+    <AvatarToken {...args} size={SizeType.XS} />
+    <AvatarToken {...args} size={SizeType.SM} />
+    <AvatarToken {...args} size={SizeType.MD} />
+    <AvatarToken {...args} size={SizeType.LG} />
+    <AvatarToken {...args} size={SizeType.XL} />
   </Box>
 );
 
@@ -114,17 +113,17 @@ export const ColorBackgroundColorAndBorderColor = (args) => (
   <Box display={DISPLAY.FLEX} gap={1}>
     <AvatarToken
       {...args}
-      backgroundColor={COLORS.GOERLI}
-      borderColor={COLORS.GOERLI}
+      backgroundColor={BACKGROUND_COLORS.goerli}
+      borderColor={BORDER_COLORS.goerli}
       name="G"
-      color={COLORS.PRIMARY_INVERSE} // TODO: update it to COLORS.GOERLI_INVERSE
+      color={TEXT_COLORS.primaryInverse}
     />
     <AvatarToken
       {...args}
-      backgroundColor={COLORS.SEPOLIA}
-      borderColor={COLORS.SEPOLIA}
+      backgroundColor={BACKGROUND_COLORS.sepolia}
+      borderColor={BORDER_COLORS.sepolia}
       name="S"
-      color={COLORS.PRIMARY_INVERSE} // TODO: update it to COLORS.GOERLI_INVERSE
+      color={TEXT_COLORS.primaryInverse}
     />
   </Box>
 );

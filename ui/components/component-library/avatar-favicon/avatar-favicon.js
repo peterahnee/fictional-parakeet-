@@ -5,17 +5,16 @@ import { AvatarBase } from '../avatar-base';
 import Box from '../../ui/box/box';
 import { ICON_NAMES, Icon } from '../icon';
 import {
-  COLORS,
   BORDER_COLORS,
-  SIZES,
+  Size,
   DISPLAY,
-  ALIGN_ITEMS,
-  JUSTIFY_CONTENT,
+  AlignItems,
+  JustifyContent, ICON_COLORS,
 } from '../../../helpers/constants/design-system';
 import { AVATAR_FAVICON_SIZES } from './avatar-favicon.constants';
 
 export const AvatarFavicon = ({
-  size = SIZES.MD,
+  size = Size.MD,
   src,
   name = 'avatar-favicon',
   className,
@@ -27,8 +26,8 @@ export const AvatarFavicon = ({
     <AvatarBase
       size={size}
       display={DISPLAY.FLEX}
-      alignItems={ALIGN_ITEMS.CENTER}
-      justifyContent={JUSTIFY_CONTENT.CENTER}
+      alignItems={AlignItems.center}
+      justifyContent={JustifyContent.center}
       className={classnames('mm-avatar-favicon', className)}
       {...{ borderColor, ...props }}
     >
@@ -41,7 +40,7 @@ export const AvatarFavicon = ({
       ) : (
         <Icon
           name={ICON_NAMES.GLOBAL}
-          color={COLORS.ICON_DEFAULT}
+          color={ICON_COLORS.iconDefault}
           size={size}
           {...fallbackIconProps}
         />

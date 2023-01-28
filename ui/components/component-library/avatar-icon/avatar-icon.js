@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import {
-  COLORS,
   BORDER_COLORS,
-  SIZES,
+  Size,
   DISPLAY,
-  ALIGN_ITEMS,
-  JUSTIFY_CONTENT,
+  AlignItems,
+  JustifyContent, BACKGROUND_COLORS, ICON_COLORS, TEXT_COLORS,
 } from '../../../helpers/constants/design-system';
 
 import Box from '../../ui/box/box';
@@ -18,9 +17,9 @@ import { AvatarBase } from '../avatar-base';
 import { AVATAR_ICON_SIZES } from './avatar-icon.constants';
 
 export const AvatarIcon = ({
-  size = SIZES.MD,
-  color = COLORS.PRIMARY_DEFAULT,
-  backgroundColor = COLORS.PRIMARY_MUTED,
+  size = Size.MD,
+  color = TEXT_COLORS.primaryDefault,
+  backgroundColor = BACKGROUND_COLORS.PRIMARY_MUTED,
   className,
   iconProps,
   iconName,
@@ -30,15 +29,15 @@ export const AvatarIcon = ({
     <AvatarBase
       size={size}
       display={DISPLAY.FLEX}
-      alignItems={ALIGN_ITEMS.CENTER}
-      justifyContent={JUSTIFY_CONTENT.CENTER}
+      alignItems={AlignItems.center}
+      justifyContent={JustifyContent.center}
       color={color}
       backgroundColor={backgroundColor}
       borderColor={BORDER_COLORS.TRANSPARENT}
       className={classnames('mm-avatar-icon', className)}
       {...props}
     >
-      <Icon color={COLORS.INHERIT} name={iconName} size={size} {...iconProps} />
+      <Icon color={ICON_COLORS.inherit} name={iconName} size={size} {...iconProps} />
     </AvatarBase>
   );
 };
@@ -61,12 +60,12 @@ AvatarIcon.propTypes = {
   size: PropTypes.oneOf(Object.values(AVATAR_ICON_SIZES)),
   /**
    * The background color of the AvatarIcon
-   * Defaults to COLORS.PRIMARY_MUTED
+   * Defaults to BACKGROUND_COLORS.primaryMuted
    */
   backgroundColor: Box.propTypes.backgroundColor,
   /**
    * The color of the text inside the AvatarIcon
-   * Defaults to COLORS.PRIMARY_DEFAULT
+   * Defaults to TEXT_COLORS.primaryDefault
    */
   color: Box.propTypes.color,
   /**

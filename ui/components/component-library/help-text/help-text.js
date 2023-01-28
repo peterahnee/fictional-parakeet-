@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import {
-  COLORS,
-  TEXT,
+  Color,
+  TextType,
   TEXT_COLORS,
 } from '../../../helpers/constants/design-system';
 
@@ -12,7 +12,7 @@ import { Text } from '../text';
 
 export const HelpText = ({
   error,
-  color = COLORS.TEXT_DEFAULT,
+  color = Color.textDefault,
   className,
   children,
   ...props
@@ -20,8 +20,8 @@ export const HelpText = ({
   <Text
     className={classnames('mm-help-text', className)}
     as="span"
-    variant={TEXT.BODY_XS}
-    color={error ? COLORS.ERROR_DEFAULT : color}
+    variant={TextType.bodyXs}
+    color={error ? Color.errorDefault : color}
     {...props}
   >
     {children}

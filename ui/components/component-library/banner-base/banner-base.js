@@ -7,10 +7,10 @@ import { ButtonIcon, ButtonLink, ICON_NAMES, Text } from '..';
 import Box from '../../ui/box';
 
 import {
-  COLORS,
+  BACKGROUND_COLORS, BorderRadius,
   DISPLAY,
-  SIZES,
-  TEXT,
+  Size,
+  TextType,
 } from '../../../helpers/constants/design-system';
 
 export const BannerBase = ({
@@ -31,8 +31,8 @@ export const BannerBase = ({
       className={classnames('mm-banner-base', className)}
       display={DISPLAY.FLEX}
       gap={2}
-      backgroundColor={COLORS.BACKGROUND_DEFAULT}
-      borderRadius={SIZES.SM}
+      backgroundColor={BACKGROUND_COLORS.backgroundDefault}
+      borderRadius={BorderRadius.SM}
       padding={3}
       paddingLeft={2}
       {...props}
@@ -43,7 +43,7 @@ export const BannerBase = ({
         {title && (
           <Text
             className="mm-banner-base__title"
-            variant={TEXT.BODY_LG_MEDIUM}
+            variant={TextType.bodyLgMedium}
             as="h5"
             {...titleProps}
           >
@@ -57,7 +57,7 @@ export const BannerBase = ({
         )}
         {actionButtonLabel && (
           <ButtonLink
-            size={SIZES.AUTO}
+            size={Size.auto}
             onClick={actionButtonOnClick}
             {...actionButtonProps}
           >
@@ -70,7 +70,7 @@ export const BannerBase = ({
           className="mm-banner-base__close-button"
           marginLeft="auto"
           iconName={ICON_NAMES.CLOSE}
-          size={SIZES.SM}
+          size={Size.SM}
           ariaLabel="Close" // TODO: i18n
           onClick={onClose}
           {...closeButtonProps}

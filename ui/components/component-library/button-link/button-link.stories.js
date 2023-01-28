@@ -1,11 +1,11 @@
 import React from 'react';
 import {
-  ALIGN_ITEMS,
-  BORDER_STYLE,
-  COLORS,
+  AlignItems,
+  BORDER_COLORS,
+  BorderStyle,
   DISPLAY,
-  SIZES,
-  TEXT,
+  Size as SizeType,
+  TextType,
 } from '../../../helpers/constants/design-system';
 import Box from '../../ui/box/box';
 import { ICON_NAMES } from '../icon';
@@ -120,41 +120,41 @@ DefaultStory.storyName = 'Default';
 
 export const Size = (args) => (
   <>
-    <Box display={DISPLAY.FLEX} alignItems={ALIGN_ITEMS.FLEX_START} gap={4}>
-      <ButtonLink {...args} size={SIZES.AUTO}>
+    <Box display={DISPLAY.FLEX} alignItems={AlignItems.flexStart} gap={4}>
+      <ButtonLink {...args} size={SizeType.auto}>
         Auto (default)
       </ButtonLink>
-      <ButtonLink {...args} size={SIZES.SM}>
+      <ButtonLink {...args} size={SizeType.SM}>
         Small
       </ButtonLink>
-      <ButtonLink {...args} size={SIZES.MD}>
+      <ButtonLink {...args} size={SizeType.MD}>
         Medium
       </ButtonLink>
-      <ButtonLink {...args} size={SIZES.LG}>
+      <ButtonLink {...args} size={SizeType.LG}>
         Large
       </ButtonLink>
     </Box>
-    <Text variant={TEXT.BODY_LG_MEDIUM}>
+    <Text variant={TextType.bodyLgMedium}>
       Inherits the font-size of the parent element.{' '}
-      <ButtonLink {...args} size={SIZES.INHERIT}>
+      <ButtonLink {...args} size={SizeType.inherit}>
         Learn more
       </ButtonLink>
     </Text>
-    <Text variant={TEXT.BODY_MD}>
+    <Text variant={TextType.bodyMd}>
       Inherits the font-size of the parent element.{' '}
-      <ButtonLink {...args} size={SIZES.INHERIT}>
+      <ButtonLink {...args} size={SizeType.inherit}>
         Learn more
       </ButtonLink>
     </Text>
-    <Text variant={TEXT.BODY_SM}>
+    <Text variant={TextType.bodySm}>
       Inherits the font-size of the parent element.{' '}
-      <ButtonLink {...args} size={SIZES.INHERIT}>
+      <ButtonLink {...args} size={SizeType.inherit}>
         Learn more
       </ButtonLink>
     </Text>
-    <Text variant={TEXT.BODY_XS}>
+    <Text variant={TextType.bodyXs}>
       Inherits the font-size of the parent element.{' '}
-      <ButtonLink {...args} size={SIZES.INHERIT}>
+      <ButtonLink {...args} size={SizeType.inherit}>
         Learn more
       </ButtonLink>
     </Text>
@@ -182,51 +182,56 @@ export const HitArea = (args) => (
     <Text marginBottom={4}>Default</Text>
     <Box
       display={DISPLAY.FLEX}
-      alignItems={ALIGN_ITEMS.FLEX_START}
+      alignItems={AlignItems.flexStart}
       gap={4}
       marginBottom={4}
     >
-      <ButtonLink {...args} size={SIZES.AUTO}>
+      <ButtonLink {...args} size={SizeType.auto}>
         Auto (default)
       </ButtonLink>
-      <ButtonLink {...args} size={SIZES.SM}>
+      <ButtonLink {...args} size={SizeType.SM}>
         Small
       </ButtonLink>
-      <ButtonLink {...args} size={SIZES.MD}>
+      <ButtonLink {...args} size={SizeType.MD}>
         Medium
       </ButtonLink>
-      <ButtonLink {...args} size={SIZES.LG}>
+      <ButtonLink {...args} size={SizeType.LG}>
         Large
       </ButtonLink>
     </Box>
     <Text marginBottom={4}>Add paddingLeft and paddingRight props</Text>
     <Box
       display={DISPLAY.FLEX}
-      alignItems={ALIGN_ITEMS.FLEX_START}
+      alignItems={AlignItems.flexStart}
       gap={4}
       marginBottom={4}
     >
-      <ButtonLink {...args} paddingLeft={4} paddingRight={4} size={SIZES.AUTO}>
+      <ButtonLink
+        {...args}
+        paddingLeft={4}
+        paddingRight={4}
+        size={SizeType.auto}
+      >
         Auto (default)
       </ButtonLink>
-      <ButtonLink {...args} paddingLeft={4} paddingRight={4} size={SIZES.SM}>
+      <ButtonLink {...args} paddingLeft={4} paddingRight={4} size={SizeType.SM}>
         Small
       </ButtonLink>
-      <ButtonLink {...args} paddingLeft={4} paddingRight={4} size={SIZES.MD}>
+      <ButtonLink {...args} paddingLeft={4} paddingRight={4} size={SizeType.MD}>
         Medium
       </ButtonLink>
-      <ButtonLink {...args} paddingLeft={4} paddingRight={4} size={SIZES.LG}>
+      <ButtonLink {...args} paddingLeft={4} paddingRight={4} size={SizeType.LG}>
         Large
       </ButtonLink>
     </Box>
     <Text marginBottom={4}>Add block prop</Text>
-    <ButtonLink {...args} size={SIZES.LG} block>
+    <ButtonLink {...args} size={SizeType.LG} block>
       Large block
     </ButtonLink>
   </>
 );
 
 HitArea.args = {
-  borderColor: COLORS.ERROR_DEFAULT,
-  borderStyle: BORDER_STYLE.DASHED,
+  borderColor: BORDER_COLORS.errorDefault,
+  borderStyle: BorderStyle.dashed,
 };

@@ -46,11 +46,11 @@ Defaults to `SIZES.MD`
 import { SIZES } from '../../../helpers/constants/design-system';
 import { AvatarIcon, ICON_NAMES } from '../ui/component-library';
 
-<AvatarIcon size={SIZES.XS} />
-<AvatarIcon size={SIZES.SM} />
-<AvatarIcon size={SIZES.MD} />
-<AvatarIcon size={SIZES.LG} />
-<AvatarIcon size={SIZES.XL} />
+    <AvatarIcon {...args} size={SizeType.XS} />
+    <AvatarIcon {...args} size={SizeType.SM} />
+    <AvatarIcon {...args} size={SizeType.MD} />
+    <AvatarIcon {...args} size={SizeType.LG} />
+    <AvatarIcon {...args} size={SizeType.XL} />
 ```
 
 ### Icon Name<span style={{ color: 'red' }}>\*</span>
@@ -75,23 +75,23 @@ import { AvatarIcon, ICON_NAMES } from '../ui/component-library';
 
 ### Color and Background Color
 
-Use the `color` and `backgroundColor` props with the `COLORS` object from `./ui/helpers/constants/design-system.js` to change the icon color and background color of `AvatarIcon`
+Use the `color` and `backgroundColor` props with the `ICON_COLORS` and `BACKGROUND_COLORS` object from `./ui/helpers/constants/design-system.js` to change the icon color and background color of `AvatarIcon`
 
-`color` default: `COLORS.COLORS.PRIMARY_DEFAULT`
-`backgroundColor` default: `COLORS.COLORS.PRIMARY_MUTED`
+`color` default: `ICON_COLORS.primaryDefault`
+`backgroundColor` default: `BACKGROUND_COLORS.primaryMuted`
 
 <Canvas>
   <Story id="components-componentlibrary-avataricon--color-and-background-color" />
 </Canvas>
 
 ```jsx
-import { COLORS } from '../../../helpers/constants/design-system';
+import { BACKGROUND_COLORS, ICON_COLORS } from '../../../helpers/constants/design-system';
 import { AvatarIcon } from '../ui/component-library';
 
-<AvatarIcon color={COLORS.PRIMARY_DEFAULT} backgroundColor={BACKGROUND_COLORS.PRIMARY_MUTED} />
-<AvatarIcon color={COLORS.PRIMARY_INVERSE} backgroundColor={BACKGROUND_COLORS.PRIMARY_DEFAULT} />
-<AvatarIcon color={COLORS.SUCCESS_DEFAULT} backgroundColor={BACKGROUND_COLORS.SUCCESS_MUTED} />
-<AvatarIcon color={COLORS.INFO_DEFAULT} backgroundColor={BACKGROUND_COLORS.INFO_MUTED} />
-<AvatarIcon color={COLORS.WARNING_DEFAULT} backgroundColor={BACKGROUND_COLORS.WARNING_MUTED} />
-<AvatarIcon color={COLORS.ERROR_DEFAULT} backgroundColor={BACKGROUND_COLORS.ERROR_MUTED} />
+<AvatarIcon color={ICON_COLORS.primaryDefault} backgroundColor={BACKGROUND_COLORS.primaryMuted} />
+<AvatarIcon color={ICON_COLORS.primaryInverse} backgroundColor={BACKGROUND_COLORS.primaryDefault} />
+<AvatarIcon color={ICON_COLORS.successDefault} backgroundColor={BACKGROUND_COLORS.successMuted} />
+<AvatarIcon color={ICON_COLORS.infoDefault} backgroundColor={BACKGROUND_COLORS.infoMuted} />
+<AvatarIcon color={ICON_COLORS.warningDefault} backgroundColor={BACKGROUND_COLORS.warningMuted} />
+<AvatarIcon color={ICON_COLORS.errorDefault} backgroundColor={BACKGROUND_COLORS.errorMuted} />
 ```

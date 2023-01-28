@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import {
-  ALIGN_ITEMS,
-  BORDER_RADIUS,
-  COLORS,
-  DISPLAY,
-  JUSTIFY_CONTENT,
-  SIZES,
+  AlignItems, BACKGROUND_COLORS,
+  BorderRadius,
+  DISPLAY, ICON_COLORS,
+  JustifyContent,
+  Size,
 } from '../../../helpers/constants/design-system';
 
 import Box from '../../ui/box';
@@ -20,9 +19,9 @@ export const ButtonIcon = ({
   ariaLabel,
   as = 'button',
   className,
-  color = COLORS.ICON_DEFAULT,
+  color = ICON_COLORS.iconDefault,
   href,
-  size = SIZES.LG,
+  size = Size.LG,
   iconName,
   disabled,
   iconProps,
@@ -44,10 +43,10 @@ export const ButtonIcon = ({
       color={color}
       disabled={disabled}
       display={DISPLAY.INLINE_FLEX}
-      justifyContent={JUSTIFY_CONTENT.CENTER}
-      alignItems={ALIGN_ITEMS.CENTER}
-      borderRadius={BORDER_RADIUS.LG}
-      backgroundColor={COLORS.TRANSPARENT}
+      justifyContent={JustifyContent.center}
+      alignItems={AlignItems.center}
+      borderRadius={BorderRadius.LG}
+      backgroundColor={BACKGROUND_COLORS.transparent}
       href={href}
       {...props}
     >
@@ -70,10 +69,10 @@ ButtonIcon.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * The color of the ButtonIcon component should use the COLOR object from
+   * The color of the ButtonIcon component should use the ICON_COLORS object from
    * ./ui/helpers/constants/design-system.js
    */
-  color: PropTypes.oneOf(Object.values(COLORS)),
+  color: PropTypes.oneOf(ICON_COLORS),
   /**
    * Boolean to disable button
    */

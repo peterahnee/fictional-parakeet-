@@ -54,7 +54,7 @@ Use the `name` prop to set the initial letter of the `AvatarToken`. This will be
 
 ```jsx
 import { AvatarToken } from '../../component-library';
-<AvatarToken name="eth" />
+<AvatarToken name="eth" />;
 ```
 
 ### Src
@@ -88,8 +88,7 @@ Use the `showHalo` prop to display the component with halo effect. Only works if
 ```jsx
 import { AvatarToken } from '../../component-library';
 
-<AvatarToken src="./images/eth_logo.svg" showHalo/>
-
+<AvatarToken src="./images/eth_logo.svg" showHalo />;
 ```
 
 ### Color, Background Color And Border Color
@@ -101,22 +100,24 @@ Use the `color`, `backgroundColor` and `borderColor` props to set the text color
 </Canvas>
 
 ```jsx
-import { COLORS } from '../../../helpers/constants/design-system';
+import {   TEXT_COLORS,
+           BACKGROUND_COLORS,
+           BORDER_COLORS, } from '../../../helpers/constants/design-system';
 import { AvatarToken } from '../../component-library';
 
 <AvatarToken
-  backgroundColor={COLORS.GOERLI}
-  borderColor={COLORS.GOERLI}
-  name="G"
-  color={COLORS.PRIMARY_INVERSE}
+      backgroundColor={BACKGROUND_COLORS.goerli}
+      borderColor={BORDER_COLORS.goerli}
+      name="G"
+      color={Color.primaryInverse}
 >
   G
 </AvatarToken>
 <AvatarToken
-  backgroundColor={COLORS.SEPOLIA}
-  borderColor={COLORS.SEPOLIA}
-  name="S"
-  color={COLORS.PRIMARY_INVERSE}
+    backgroundColor={BACKGROUND_COLORS.sepolia}
+      borderColor={BORDER_COLORS.sepolia}
+      name="S"
+      color={Color.primaryInverse}
 >
   S
 </AvatarToken>

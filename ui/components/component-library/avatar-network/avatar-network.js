@@ -4,22 +4,24 @@ import classnames from 'classnames';
 import { AvatarBase } from '../avatar-base';
 import Box from '../../ui/box/box';
 import {
-  COLORS,
-  SIZES,
+  Size,
   DISPLAY,
-  ALIGN_ITEMS,
-  JUSTIFY_CONTENT,
+  AlignItems,
+  JustifyContent,
+  TEXT_COLORS,
+  BACKGROUND_COLORS,
+  BORDER_COLORS,
 } from '../../../helpers/constants/design-system';
 import { AVATAR_NETWORK_SIZES } from './avatar-network.constants';
 
 export const AvatarNetwork = ({
-  size = SIZES.MD,
+  size = Size.MD,
   name,
   src,
   showHalo,
-  color = COLORS.TEXT_DEFAULT,
-  backgroundColor = COLORS.BACKGROUND_ALTERNATIVE,
-  borderColor = COLORS.TRANSPARENT,
+  color = TEXT_COLORS.textDefault,
+  backgroundColor = BACKGROUND_COLORS.backgroundAlternative,
+  borderColor = BORDER_COLORS.transparent,
   className,
   ...props
 }) => {
@@ -39,8 +41,8 @@ export const AvatarNetwork = ({
     <AvatarBase
       size={size}
       display={DISPLAY.FLEX}
-      alignItems={ALIGN_ITEMS.CENTER}
-      justifyContent={JUSTIFY_CONTENT.CENTER}
+      alignItems={AlignItems.center}
+      justifyContent={JustifyContent.center}
       className={classnames(
         'mm-avatar-network',
         showHalo && 'mm-avatar-network--with-halo',
@@ -98,17 +100,17 @@ AvatarNetwork.propTypes = {
   size: PropTypes.oneOf(Object.values(AVATAR_NETWORK_SIZES)),
   /**
    * The background color of the AvatarNetwork
-   * Defaults to COLORS.BACKGROUND_ALTERNATIVE
+   * Defaults to BACKGROUND_COLORS.backgroundAlternative
    */
   backgroundColor: Box.propTypes.backgroundColor,
   /**
    * The background color of the AvatarNetwork
-   * Defaults to COLORS.BORDER_DEFAULT
+   * Defaults to BORDER_COLORS.borderDefault
    */
   borderColor: Box.propTypes.borderColor,
   /**
    * The color of the text inside the AvatarNetwork
-   * Defaults to COLORS.TEXT_DEFAULT
+   * Defaults to TEXT_COLORS.textDefault
    */
   color: Box.propTypes.color,
   /**

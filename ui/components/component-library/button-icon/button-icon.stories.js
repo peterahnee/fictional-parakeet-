@@ -1,10 +1,10 @@
 import React from 'react';
 import {
-  ALIGN_ITEMS,
-  COLORS,
+  AlignItems,
+  Color,
   DISPLAY,
   FLEX_DIRECTION,
-  SIZES,
+  Size as SizeType,
 } from '../../../helpers/constants/design-system';
 import Box from '../../ui/box/box';
 import { ICON_NAMES } from '../icon';
@@ -52,7 +52,7 @@ export default {
     },
     color: {
       control: 'select',
-      options: Object.values(COLORS),
+      options: Object.values(Color),
     },
     disabled: {
       control: 'boolean',
@@ -110,20 +110,20 @@ IconName.args = {
 export const Size = (args) => (
   <Box
     display={DISPLAY.FLEX}
-    alignItems={ALIGN_ITEMS.BASELINE}
+    alignItems={AlignItems.baseline}
     gap={1}
     marginBottom={2}
   >
     <ButtonIcon
       {...args}
-      size={SIZES.SM}
+      size={SizeType.SM}
       iconName={ICON_NAMES.CLOSE}
       ariaLabel="Close"
     />
     <ButtonIcon
       {...args}
-      size={SIZES.LG}
-      color={COLORS.PRIMARY}
+      size={SizeType.LG}
+      color={Color.primaryDefault}
       iconName={ICON_NAMES.CLOSE}
       ariaLabel="Close"
     />
@@ -142,7 +142,7 @@ export const AriaLabel = (args) => (
       as="a"
       href="https://metamask.io/"
       target="_blank"
-      color={COLORS.PRIMARY_DEFAULT}
+      color={Color.primaryDefault}
       iconName={ICON_NAMES.EXPORT}
       ariaLabel="Visit MetaMask.io"
       {...args}
@@ -157,7 +157,7 @@ export const As = (args) => (
       as="a"
       href="#"
       {...args}
-      color={COLORS.PRIMARY_DEFAULT}
+      color={Color.primaryDefault}
       iconName={ICON_NAMES.EXPORT}
       ariaLabel="demo"
     />
@@ -171,7 +171,7 @@ export const Href = (args) => (
 Href.args = {
   ariaLabel: 'Visit Metamask.io',
   href: 'https://metamask.io/',
-  color: COLORS.PRIMARY_DEFAULT,
+  color: Color.primaryDefault,
 };
 
 export const Color = (args) => (
@@ -179,7 +179,7 @@ export const Color = (args) => (
 );
 
 Color.args = {
-  color: COLORS.PRIMARY_DEFAULT,
+  color: Color.primaryDefault,
 };
 
 export const Disabled = (args) => (

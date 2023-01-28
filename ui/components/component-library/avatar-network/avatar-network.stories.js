@@ -1,12 +1,12 @@
 import React from 'react';
 import {
-  COLORS,
-  SIZES,
+  Size as SizeType,
   DISPLAY,
-  ALIGN_ITEMS,
   TEXT_COLORS,
   BACKGROUND_COLORS,
   BORDER_COLORS,
+  Color,
+  AlignItems,
 } from '../../../helpers/constants/design-system';
 
 import Box from '../../ui/box/box';
@@ -54,7 +54,7 @@ export default {
   args: {
     name: 'Arbitrum One',
     src: './images/arbitrum.svg',
-    size: SIZES.MD,
+    size: SizeType.MD,
     showHalo: false,
   },
 };
@@ -67,12 +67,12 @@ export const DefaultStory = Template.bind({});
 DefaultStory.storyName = 'Default';
 
 export const Size = (args) => (
-  <Box display={DISPLAY.FLEX} alignItems={ALIGN_ITEMS.BASELINE} gap={1}>
-    <AvatarNetwork {...args} size={SIZES.XS} />
-    <AvatarNetwork {...args} size={SIZES.SM} />
-    <AvatarNetwork {...args} size={SIZES.MD} />
-    <AvatarNetwork {...args} size={SIZES.LG} />
-    <AvatarNetwork {...args} size={SIZES.XL} />
+  <Box display={DISPLAY.FLEX} alignItems={AlignItems.baseline} gap={1}>
+    <AvatarNetwork {...args} size={SizeType.XS} />
+    <AvatarNetwork {...args} size={SizeType.SM} />
+    <AvatarNetwork {...args} size={SizeType.MD} />
+    <AvatarNetwork {...args} size={SizeType.LG} />
+    <AvatarNetwork {...args} size={SizeType.XL} />
   </Box>
 );
 
@@ -104,17 +104,17 @@ export const ColorBackgroundColorAndBorderColor = (args) => (
   <Box display={DISPLAY.FLEX} gap={1}>
     <AvatarNetwork
       {...args}
-      backgroundColor={COLORS.GOERLI}
-      borderColor={COLORS.GOERLI}
+      backgroundColor={BACKGROUND_COLORS.goerli}
+      borderColor={BORDER_COLORS.goerli}
       name="G"
-      color={COLORS.PRIMARY_INVERSE} // TODO: update it to COLORS.GOERLI_INVERSE
+      color={Color.goerliInverse}
     />
     <AvatarNetwork
       {...args}
-      backgroundColor={COLORS.SEPOLIA}
-      borderColor={COLORS.SEPOLIA}
+      backgroundColor={BACKGROUND_COLORS.sepolia}
+      borderColor={BORDER_COLORS.sepolia}
       name="S"
-      color={COLORS.PRIMARY_INVERSE} // TODO: update it to COLORS.GOERLI_INVERSE
+      color={Color.goerliInverse}
     />
   </Box>
 );

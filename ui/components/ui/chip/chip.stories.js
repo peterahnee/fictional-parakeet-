@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 
 import {
-  COLORS,
-  TYPOGRAPHY,
+  TypographyType,
   SEVERITIES,
+  Color,
+  BORDER_COLORS,
+  BACKGROUND_COLORS,
+  TEXT_COLORS,
 } from '../../../helpers/constants/design-system';
 
 import ApproveIcon from '../icon/approve-icon.component';
@@ -58,14 +61,14 @@ export default {
         control: {
           type: 'select',
         },
-        options: Object.values(COLORS),
+        options: Object.values(Color),
       },
       variant: {
         color: {
           control: {
             type: 'select',
           },
-          options: Object.values(TYPOGRAPHY),
+          options: Object.values(TypographyType),
         },
       },
     },
@@ -73,13 +76,13 @@ export default {
       control: {
         type: 'select',
       },
-      options: Object.values(COLORS),
+      options: Object.values(BORDER_COLORS),
     },
     backgroundColor: {
       control: {
         type: 'select',
       },
-      options: Object.values(COLORS),
+      options: Object.values(BACKGROUND_COLORS),
     },
     children: {
       control: 'text',
@@ -93,18 +96,18 @@ DefaultStory.storyName = 'Default';
 
 DefaultStory.args = {
   label: 'Chip',
-  borderColor: COLORS.BORDER_DEFAULT,
-  backgroundColor: COLORS.BACKGROUND_ALTERNATIVE,
+  borderColor: BORDER_COLORS.borderDefault,
+  backgroundColor: BACKGROUND_COLORS.backgroundAlternative,
   labelProps: {
-    color: COLORS.TEXT_DEFAULT,
-    variant: TYPOGRAPHY.H6,
+    color: TEXT_COLORS.textDefault,
+    variant: TypographyType.H6,
   },
 };
 
 export const WithLeftIcon = () => (
   <Chip
     label="Done!"
-    borderColor={COLORS.SUCCESS_DEFAULT}
+    borderColor={BORDER_COLORS.successDefault}
     leftIcon={<ApproveIcon size={24} color="var(--color-success-default)" />}
   />
 );
@@ -112,7 +115,7 @@ export const WithLeftIcon = () => (
 export const WithRightIcon = () => (
   <Chip
     label="0x5CfE73b6021E818B776b421B1c4Db2474086a7e1"
-    borderColor={COLORS.BORDER_DEFAULT}
+    borderColor={BORDER_COLORS.borderDefault}
     rightIcon={
       <Identicon
         address="0x5CfE73b6021E818B776b421B1c4Db2474086a7e1"
@@ -125,7 +128,7 @@ export const WithRightIcon = () => (
 export const WithBothIcons = () => (
   <Chip
     label="Account 1"
-    borderColor={COLORS.BORDER_DEFAULT}
+    borderColor={BORDER_COLORS.borderDefault}
     rightIcon={<InfoIcon size={24} severity={SEVERITIES.INFO} />}
     leftIcon={
       <Identicon
@@ -147,5 +150,5 @@ export const WithInput = (args) => {
 };
 
 WithInput.args = {
-  borderColor: COLORS.BORDER_DEFAULT,
+  borderColor: BORDER_COLORS.borderDefault,
 };

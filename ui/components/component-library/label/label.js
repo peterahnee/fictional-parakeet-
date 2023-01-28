@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import {
-  COLORS,
+  Color,
   FONT_WEIGHT,
-  TEXT,
+  Text,
   DISPLAY,
-  ALIGN_ITEMS,
+  AlignItems,
 } from '../../../helpers/constants/design-system';
-import { Text } from '../text';
 
 export const Label = ({
   htmlFor,
@@ -29,10 +28,10 @@ export const Label = ({
     as="label"
     disabled={disabled}
     htmlFor={htmlFor}
-    variant={TEXT.BODY_MD}
+    variant={Text.bodyMd}
     fontWeight={FONT_WEIGHT.BOLD}
     display={DISPLAY.INLINE_FLEX}
-    alignItems={ALIGN_ITEMS.CENTER}
+    alignItems={AlignItems.center}
     {...props}
   >
     {children}
@@ -41,7 +40,7 @@ export const Label = ({
         as="span"
         className="mm-label__required-asterisk"
         aria-hidden="true"
-        color={COLORS.ERROR_DEFAULT}
+        color={Color.errorDefault}
       >
         *
       </Text>

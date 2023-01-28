@@ -3,20 +3,20 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { memoize } from 'lodash';
 import {
-  ALIGN_ITEMS,
+  AlignItems,
   BLOCK_SIZES,
-  BORDER_STYLE,
+  BorderStyle,
   BACKGROUND_COLORS,
   BORDER_COLORS,
   TEXT_COLORS,
   ICON_COLORS,
   DISPLAY,
-  JUSTIFY_CONTENT,
+  JustifyContent,
   TEXT_ALIGN,
   FLEX_DIRECTION,
   FLEX_WRAP,
   BREAKPOINTS,
-  BORDER_RADIUS,
+  BorderRadius,
 } from '../../../helpers/constants/design-system';
 
 const BASE_CLASS_NAME = 'box';
@@ -25,14 +25,12 @@ const Sizes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 const ValidSize = PropTypes.oneOf(Sizes);
 const ValidBlockSize = PropTypes.oneOf(Object.values(BLOCK_SIZES));
 const ValidSizeAndAuto = PropTypes.oneOf([...Sizes, 'auto']);
-export const ValidBackgroundColors = PropTypes.oneOf(
-  Object.values(BACKGROUND_COLORS),
-);
-export const ValidBorderColors = PropTypes.oneOf(Object.values(BORDER_COLORS));
-export const ValidTextColors = PropTypes.oneOf(Object.values(TEXT_COLORS));
-export const ValidIconColors = PropTypes.oneOf(Object.values(ICON_COLORS));
-const ValidAlignItem = PropTypes.oneOf(Object.values(ALIGN_ITEMS));
-const ValidJustifyContent = PropTypes.oneOf(Object.values(JUSTIFY_CONTENT));
+export const ValidBackgroundColors = PropTypes.oneOf(BACKGROUND_COLORS);
+export const ValidBorderColors = PropTypes.oneOf(BORDER_COLORS);
+export const ValidTextColors = PropTypes.oneOf(TEXT_COLORS);
+export const ValidIconColors = PropTypes.oneOf(ICON_COLORS);
+const ValidAlignItem = PropTypes.oneOf(Object.values(AlignItems));
+const ValidJustifyContent = PropTypes.oneOf(Object.values(JustifyContent));
 
 const ArrayOfValidSizes = PropTypes.arrayOf(ValidSize);
 export const MultipleSizes = PropTypes.oneOfType([
@@ -340,12 +338,12 @@ Box.propTypes = {
     PropTypes.arrayOf(PropTypes.number),
   ]),
   borderRadius: PropTypes.oneOfType([
-    PropTypes.oneOf(Object.values(BORDER_RADIUS)),
-    PropTypes.arrayOf(PropTypes.oneOf(Object.values(BORDER_RADIUS))),
+    PropTypes.oneOf(Object.values(BorderRadius)),
+    PropTypes.arrayOf(PropTypes.oneOf(Object.values(BorderRadius))),
   ]),
   borderStyle: PropTypes.oneOfType([
-    PropTypes.oneOf(Object.values(BORDER_STYLE)),
-    PropTypes.arrayOf(PropTypes.oneOf(Object.values(BORDER_STYLE))),
+    PropTypes.oneOf(Object.values(BorderStyle)),
+    PropTypes.arrayOf(PropTypes.oneOf(Object.values(BorderStyle))),
   ]),
   alignItems: MultipleAlignItems,
   justifyContent: MultipleJustifyContents,

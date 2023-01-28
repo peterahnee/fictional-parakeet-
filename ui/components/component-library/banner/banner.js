@@ -5,9 +5,10 @@ import classnames from 'classnames';
 import { BannerBase, Icon, ICON_NAMES } from '..';
 
 import {
-  COLORS,
+  BACKGROUND_COLORS,
+  ICON_COLORS,
   SEVERITIES,
-  SIZES,
+  Size,
 } from '../../../helpers/constants/design-system';
 import { BANNER_SEVERITIES } from './banner.constants';
 
@@ -22,23 +23,23 @@ export const Banner = ({
       case SEVERITIES.DANGER:
         return {
           name: ICON_NAMES.DANGER,
-          color: COLORS.ERROR_DEFAULT,
+          color: ICON_COLORS.errorDefault,
         };
       case SEVERITIES.WARNING:
         return {
           name: ICON_NAMES.WARNING,
-          color: COLORS.WARNING_DEFAULT,
+          color: ICON_COLORS.warningDefault,
         };
       case SEVERITIES.SUCCESS:
         return {
           name: ICON_NAMES.CONFIRMATION,
-          color: COLORS.SUCCESS_DEFAULT,
+          color: ICON_COLORS.successDefault,
         };
       // Defaults to SEVERITIES.INFO
       default:
         return {
           name: ICON_NAMES.INFO,
-          color: COLORS.PRIMARY_DEFAULT,
+          color: ICON_COLORS.primaryDefault,
         };
     }
   };
@@ -46,20 +47,20 @@ export const Banner = ({
   const severityBackground = () => {
     switch (severity) {
       case SEVERITIES.DANGER:
-        return COLORS.ERROR_MUTED;
+        return BACKGROUND_COLORS.errorMuted;
       case SEVERITIES.WARNING:
-        return COLORS.WARNING_MUTED;
+        return BACKGROUND_COLORS.warningMuted;
       case SEVERITIES.SUCCESS:
-        return COLORS.SUCCESS_MUTED;
+        return BACKGROUND_COLORS.successMuted;
       // Defaults to SEVERITIES.INFO
       default:
-        return COLORS.PRIMARY_MUTED;
+        return BACKGROUND_COLORS.primaryMuted;
     }
   };
 
   return (
     <BannerBase
-      startAccessory={<Icon size={SIZES.LG} {...severityIcon()} />}
+      startAccessory={<Icon size={Size.LG} {...severityIcon()} />}
       backgroundColor={severityBackground()}
       className={classnames(
         'mm-banner',

@@ -2,7 +2,11 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { COLORS } from '../../../helpers/constants/design-system';
+import {
+  BACKGROUND_COLORS,
+  BORDER_COLORS,
+  TEXT_COLORS,
+} from '../../../helpers/constants/design-system';
 
 import { AvatarToken } from './avatar-token';
 
@@ -59,20 +63,20 @@ describe('AvatarToken', () => {
     const { getByTestId } = render(
       <>
         <AvatarToken
-          color={COLORS.SUCCESS_DEFAULT}
-          data-testid={COLORS.SUCCESS_DEFAULT}
+          color={TEXT_COLORS.successDefault}
+          data-testid={TEXT_COLORS.successDefault}
         />
         <AvatarToken
-          color={COLORS.ERROR_DEFAULT}
-          data-testid={COLORS.ERROR_DEFAULT}
+          color={TEXT_COLORS.errorDefault}
+          data-testid={TEXT_COLORS.errorDefault}
         />
       </>,
     );
-    expect(getByTestId(COLORS.SUCCESS_DEFAULT)).toHaveClass(
-      `box--color-${COLORS.SUCCESS_DEFAULT}`,
+    expect(getByTestId(TEXT_COLORS.successDefault)).toHaveClass(
+      `box--color-${TEXT_COLORS.successDefault}`,
     );
-    expect(getByTestId(COLORS.ERROR_DEFAULT)).toHaveClass(
-      `box--color-${COLORS.ERROR_DEFAULT}`,
+    expect(getByTestId(TEXT_COLORS.errorDefault)).toHaveClass(
+      `box--color-${TEXT_COLORS.errorDefault}`,
     );
   });
   // background color
@@ -80,41 +84,41 @@ describe('AvatarToken', () => {
     const { getByTestId } = render(
       <>
         <AvatarToken
-          backgroundColor={COLORS.SUCCESS_DEFAULT}
-          data-testid={COLORS.SUCCESS_DEFAULT}
+          backgroundColor={BACKGROUND_COLORS.successDefault}
+          data-testid={BACKGROUND_COLORS.successDefault}
         />
         <AvatarToken
-          backgroundColor={COLORS.ERROR_DEFAULT}
-          data-testid={COLORS.ERROR_DEFAULT}
+          backgroundColor={BACKGROUND_COLORS.errorDefault}
+          data-testid={BACKGROUND_COLORS.errorDefault}
         />
       </>,
     );
-    expect(getByTestId(COLORS.SUCCESS_DEFAULT)).toHaveClass(
-      `box--background-color-${COLORS.SUCCESS_DEFAULT}`,
+    expect(getByTestId(BACKGROUND_COLORS.successDefault)).toHaveClass(
+      `box--background-color-${BACKGROUND_COLORS.successDefault}`,
     );
-    expect(getByTestId(COLORS.ERROR_DEFAULT)).toHaveClass(
-      `box--background-color-${COLORS.ERROR_DEFAULT}`,
+    expect(getByTestId(BACKGROUND_COLORS.errorDefault)).toHaveClass(
+      `box--background-color-${BACKGROUND_COLORS.errorDefault}`,
     );
   });
   // border color
-  it('should render with different border colors', () => {
+  it('should render with different border BORDER_COLORS', () => {
     const { getByTestId } = render(
       <>
         <AvatarToken
-          borderColor={COLORS.SUCCESS_DEFAULT}
-          data-testid={COLORS.SUCCESS_DEFAULT}
+          borderColor={BORDER_COLORS.successDefault}
+          data-testid={BORDER_COLORS.successDefault}
         />
         <AvatarToken
-          borderColor={COLORS.ERROR_DEFAULT}
-          data-testid={COLORS.ERROR_DEFAULT}
+          borderColor={BORDER_COLORS.errorDefault}
+          data-testid={BORDER_COLORS.errorDefault}
         />
       </>,
     );
-    expect(getByTestId(COLORS.SUCCESS_DEFAULT)).toHaveClass(
-      `box--border-color-${COLORS.SUCCESS_DEFAULT}`,
+    expect(getByTestId(BORDER_COLORS.successDefault)).toHaveClass(
+      `box--border-color-${BORDER_COLORS.successDefault}`,
     );
-    expect(getByTestId(COLORS.ERROR_DEFAULT)).toHaveClass(
-      `box--border-color-${COLORS.ERROR_DEFAULT}`,
+    expect(getByTestId(BORDER_COLORS.errorDefault)).toHaveClass(
+      `box--border-color-${BORDER_COLORS.errorDefault}`,
     );
   });
 });

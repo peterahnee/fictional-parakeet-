@@ -55,45 +55,45 @@ Use the `color` prop and the `COLORS` object from `./ui/helpers/constants/design
 
 ```jsx
 import { Text } from '../../component-library';
-import { COLORS } from '../../../helpers/constants/design-system';
+import { TEXT_COLORS, BACKGROUND_COLORS } from '../../../helpers/constants/design-system';
 
-<Text color={COLORS.TEXT_DEFAULT}>
+<Text color={TEXT_COLORS.textDefault}>
   text-default
 </Text>
-<Text color={COLORS.TEXT_ALTERNATIVE}>
+<Text color={TEXT_COLORS.textAlternative}>
   text-alternative
 </Text>
-<Text color={COLORS.TEXT_MUTED}>
+<Text color={TEXT_COLORS.textMuted}>
   text-muted
 </Text>
-<Text color={COLORS.OVERLAY_INVERSE} backgroundColor={COLORS.OVERLAY_DEFAULT}>
-  overlay-inverse
-</Text>
-<Text color={COLORS.PRIMARY_DEFAULT}>
+<Text color={TEXT_COLORS.primaryDefault}>
   primary-default
 </Text>
-<Text color={COLORS.PRIMARY_INVERSE} backgroundColor={COLORS.PRIMARY_DEFAULT}>
+<Text color={TEXT_COLORS.primaryInverse} backgroundColor={BACKGROUND_COLORS.primaryDefault}>
   primary-inverse
 </Text>
-<Text color={COLORS.ERROR_DEFAULT}>
+<Text color={TEXT_COLORS.errorDefault}>
   error-default
 </Text>
-<Text color={COLORS.ERROR_INVERSE} backgroundColor={COLORS.ERROR_DEFAULT}>
+<Text color={TEXT_COLORS.errorInverse} backgroundColor={BACKGROUND_COLORS.errorDefault}>
   error-inverse
 </Text>
-<Text color={COLORS.SUCCESS_DEFAULT}>
+<Text color={TEXT_COLORS.successDefault}>
   success-default
 </Text>
-<Text color={COLORS.SUCCESS_INVERSE} backgroundColor={COLORS.SUCCESS_DEFAULT}>
+<Text color={TEXT_COLORS.successInverse} backgroundColor={BACKGROUND_COLORS.successDefault}>
   success-inverse
 </Text>
-<Text color={COLORS.WARNING_INVERSE} backgroundColor={COLORS.WARNING_DEFAULT}>
+<Text color={TEXT_COLORS.warningDefault}>
+  warning-default
+</Text>
+<Text color={TEXT_COLORS.warningInverse} backgroundColor={BACKGROUND_COLORS.warningDefault}>
   warning-inverse
 </Text>
-<Text color={COLORS.INFO_DEFAULT}>
+<Text color={TEXT_COLORS.infoDefault}>
   info-default
 </Text>
-<Text color={COLORS.INFO_INVERSE} backgroundColor={COLORS.INFO_DEFAULT}>
+<Text color={TEXT_COLORS.infoInverse} backgroundColor={BACKGROUND_COLORS.infoDefault}>
   info-inverse
 </Text>
 ```

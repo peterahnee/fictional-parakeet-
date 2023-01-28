@@ -7,10 +7,9 @@ import Box from '../../../ui/box';
 import Typography from '../../../ui/typography';
 import CheckBox from '../../../ui/check-box';
 import {
-  COLORS,
   DISPLAY,
-  FLEX_DIRECTION,
-  TYPOGRAPHY,
+  FLEX_DIRECTION, TEXT_COLORS,
+  TypographyType,
 } from '../../../../helpers/constants/design-system';
 import { getAdvancedGasFeeValues } from '../../../../selectors';
 import { setAdvancedGasFee } from '../../../../store/actions';
@@ -88,8 +87,8 @@ const AdvancedGasFeeDefaults = () => {
           disabled={gasErrors.maxFeePerGas || gasErrors.maxPriorityFeePerGas}
         />
         <Typography
-          variant={TYPOGRAPHY.H7}
-          color={COLORS.TEXT_ALTERNATIVE}
+          variant={TypographyType.H7}
+          color={TEXT_COLORS.textAlternative}
           margin={0}
         >
           {isDefaultSettingsSelected

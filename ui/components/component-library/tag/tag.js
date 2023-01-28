@@ -4,30 +4,31 @@ import classnames from 'classnames';
 import Box from '../../ui/box/box';
 import { Text } from '../text';
 import {
-  ALIGN_ITEMS,
-  BORDER_RADIUS,
-  COLORS,
+  AlignItems,
+  BACKGROUND_COLORS,
+  BORDER_COLORS,
+  BorderRadius,
   DISPLAY,
-  JUSTIFY_CONTENT,
-  TEXT,
+  JustifyContent,
+  TextType,
 } from '../../../helpers/constants/design-system';
 
 export const Tag = ({ label, className, labelProps, ...props }) => {
   return (
     <Box
       className={classnames('mm-tag', className)}
-      backgroundColor={COLORS.BACKGROUND_DEFAULT}
-      borderColor={COLORS.BORDER_DEFAULT}
+      backgroundColor={BACKGROUND_COLORS.backgroundDefault}
+      borderColor={BORDER_COLORS.borderDefault}
       borderWidth={1}
-      justifyContent={JUSTIFY_CONTENT.CENTER}
-      alignItems={ALIGN_ITEMS.CENTER}
+      justifyContent={JustifyContent.center}
+      alignItems={AlignItems.center}
       paddingLeft={1}
       paddingRight={1}
-      borderRadius={BORDER_RADIUS.PILL}
+      borderRadius={BorderRadius.pill}
       display={DISPLAY.INLINE_BLOCK}
       {...props}
     >
-      <Text variant={TEXT.BODY_SM} {...labelProps}>
+      <Text variant={TextType.bodySm} {...labelProps}>
         {label}
       </Text>
     </Box>

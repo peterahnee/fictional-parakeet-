@@ -7,15 +7,15 @@ import { Icon, ICON_NAMES } from '../icon';
 import { Text } from '../text';
 
 import {
-  ALIGN_ITEMS,
+  AlignItems,
   DISPLAY,
-  JUSTIFY_CONTENT,
+  JustifyContent,
   TEXT_COLORS,
-  TEXT,
-  SIZES,
+  TextType,
+  Size,
   FLEX_DIRECTION,
-  BORDER_RADIUS,
-  COLORS,
+  BorderRadius,
+  BACKGROUND_COLORS,
 } from '../../../helpers/constants/design-system';
 import { BUTTON_BASE_SIZES } from './button-base.constants';
 
@@ -39,8 +39,8 @@ export const ButtonBase = ({
   return (
     <Box
       as={Tag}
-      backgroundColor={COLORS.BACKGROUND_ALTERNATIVE}
-      color={COLORS.TEXT_DEFAULT}
+      backgroundColor={BACKGROUND_COLORS.backgroundAlternative}
+      color={TEXT_COLORS.textDefault}
       href={href}
       paddingLeft={4}
       paddingRight={4}
@@ -57,32 +57,32 @@ export const ButtonBase = ({
       )}
       disabled={disabled}
       display={DISPLAY.INLINE_FLEX}
-      justifyContent={JUSTIFY_CONTENT.CENTER}
-      alignItems={ALIGN_ITEMS.CENTER}
-      borderRadius={BORDER_RADIUS.PILL}
+      justifyContent={JustifyContent.center}
+      alignItems={AlignItems.center}
+      borderRadius={BorderRadius.pill}
       {...props}
     >
       <Text
         as="span"
         className="mm-button-base__content"
-        alignItems={ALIGN_ITEMS.CENTER}
-        justifyContent={JUSTIFY_CONTENT.CENTER}
+        justifyContent={JustifyContent.center}
+        alignItems={AlignItems.center}
         flexDirection={
           iconPositionRight ? FLEX_DIRECTION.ROW_REVERSE : FLEX_DIRECTION.ROW
         }
         gap={2}
-        variant={TEXT.BODY_MD}
+        variant={TextType.bodyMd}
         color={TEXT_COLORS.INHERIT}
         {...textProps}
       >
-        {iconName && <Icon name={iconName} size={SIZES.SM} {...iconProps} />}
+        {iconName && <Icon name={iconName} size={Size.SM} {...iconProps} />}
         {children}
       </Text>
       {loading && (
         <Icon
           className="mm-button-base__icon-loading"
           name={ICON_NAMES.LOADING}
-          size={SIZES.MD}
+          size={Size.MD}
           {...iconLoadingProps}
         />
       )}

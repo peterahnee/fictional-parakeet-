@@ -2,12 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useI18nContext } from '../../../../hooks/useI18nContext';
 import {
-  ALIGN_ITEMS,
-  BORDER_RADIUS,
-  BORDER_STYLE,
-  COLORS,
-  SIZES,
-  TEXT,
+  BorderStyle,
+  Size,
+  BORDER_COLORS,
+  BorderRadius,
+  AlignItems,
+  BACKGROUND_COLORS,
+  ICON_COLORS,
+  TextType,
+  TEXT_COLORS,
 } from '../../../../helpers/constants/design-system';
 import Box from '../../../ui/box';
 import { Icon, Text } from '../../../component-library';
@@ -18,23 +21,23 @@ export const SnapDelineator = ({ snapName, children }) => {
   return (
     <Box
       className="snap-delineator__wrapper"
-      borderStyle={BORDER_STYLE.SOLID}
-      borderColor={COLORS.BORDER_MUTED}
-      borderRadius={BORDER_RADIUS.LG}
+      borderStyle={BorderStyle.solid}
+      borderColor={BORDER_COLORS.borderMuted}
+      borderRadius={BorderRadius.LG}
     >
       <Box
         className="snap-delineator__header"
-        alignItems={ALIGN_ITEMS.CENTER}
-        backgroundColor={COLORS.INFO_MUTED}
+        alignItems={AlignItems.center}
+        backgroundColor={BACKGROUND_COLORS.infoMuted}
         paddingLeft={2}
         paddingRight={2}
         paddingTop={1}
         paddingBottom={1}
       >
-        <Icon name="snaps" color={COLORS.INFO_DEFAULT} size={SIZES.SM} />
+        <Icon name="snaps" color={ICON_COLORS.infoDefault} size={Size.SM} />
         <Text
-          variant={TEXT.BODY_SM}
-          color={COLORS.INFO_DEFAULT}
+          variant={TextType.bodySm}
+          color={TEXT_COLORS.infoDefault}
           className="snap-delineator__header__text"
           marginLeft={1}
           marginTop={0}

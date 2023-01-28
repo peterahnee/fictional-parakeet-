@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  COLORS,
   DISPLAY,
   BACKGROUND_COLORS,
   BORDER_COLORS,
@@ -8,11 +7,12 @@ import {
   FONT_STYLE,
   TEXT_COLORS,
   TEXT_ALIGN,
-  TEXT,
   OVERFLOW_WRAP,
   TEXT_TRANSFORM,
   FRACTIONS,
   FLEX_DIRECTION,
+  TextType,
+  Color as ColorType,
 } from '../../../helpers/constants/design-system';
 
 import Box from '../../ui/box';
@@ -35,7 +35,7 @@ export default {
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: Object.values(TEXT),
+      options: Object.values(TextType),
     },
     color: {
       control: { type: 'select' },
@@ -129,23 +129,23 @@ export default {
 function renderBackgroundColor(color) {
   let bgColor;
   switch (color) {
-    case COLORS.OVERLAY_INVERSE:
-      bgColor = COLORS.OVERLAY_DEFAULT;
+    case ColorType.overlayInverse:
+      bgColor = BACKGROUND_COLORS.overlayDefault;
       break;
-    case COLORS.PRIMARY_INVERSE:
-      bgColor = COLORS.PRIMARY_DEFAULT;
+    case ColorType.primaryInverse:
+      bgColor = BACKGROUND_COLORS.primaryDefault;
       break;
-    case COLORS.ERROR_INVERSE:
-      bgColor = COLORS.ERROR_DEFAULT;
+    case ColorType.errorInverse:
+      bgColor = BACKGROUND_COLORS.errorDefault;
       break;
-    case COLORS.WARNING_INVERSE:
-      bgColor = COLORS.WARNING_DEFAULT;
+    case ColorType.warningInverse:
+      bgColor = BACKGROUND_COLORS.warningDefault;
       break;
-    case COLORS.SUCCESS_INVERSE:
-      bgColor = COLORS.SUCCESS_DEFAULT;
+    case ColorType.successInverse:
+      bgColor = BACKGROUND_COLORS.successDefault;
       break;
-    case COLORS.INFO_INVERSE:
-      bgColor = COLORS.INFO_DEFAULT;
+    case ColorType.infoInverse:
+      bgColor = BACKGROUND_COLORS.infoDefault;
       break;
     default:
       bgColor = null;
@@ -165,7 +165,7 @@ DefaultStory.args = {
 
 export const Variant = (args) => (
   <>
-    {Object.values(TEXT).map((variant) => (
+    {Object.values(TextType).map((variant) => (
       <Text {...args} variant={variant} key={variant}>
         {args.children || variant}
       </Text>
@@ -235,7 +235,7 @@ export const TextAlign = (args) => (
 
 export const OverflowWrap = (args) => (
   <Box
-    borderColor={COLORS.WARNING_DEFAULT}
+    borderColor={BORDER_COLORS.warningDefault}
     display={DISPLAY.BLOCK}
     width={FRACTIONS.ONE_THIRD}
   >
@@ -250,7 +250,7 @@ export const OverflowWrap = (args) => (
 
 export const Ellipsis = (args) => (
   <Box
-    borderColor={COLORS.PRIMARY_DEFAULT}
+    borderColor={BORDER_COLORS.primaryDefault}
     display={DISPLAY.BLOCK}
     width={FRACTIONS.ONE_THIRD}
   >

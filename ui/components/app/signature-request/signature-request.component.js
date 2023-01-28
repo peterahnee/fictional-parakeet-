@@ -9,10 +9,9 @@ import Button from '../../ui/button';
 import Typography from '../../ui/typography/typography';
 import ContractDetailsModal from '../modals/contract-details-modal/contract-details-modal';
 import {
-  TYPOGRAPHY,
+  TypographyType,
   FONT_WEIGHT,
-  COLORS,
-  TEXT_ALIGN,
+  TEXT_ALIGN, TEXT_COLORS,
 } from '../../../helpers/constants/design-system';
 import NetworkAccountBalanceHeader from '../network-account-balance-header';
 import { NETWORK_TYPES } from '../../../../shared/constants/network';
@@ -206,7 +205,7 @@ export default class SignatureRequest extends PureComponent {
 
           <Typography
             className="signature-request__content__title"
-            variant={TYPOGRAPHY.H3}
+            variant={TypographyType.H3}
             fontWeight={FONT_WEIGHT.BOLD}
             boxProps={{
               marginTop: 4,
@@ -216,8 +215,8 @@ export default class SignatureRequest extends PureComponent {
           </Typography>
           <Typography
             className="request-signature__content__subtitle"
-            variant={TYPOGRAPHY.H7}
-            color={COLORS.TEXT_ALTERNATIVE}
+            variant={TypographyType.H7}
+            color={TEXT_COLORS.textAlternative}
             align={TEXT_ALIGN.CENTER}
             margin={12}
             marginTop={3}
@@ -233,8 +232,8 @@ export default class SignatureRequest extends PureComponent {
                 data-testid="verify-contract-details"
               >
                 <Typography
-                  variant={TYPOGRAPHY.H7}
-                  color={COLORS.PRIMARY_DEFAULT}
+                  variant={TypographyType.H7}
+                  color={TEXT_COLORS.primaryDefault}
                 >
                   {this.context.t('verifyContractDetails')}
                 </Typography>

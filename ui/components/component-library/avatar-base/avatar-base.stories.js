@@ -1,7 +1,6 @@
 import React from 'react';
 import {
-  ALIGN_ITEMS,
-  COLORS,
+  AlignItems,
   DISPLAY,
   TEXT_COLORS,
   BACKGROUND_COLORS,
@@ -85,9 +84,9 @@ export default {
   },
   args: {
     size: AVATAR_BASE_SIZES.MD,
-    color: COLORS.TEXT_DEFAULT,
-    backgroundColor: COLORS.BACKGROUND_ALTERNATIVE,
-    borderColor: COLORS.BORDER_DEFAULT,
+    color: TEXT_COLORS.textDefault,
+    backgroundColor: BACKGROUND_COLORS.backgroundAlternative,
+    borderColor: BORDER_COLORS.borderDefault,
   },
 };
 
@@ -96,7 +95,7 @@ export const DefaultStory = (args) => <AvatarBase {...args}>B</AvatarBase>;
 DefaultStory.storyName = 'Default';
 
 export const Size = (args) => (
-  <Box display={DISPLAY.FLEX} alignItems={ALIGN_ITEMS.BASELINE} gap={1}>
+  <Box display={DISPLAY.FLEX} alignItems={AlignItems.baseline} gap={1}>
     <AvatarBase {...args} size={AVATAR_BASE_SIZES.XS} />
     <AvatarBase {...args} size={AVATAR_BASE_SIZES.SM} />
     <AvatarBase {...args} size={AVATAR_BASE_SIZES.MD} />
@@ -119,8 +118,8 @@ export const Children = (args) => (
     <AvatarBase {...args}>A</AvatarBase>
     <AvatarBase
       {...args}
-      backgroundColor={COLORS.INFO_MUTED}
-      borderColor={COLORS.INFO_MUTED}
+      backgroundColor={BACKGROUND_COLORS.infoMuted}
+      borderColor={BORDER_COLORS.infoMuted}
     >
       <i
         className="fa fa-user"
@@ -135,17 +134,17 @@ export const ColorBackgroundColorAndBorderColor = (args) => (
     <AvatarBase {...args}>B</AvatarBase>
     <AvatarBase
       {...args}
-      backgroundColor={COLORS.GOERLI}
-      borderColor={COLORS.GOERLI}
-      color={COLORS.PRIMARY_INVERSE}
+      backgroundColor={BACKGROUND_COLORS.goerli}
+      borderColor={BORDER_COLORS.goerli}
+      color={TEXT_COLORS.primaryInverse}
     >
       G
     </AvatarBase>
     <AvatarBase
       {...args}
-      backgroundColor={COLORS.SEPOLIA}
-      borderColor={COLORS.SEPOLIA}
-      color={COLORS.PRIMARY_INVERSE}
+      backgroundColor={BACKGROUND_COLORS.sepolia}
+      borderColor={BORDER_COLORS.sepolia}
+      color={TEXT_COLORS.primaryInverse}
     >
       S
     </AvatarBase>

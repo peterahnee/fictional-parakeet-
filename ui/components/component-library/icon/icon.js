@@ -5,8 +5,7 @@ import classnames from 'classnames';
 import Box from '../../ui/box/box';
 
 import {
-  SIZES,
-  COLORS,
+  Size,
   ICON_COLORS,
 } from '../../../helpers/constants/design-system';
 
@@ -14,8 +13,8 @@ import { ICON_SIZES, ICON_NAMES } from './icon.constants';
 
 export const Icon = ({
   name,
-  size = SIZES.MD,
-  color = COLORS.INHERIT,
+  size = Size.MD,
+  color = ICON_COLORS.inherit,
   className,
   style,
   ...props
@@ -54,7 +53,7 @@ Icon.propTypes = {
    * The color of the icon.
    * Defaults to COLORS.INHERIT.
    */
-  color: PropTypes.oneOf(Object.values(ICON_COLORS)),
+  color: PropTypes.oneOf(ICON_COLORS),
   /**
    * An additional className to apply to the icon.
    */

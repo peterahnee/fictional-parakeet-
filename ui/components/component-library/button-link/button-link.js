@@ -3,13 +3,18 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import { ButtonBase } from '../button-base';
-import { COLORS, TEXT, SIZES } from '../../../helpers/constants/design-system';
+import {
+  BACKGROUND_COLORS,
+  Color,
+  Size,
+  TextType,
+} from '../../../helpers/constants/design-system';
 import { BUTTON_LINK_SIZES } from './button-link.constants';
 
 export const ButtonLink = ({
   className,
   danger,
-  size = SIZES.AUTO,
+  size = Size.auto,
   ...props
 }) => {
   return (
@@ -22,19 +27,21 @@ export const ButtonLink = ({
       paddingLeft={0}
       paddingRight={0}
       size={size === BUTTON_LINK_SIZES.INHERIT ? null : size}
-      backgroundColor={COLORS.TRANSPARENT}
-      color={danger ? COLORS.ERROR_DEFAULT : COLORS.PRIMARY_DEFAULT}
+      backgroundColor={BACKGROUND_COLORS.transparent}
+      color={danger ? Color.errorDefault : Color.primaryDefault}
       borderRadius={null}
       {...props}
       textProps={{
         variant:
-          size === BUTTON_LINK_SIZES.INHERIT ? TEXT.INHERIT : TEXT.BODY_MD,
+          size === BUTTON_LINK_SIZES.INHERIT
+            ? TextType.inherit
+            : TextType.bodyMd,
       }}
       iconProps={{
-        size: size === BUTTON_LINK_SIZES.INHERIT ? SIZES.INHERIT : SIZES.SM,
+        size: size === BUTTON_LINK_SIZES.INHERIT ? Size.inherit : Size.SM,
       }}
       iconLoadingProps={{
-        size: size === BUTTON_LINK_SIZES.INHERIT ? SIZES.INHERIT : SIZES.MD,
+        size: size === BUTTON_LINK_SIZES.INHERIT ? Size.inherit : Size.MD,
       }}
     />
   );

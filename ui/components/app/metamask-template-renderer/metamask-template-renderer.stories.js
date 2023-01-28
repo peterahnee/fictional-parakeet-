@@ -1,6 +1,9 @@
 import React from 'react';
 import { object } from '@storybook/addon-knobs';
-import { COLORS, TYPOGRAPHY } from '../../../helpers/constants/design-system';
+import {
+  TEXT_COLORS,
+  TypographyType,
+} from '../../../helpers/constants/design-system';
 import MetaMaskTemplateRenderer from '.';
 
 export default {
@@ -12,7 +15,7 @@ const SECTIONS = {
   props: {
     margin: 4,
     padding: 8,
-    borderColor: COLORS.PRIMARY_DEFAULT,
+    borderColor: TEXT_COLORS.primaryDefault,
     borderWidth: 2,
   },
   children: [
@@ -21,8 +24,8 @@ const SECTIONS = {
       key: 'A Test String',
       children: 'A Test String',
       props: {
-        color: COLORS.TEXT_MUTED,
-        variant: TYPOGRAPHY.H2,
+        color: TEXT_COLORS.textMuted,
+        variant: TypographyType.H2,
       },
     },
     {
@@ -30,8 +33,8 @@ const SECTIONS = {
       key: 'Some more text',
       children: 'Some more text as a paragraph',
       props: {
-        color: COLORS.TEXT_ALTERNATIVE,
-        variant: TYPOGRAPHY.Paragraph,
+        color: TEXT_COLORS.textAlternative,
+        variant: TypographyType.paragraph,
       },
     },
     {

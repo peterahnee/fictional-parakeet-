@@ -100,21 +100,23 @@ Use the `color`, `backgroundColor` and `borderColor` props to set the text color
 </Canvas>
 
 ```jsx
-import { COLORS } from '../../../helpers/constants/design-system';
+import { TEXT_COLORS,
+           BACKGROUND_COLORS,
+           BORDER_COLORS } from '../../../helpers/constants/design-system';
 import { AvatarNetwork } from '../../component-library';
 <AvatarNetwork
-  backgroundColor={COLORS.GOERLI}
-  borderColor={COLORS.GOERLI}
-  name="G"
-  color={COLORS.PRIMARY_INVERSE}
+      backgroundColor={BACKGROUND_COLORS.goerli}
+      borderColor={BORDER_COLORS.goerli}
+      name="G"
+      color={Color.goerliInverse}
 >
   G
 </AvatarNetwork>
 <AvatarNetwork
-  backgroundColor={COLORS.SEPOLIA}
-  borderColor={COLORS.SEPOLIA}
-  name="S"
-  color={COLORS.PRIMARY_INVERSE}
+   backgroundColor={BACKGROUND_COLORS.sepolia}
+      borderColor={BORDER_COLORS.sepolia}
+      name="S"
+      color={Color.goerliInverse}
 >
   S
 </AvatarNetwork>

@@ -1,9 +1,8 @@
 import { ethErrors } from 'eth-rpc-errors';
 import {
-  COLORS,
-  JUSTIFY_CONTENT,
-  SEVERITIES,
-  TYPOGRAPHY,
+  JustifyContent,
+  SEVERITIES, TEXT_COLORS,
+  TypographyType,
 } from '../../../helpers/constants/design-system';
 
 const PENDING_TX_DROP_NOTICE = {
@@ -32,7 +31,7 @@ function getValues(pendingApproval, t, actions) {
         key: 'title',
         children: t('switchEthereumChainConfirmationTitle'),
         props: {
-          variant: TYPOGRAPHY.H3,
+          variant: TypographyType.H3,
           align: 'center',
           fontWeight: 'normal',
           boxProps: {
@@ -46,8 +45,8 @@ function getValues(pendingApproval, t, actions) {
         key: 'description',
         children: t('switchEthereumChainConfirmationDescription'),
         props: {
-          variant: TYPOGRAPHY.H7,
-          color: COLORS.TEXT_ALTERNATIVE,
+          variant: TypographyType.H7,
+          color: TEXT_COLORS.textAlternative,
           align: 'center',
           boxProps: {
             padding: [0, 4, 0, 4],
@@ -58,7 +57,7 @@ function getValues(pendingApproval, t, actions) {
         element: 'Box',
         key: 'status-box',
         props: {
-          justifyContent: JUSTIFY_CONTENT.CENTER,
+          justifyContent: JustifyContent.center,
         },
         children: {
           element: 'ConfirmationNetworkSwitch',
