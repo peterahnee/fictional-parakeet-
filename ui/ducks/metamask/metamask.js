@@ -62,13 +62,22 @@ const initialState = {
  * @returns {typeof initialState}
  */
 export default function reduceMetamask(state = initialState, action) {
+  // I don't think we should be spreading initialState into this. Once the
+  // state tree has begun by way of the first reduce call the initialState is
+  // set. The only time it should be used again is if we reset the state with a
+  // deliberate action. However, our tests are *relying upon the initialState
+  // tree above to be spread into the reducer as a way of hydrating the state
+  // for this slice*. I attempted to remove this and it caused nearly 40 test
+  // failures. We are going to refactor this slice anyways, possibly removing
+  // it so we will fix this issue when that time comes.
+  const metamaskState = { ...initialState, ...state };
   switch (action.type) {
     case actionConstants.UPDATE_METAMASK_STATE:
-      return { ...state, ...action.value };
+      return { ...metamaskState, ...action.value };
 
     case actionConstants.LOCK_METAMASK:
       return {
-        ...state,
+        ...metamaskState,
         isUnlocked: false,
       };
 
@@ -76,20 +85,20 @@ export default function reduceMetamask(state = initialState, action) {
       const { account } = action.value;
       const name = action.value.label;
       const id = {};
-      id[account] = { ...state.identities[account], name };
-      const identities = { ...state.identities, ...id };
+      id[account] = { ...metamaskState.identities[account], name };
+      const identities = { ...metamaskState.identities, ...id };
       return Object.assign(state, { identities });
     }
 
     case actionConstants.UPDATE_CUSTOM_NONCE:
       return {
-        ...state,
+        ...metamaskState,
         customNonceValue: action.value,
       };
 
     case actionConstants.TOGGLE_ACCOUNT_MENU:
       return {
-        ...state,
+        ...metamaskState,
         isAccountMenuOpen: !state.isAccountMenuOpen,
       };
 
@@ -106,59 +115,59 @@ export default function reduceMetamask(state = initialState, action) {
       });
 
       return {
-        ...state,
+        ...metamaskState,
         currentNetworkTxList,
       };
     }
 
     case actionConstants.SET_PARTICIPATE_IN_METAMETRICS:
       return {
-        ...state,
+        ...metamaskState,
         participateInMetaMetrics: action.value,
       };
 
     case actionConstants.CLOSE_WELCOME_SCREEN:
       return {
-        ...state,
+        ...metamaskState,
         welcomeScreenSeen: true,
       };
 
     case actionConstants.SET_PENDING_TOKENS:
       return {
-        ...state,
+        ...metamaskState,
         pendingTokens: { ...action.payload },
       };
 
     case actionConstants.CLEAR_PENDING_TOKENS: {
       return {
-        ...state,
+        ...metamaskState,
         pendingTokens: {},
       };
     }
 
     case actionConstants.COMPLETE_ONBOARDING: {
       return {
-        ...state,
+        ...metamaskState,
         completedOnboarding: true,
       };
     }
 
     case actionConstants.SET_FIRST_TIME_FLOW_TYPE: {
       return {
-        ...state,
+        ...metamaskState,
         firstTimeFlowType: action.value,
       };
     }
 
     case actionConstants.SET_NEXT_NONCE: {
       return {
-        ...state,
+        ...metamaskState,
         nextNonce: action.payload,
       };
     }
 
     default:
-      return state;
+      return metamaskState;
   }
 }
 
