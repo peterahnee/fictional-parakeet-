@@ -14,6 +14,7 @@ describe('Redux actionConstants', () => {
           },
         },
       };
+      freeze(initialState);
 
       const action = {
         type: actionConstants.SET_ACCOUNT_LABEL,

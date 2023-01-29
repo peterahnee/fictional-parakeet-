@@ -87,7 +87,7 @@ export default function reduceMetamask(state = initialState, action) {
       const id = {};
       id[account] = { ...metamaskState.identities[account], name };
       const identities = { ...metamaskState.identities, ...id };
-      return Object.assign(state, { identities });
+      return Object.assign(metamaskState, { identities });
     }
 
     case actionConstants.UPDATE_CUSTOM_NONCE:
@@ -99,12 +99,12 @@ export default function reduceMetamask(state = initialState, action) {
     case actionConstants.TOGGLE_ACCOUNT_MENU:
       return {
         ...metamaskState,
-        isAccountMenuOpen: !state.isAccountMenuOpen,
+        isAccountMenuOpen: !metamaskState.isAccountMenuOpen,
       };
 
     case actionConstants.UPDATE_TRANSACTION_PARAMS: {
       const { id: txId, value } = action;
-      let { currentNetworkTxList } = state;
+      let { currentNetworkTxList } = metamaskState;
       currentNetworkTxList = currentNetworkTxList.map((tx) => {
         if (tx.id === txId) {
           const newTx = { ...tx };
