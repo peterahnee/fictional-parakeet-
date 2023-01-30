@@ -141,7 +141,7 @@ export default class Home extends PureComponent {
     closeNotificationPopup: PropTypes.func.isRequired,
     newTokensImported: PropTypes.string,
     setNewTokensImported: PropTypes.func.isRequired,
-    newCustomNetworkAddedUUID: PropTypes.object,
+    newCustomNetworkAddedUUID: PropTypes.string,
     clearNewCustomNetworkAddedUUID: PropTypes.func,
     setRpcTarget: PropTypes.func,
     onboardedInThisUISession: PropTypes.bool,
@@ -272,7 +272,7 @@ export default class Home extends PureComponent {
       setNewTokensImported,
       newCustomNetworkAddedUUID,
       clearNewCustomNetworkAddedUUID,
-      setNetworkTarget
+      setNetworkTarget,
     } = this.props;
     return (
       <MultipleNotifications>
@@ -608,7 +608,7 @@ export default class Home extends PureComponent {
       showWhatsNewPopup &&
       !showPortfolioTooltip &&
       !portfolioTooltipWasShownInThisSession &&
-      Object.keys(newCustomNetworkAddedUUID).length === 0;
+      !newCustomNetworkAddedUUID;
     return (
       <div className="main-container">
         <Route path={CONNECTED_ROUTE} component={ConnectedSites} exact />

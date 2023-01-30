@@ -29,7 +29,7 @@ export default function reduceMetamask(state = {}, action) {
     isAccountMenuOpen: false,
     identities: {},
     unapprovedTxs: {},
-    frequentRpcList: [],
+    networkConfigurations: {},
     addressBook: [],
     contractExchangeRates: {},
     pendingTokens: {},

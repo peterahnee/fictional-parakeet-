@@ -57,7 +57,7 @@ export default function reduceApp(state = {}, action) {
     portfolioTooltipWasShownInThisSession: false,
     sendInputCurrencySwitched: false,
     newTokensImported: '',
-    newCustomNetworkAddedUUID: {},
+    newCustomNetworkAddedUUID: '',
     onboardedInThisUISession: false,
     customTokenAmount: '',
     ...state,

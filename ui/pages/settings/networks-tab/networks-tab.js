@@ -15,7 +15,7 @@ import Button from '../../../components/ui/button';
 import { getEnvironmentType } from '../../../../app/scripts/lib/util';
 import { ENVIRONMENT_TYPE_FULLSCREEN } from '../../../../shared/constants/app';
 import {
-  getFrequentRpcListDetail,
+  getNetworkConfigurations,
   getNetworksTabSelectedRpcUrl,
   getProvider,
 } from '../../../selectors';
@@ -47,27 +47,26 @@ const NetworksTab = ({ addNewNetwork }) => {
     Boolean(pathname.match(NETWORKS_FORM_ROUTE)) ||
     window.location.hash.split('#')[2] === 'blockExplorerUrl';
 
-  const frequentRpcListDetail = useSelector(getFrequentRpcListDetail);
+  const networkConfigurations = useSelector(getNetworkConfigurations);
   const provider = useSelector(getProvider);
   const networksTabSelectedRpcUrl = useSelector(getNetworksTabSelectedRpcUrl);
 
-  const frequentRpcNetworkListDetails = frequentRpcListDetail.map((rpc) => {
-    return {
-      label: rpc.nickname,
-      iconColor: 'var(--color-icon-alternative)',
-      providerType: NETWORK_TYPES.RPC,
-      rpcUrl: rpc.rpcUrl,
-      chainId: rpc.chainId,
-      ticker: rpc.ticker,
-      blockExplorerUrl: rpc.rpcPrefs?.blockExplorerUrl || '',
-      isATestNetwork: TEST_CHAINS.includes(rpc.chainId),
-    };
-  });
+  const networkConfigurationsList = Object.values(networkConfigurations).map(
+    (rpc) => {
+      return {
+        label: rpc.nickname,
+        iconColor: 'var(--color-icon-alternative)',
+        providerType: NETWORK_TYPES.RPC,
+        rpcUrl: rpc.rpcUrl,
+        chainId: rpc.chainId,
+        ticker: rpc.ticker,
+        blockExplorerUrl: rpc.rpcPrefs?.blockExplorerUrl || '',
+        isATestNetwork: TEST_CHAINS.includes(rpc.chainId),
+      };
+    },
+  );
 
-  const networksToRender = [
-    ...defaultNetworks,
-    ...frequentRpcNetworkListDetails,
-  ];
+  const networksToRender = [...defaultNetworks, ...networkConfigurationsList];
   let selectedNetwork =
     networksToRender.find(
       (network) => network.rpcUrl === networksTabSelectedRpcUrl,

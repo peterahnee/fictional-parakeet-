@@ -946,7 +946,7 @@ export default class MetamaskController extends EventEmitter {
           const networkConfigurations =
             this.networkController.getNetworkConfigurations();
           let matchingNetworkConfig;
-          for (const [uuid, networkConfig] of Object.entries(
+          for (const networkConfig of Object.values(
             networkConfigurations,
           )) {
             if (networkConfig.chainId === txMeta.chainId) {
@@ -1782,6 +1782,7 @@ export default class MetamaskController extends EventEmitter {
       rollbackToPreviousProvider:
         networkController.rollbackToPreviousProvider.bind(networkController),
       setCustomRpc: this.setCustomRpc.bind(this),
+      setNetworkTarget: this.setNetworkTarget.bind(this),
       updateAndSetCustomRpc: this.updateAndSetCustomRpc.bind(this),
       delCustomRpc: this.delCustomRpc.bind(this),
       addCustomNetwork: this.addCustomNetwork.bind(this),
@@ -2217,12 +2218,14 @@ export default class MetamaskController extends EventEmitter {
     const { chainId, chainName, rpcUrl, ticker, blockExplorerUrl } = customRpc;
 
     const networkConfigUUID = this.networkController.upsertNetworkConfiguration(
-      rpcUrl,
-      chainId,
-      ticker,
-      chainName,
       {
-        blockExplorerUrl,
+        rpcUrl,
+        chainId,
+        ticker,
+        chainName,
+        rpcPrefs: {
+          blockExplorerUrl,
+        },
       },
     );
 
@@ -2375,8 +2378,7 @@ export default class MetamaskController extends EventEmitter {
       this.networkController.store.getState().provider.chainId ===
         CHAIN_IDS.MAINNET;
 
-    const networkConfigurations =
-      this.networkController.store.getState().networkConfigurations;
+    const { networkConfigurations } = this.networkController.store.getState();
 
     const { tokenList } = this.tokenListController.state;
     const caseInSensitiveTokenList = isTokenDetectionInactiveInMainnet
@@ -3920,15 +3922,15 @@ export default class MetamaskController extends EventEmitter {
           chainName,
           rpcUrl,
         } = {}) => {
-          await this.networkController.upsertNetworkConfiguration(
+          await this.networkController.upsertNetworkConfiguration({
             rpcUrl,
             chainId,
             ticker,
             chainName,
-            {
+            rpcPrefs: {
               blockExplorerUrl,
             },
-          );
+          });
         },
         findCustomRpcBy: this.findCustomRpcBy.bind(this),
         getCurrentChainId: this.networkController.getCurrentChainId.bind(
@@ -4328,13 +4330,13 @@ export default class MetamaskController extends EventEmitter {
       nickname,
       rpcPrefs,
     );
-    await this.networkController.upsertNetworkConfiguration(
+    await this.networkController.upsertNetworkConfiguration({
       rpcUrl,
       chainId,
       ticker,
       nickname,
       rpcPrefs,
-    );
+    });
     return rpcUrl;
   }
 
@@ -4369,13 +4371,13 @@ export default class MetamaskController extends EventEmitter {
       nickname,
       rpcPrefs,
     );
-    await this.networkController.upsertNetworkConfiguration(
+    await this.networkController.upsertNetworkConfiguration({
       rpcUrl,
       chainId,
       ticker,
       nickname,
       rpcPrefs,
-    );
+    });
     return rpcUrl;
   }
 
@@ -4387,6 +4389,7 @@ export default class MetamaskController extends EventEmitter {
    * A method for deleting a selected custom URL.
    *
    * @param {string} rpcUrl - UUID of network configuration to delete.
+   * @param uuid
    */
   async delCustomRpc(uuid) {
     await this.networkController.removeNetworkConfiguration(uuid);
@@ -4397,11 +4400,12 @@ export default class MetamaskController extends EventEmitter {
    * provided search criteria. Returns null if no match is found
    *
    * @param {object} rpcInfo - The RPC endpoint properties and values to check.
-   * @returns {object} rpcInfo found in the frequentRpcList
+   * @returns {object} rpcInfo found in the network configurations list
    */
   findCustomRpcBy(rpcInfo) {
-    const networkConfigurations = this.networkController.getNetworkConfigurations();
-    for (const [_, networkDetails] of networkConfigurations) {
+    const networkConfigurations =
+      this.networkController.getNetworkConfigurations();
+    for (const [_, networkDetails] of Object.entries(networkConfigurations)) {
       for (const key of Object.keys(rpcInfo)) {
         if (networkDetails[key] === rpcInfo[key]) {
           return existingRpcInfo;

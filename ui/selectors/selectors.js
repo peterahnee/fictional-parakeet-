@@ -1162,6 +1162,10 @@ export function getFrequentRpcListDetail(state) {
   return state.metamask.frequentRpcListDetail;
 }
 
+export function getNetworkConfigurations(state) {
+  return state.metamask.networkConfigurations;
+}
+
 export function getIsOptimism(state) {
   return (
     getCurrentChainId(state) === CHAIN_IDS.OPTIMISM ||

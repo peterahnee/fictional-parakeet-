@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
+import { pickBy, omitBy } from 'lodash';
 import Button from '../../ui/button';
 import * as actions from '../../../store/actions';
 import { openAlert as displayInvalidCustomNetworkAlert } from '../../../ducks/alerts/invalid-custom-network';
@@ -46,7 +47,7 @@ function mapStateToProps(state) {
   return {
     provider: state.metamask.provider,
     shouldShowTestNetworks: getShowTestNetworks(state),
-    frequentRpcListDetail: state.metamask.frequentRpcListDetail || [],
+    networkConfigurations: state.metamask.networkConfigurations || [],
     networkDropdownOpen: state.appState.networkDropdownOpen,
     showTestnetMessageInDropdown: state.metamask.showTestnetMessageInDropdown,
   };
@@ -57,8 +58,8 @@ function mapDispatchToProps(dispatch) {
     setProviderType: (type) => {
       dispatch(actions.setProviderType(type));
     },
-    setRpcTarget: (target, chainId, ticker, nickname) => {
-      dispatch(actions.setRpcTarget(target, chainId, ticker, nickname));
+    setRpcTarget: (uuid) => {
+      dispatch(actions.setNetworkTarget(uuid));
     },
     hideNetworkDropdown: () => dispatch(actions.hideNetworkDropdown()),
     displayInvalidCustomNetworkAlert: (networkName) => {
@@ -149,10 +150,10 @@ class NetworkDropdown extends Component {
     );
   }
 
-  renderCustomRpcList(rpcListDetail, provider, opts = {}) {
-    const reversedRpcListDetail = rpcListDetail.slice().reverse();
+  renderCustomRpcList(networkConfigurations, provider, opts = {}) {
+    // const reversedRpcListDetail = rpcListDetail.slice().reverse();
 
-    return reversedRpcListDetail.map((entry) => {
+    return Object.entries(networkConfigurations).map(([uuid, entry]) => {
       const { rpcUrl, chainId, ticker = 'ETH', nickname = '' } = entry;
       const isCurrentRpcTarget =
         provider.type === NETWORK_TYPES.RPC && rpcUrl === provider.rpcUrl;
@@ -163,7 +164,7 @@ class NetworkDropdown extends Component {
           closeMenu={() => this.props.hideNetworkDropdown()}
           onClick={() => {
             if (isPrefixedFormattedHexString(chainId)) {
-              this.props.setRpcTarget(rpcUrl, chainId, ticker, nickname);
+              this.props.setRpcTarget(uuid);
             } else {
               this.props.displayInvalidCustomNetworkAlert(nickname || rpcUrl);
             }
@@ -276,14 +277,19 @@ class NetworkDropdown extends Component {
       shouldShowTestNetworks,
       showTestnetMessageInDropdown,
       hideTestNetMessage,
+      networkConfigurations,
     } = this.props;
-    const rpcListDetail = this.props.frequentRpcListDetail;
-    const rpcListDetailWithoutLocalHost = rpcListDetail.filter(
-      (rpc) => rpc.rpcUrl !== LOCALHOST_RPC_URL,
+    // const rpcListDetail = this.props.frequentRpcListDetail;
+
+    const rpcListDetailWithoutLocalHost = pickBy(
+      networkConfigurations,
+      (config) => config.rpcUrl !== LOCALHOST_RPC_URL,
     );
-    const rpcListDetailForLocalHost = rpcListDetail.filter(
-      (rpc) => rpc.rpcUrl === LOCALHOST_RPC_URL,
+    const rpcListDetailForLocalHost = pickBy(
+      networkConfigurations,
+      (config) => config.rpcUrl === LOCALHOST_RPC_URL,
     );
+
     const isOpen = this.props.networkDropdownOpen;
     const { t } = this.context;
 
