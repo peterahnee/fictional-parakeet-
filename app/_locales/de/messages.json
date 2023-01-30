@@ -370,6 +370,10 @@
   "approveButtonText": {
     "message": "Genehmigen"
   },
+  "approveSpendingCap": {
+    "message": "$1 Ausgabenlimit genehmigen",
+    "description": "The token symbol that is being approved"
+  },
   "approveTokenDescription": {
     "message": "Dies gestattet es Dritten, ohne weitere Benachrichtigung auf die folgenden NFTs zuzugreifen und diese zu übertragen, bis Sie dieses Zugriffsrecht widerrufen."
   },
@@ -421,7 +425,7 @@
     "message": "Tokens automatisch erkennen"
   },
   "autoDetectTokensDescription": {
-    "message": "Wir verwenden APIs von Drittanbietern, um neue Token zu erkennen und anzuzeigen, die in Ihr Wallet gesendet werden. Schalten Sie dies ab, wenn Sie keine Daten von diesen Diensten beziehen möchten. $1",
+    "message": "Wir verwenden APIs von Drittanbietern, um neue Token zu erkennen und anzuzeigen, die in Ihr Wallet gesendet werden. Schalten Sie dies aus, wenn Sie keine Daten von diesen Diensten beziehen möchten. $1",
     "description": "$1 is a link to a support article"
   },
   "autoLockTimeLimit": {
@@ -671,6 +675,9 @@
   "close": {
     "message": "Schließen"
   },
+  "coingecko": {
+    "message": "CoinGecko"
+  },
   "collectibleAddFailedMessage": {
     "message": "NFT kann nicht hinzugefügt werden, da die Eigentumsangaben nicht übereinstimmen. Stellen Sie sicher, dass Sie die richtigen Informationen eingegeben haben."
   },
@@ -883,8 +890,18 @@
   "createPassword": {
     "message": "Passwort erstellen"
   },
+  "cryptoCompare": {
+    "message": "CryptoCompare"
+  },
   "currencyConversion": {
     "message": "Währungsumrechnung"
+  },
+  "currencyRateCheckToggle": {
+    "message": "Guthaben und Token-Preisprüfer anzeigen"
+  },
+  "currencyRateCheckToggleDescription": {
+    "message": "Wie verwenden $1- und $2-APIs, um Ihr Guthaben und den Tokenpreis anzuzeigen. $3",
+    "description": "$1 represents Coingecko, $2 represents CryptoCompare and $3 represents Privacy Policy"
   },
   "currencySymbol": {
     "message": "Währungssymbol"
@@ -2046,6 +2063,9 @@
   "metametricsOptInDescription": {
     "message": "MetaMask möchte Nutzungsdaten sammeln, um besser zu verstehen, wie unsere Nutzer mit der Erweiterung umgehen. Diese Daten werden verwendet, um die Benutzerfreundlichkeit und das Benutzererlebnis unseres Produkts und des Ethereum-Ökosystems kontinuierlich zu verbessern."
   },
+  "metrics": {
+    "message": "Metriken"
+  },
   "mismatchedChainLinkText": {
     "message": "die Netzwerkdetails überprüfen",
     "description": "Serves as link text for the 'mismatchedChain' key. This text will be embedded inside the translation for that key."
@@ -2077,6 +2097,9 @@
   },
   "mobileSyncWarning": {
     "message": "Die Funktion \"Mit Erweiterung synchronisieren\" ist vorübergehend deaktiviert. Wenn Sie Ihre Erweiterungs-Wallet auf MetaMask mobile verwenden möchten, dann gehen Sie in Ihrer mobilen App zurück zu den Einrichtungsoptionen für die Wallet und wählen Sie die Option \"Import mit Geheime Wiederherstellungsphrase\". Verwenden Sie die Geheime Wiederherstellungsphrase Ihrer Erweiterungs-Wallet, um Ihre Wallet in Mobile zu importieren."
+  },
+  "moreComingSoon": {
+    "message": "Mehr in Kürze ..."
   },
   "mustSelectOne": {
     "message": "Du musst mindestens 1 Token auswählen."
@@ -2242,6 +2265,9 @@
   },
   "nft": {
     "message": "NFT"
+  },
+  "nftDisclaimer": {
+    "message": "Haftungsausschluss: MetaMask bezieht die Mediendatei aus der Quellen-URL. Diese URL wird manchmal vom Markt, auf dem das NFT erstellt wurde, geändert."
   },
   "nftTokenIdPlaceholder": {
     "message": "Token-ID eingeben"
@@ -2654,6 +2680,9 @@
   "openInBlockExplorer": {
     "message": "Im Block-Explorer öffnen"
   },
+  "openSea": {
+    "message": "OpenSea (Beta)"
+  },
   "optional": {
     "message": "Optional"
   },
@@ -2967,6 +2996,9 @@
   "removeAccountDescription": {
     "message": "Dieses Konto wird aus Ihrer Wallet entfernt. Bitte stellen Sie sicher, dass Sie den ursprünglichen Seedschlüssel oder den privaten Schlüssel für dieses importierte Konto haben, bevor Sie fortfahren. Über die Dropdown-Liste des Kontos können Sie Konten importieren oder neu anlegen."
   },
+  "removeCollectibleMessage": {
+    "message": "Sammelobjekt wurde erfolgreich entfernt!"
+  },
   "removeNFT": {
     "message": "NFT entfernen"
   },
@@ -3204,6 +3236,9 @@
   },
   "selectPathHelp": {
     "message": "Wenn Sie Ihre bestehenden Ledger-Konten nachfolgend nicht sehen, versuchen Sie, die Pfade zu \"Legacy (MEW / MyCrypto)\" zu ändern"
+  },
+  "selectProvider": {
+    "message": "Anbieter auswählen:"
   },
   "selectType": {
     "message": "Typ auswählen"
@@ -3453,6 +3488,9 @@
   },
   "spendLimitTooLarge": {
     "message": "Ausgabelimit zu groß"
+  },
+  "spendingCap": {
+    "message": "Ausgabenlimit"
   },
   "spendingCapError": {
     "message": "Fehler: Nur Zahlen eingeben"
@@ -3766,7 +3804,7 @@
     "message": "MetaMask Gebühr"
   },
   "swapMetaMaskFeeDescription": {
-    "message": "Wir finden jedes Mal den besten Kurs bei den besten Liquiditätsquellen. Eine Gebühr von $1% ist automatisch darin enthalten.",
+    "message": "Die Gebühr von $1% ist automatisch in diesem Angebot enthalten. Sie zahlen sie als Gegenleistung für eine Lizenz zur Nutzung der Software von MetaMask zur Aggregation von Liquiditätsanbieterinformationen.",
     "description": "Provides information about the fee that metamask takes for swaps. $1 is a decimal number."
   },
   "swapNQuotesWithDot": {
@@ -4031,6 +4069,9 @@
   "thingsToKeep": {
     "message": "Was Sie beachten sollten:"
   },
+  "thisServiceIsExperimental": {
+    "message": "Dieser Dienst ist experimentell"
+  },
   "thisWillCreate": {
     "message": "Hierdurch werden ein neues Wallet und eine mnemonische Phrase erzeugt"
   },
@@ -4203,7 +4244,7 @@
     "message": "Sicherheitsprüfung der Transaktion"
   },
   "transactionSecurityCheckDescription": {
-    "message": "Aktivieren Sie dies, um einer dritten Partei (OpenSea) zu gestatten, alle Ihre Transaktionen zu überprüfen, Signatur-Anfragen zu stellen und Sie vor bekannten bösartigen Anfragen zu schützen."
+    "message": "Wir verwenden APIs von Drittanbietern, um Risiken bei unsignierten Transaktionen und Signaturanfragen zu erkennen und anzuzeigen, bevor Sie diese signieren. Diese Dienste haben Zugriff auf Ihre unsignierten Transaktions- und Signaturanfragen, Ihre Kontoadresse und Ihre bevorzugte Sprache."
   },
   "transactionSubmitted": {
     "message": "Transaktion mit einer Gasgebühr von $1 bei $2 übermittelt."

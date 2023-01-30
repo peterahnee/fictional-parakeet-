@@ -370,6 +370,10 @@
   "approveButtonText": {
     "message": "承認"
   },
+  "approveSpendingCap": {
+    "message": "$1 の使用上限を承認する",
+    "description": "The token symbol that is being approved"
+  },
   "approveTokenDescription": {
     "message": "これにより、アクセス許可を取り消すまで、第三者が今後通知なしに次の NFT にアクセスし、転送できるようになります。"
   },
@@ -421,7 +425,7 @@
     "message": "トークンを自動検出"
   },
   "autoDetectTokensDescription": {
-    "message": "サードパーティー API を使用して、ウォレットに送られた新しいトークンを検出・表示します。アプリがこれらのサービスからデータを取得しないようにするには、オフにしてください。$1",
+    "message": "サードパーティー API を使用して、ウォレットに送られた新しいトークンを検出・表示します。アプリがこれらのサービスからデータを自動的に取得しないようにするには、オフにしてください。$1",
     "description": "$1 is a link to a support article"
   },
   "autoLockTimeLimit": {
@@ -671,6 +675,9 @@
   "close": {
     "message": "閉じる"
   },
+  "coingecko": {
+    "message": "CoinGecko"
+  },
   "collectibleAddFailedMessage": {
     "message": "所有者情報が一致していないため、NFT を追加できません。入力された情報が正しいことを確認してください。"
   },
@@ -883,8 +890,18 @@
   "createPassword": {
     "message": "パスワードを作成"
   },
+  "cryptoCompare": {
+    "message": "CryptoCompare"
+  },
   "currencyConversion": {
     "message": "通貨換算"
+  },
+  "currencyRateCheckToggle": {
+    "message": "残高とトークン価格チェッカーを表示"
+  },
+  "currencyRateCheckToggleDescription": {
+    "message": "MetaMask は $1 と $2 の API を使用して残高とトークンの価格を表示します。$3",
+    "description": "$1 represents Coingecko, $2 represents CryptoCompare and $3 represents Privacy Policy"
   },
   "currencySymbol": {
     "message": "通貨記号"
@@ -2046,6 +2063,9 @@
   "metametricsOptInDescription": {
     "message": "MetaMaskでは、ユーザーによる拡張機能の利用状況についてよりよく理解するため、基本的な使用状況データを収集させていただきたいと考えています。このデータは、当社の製品およびイーサリアムエコシステムの使いやすさとユーザーエクスペリエンスを継続的に改善するために使用されます。"
   },
+  "metrics": {
+    "message": "メトリクス"
+  },
   "mismatchedChainLinkText": {
     "message": "ネットワークの詳細の確認",
     "description": "Serves as link text for the 'mismatchedChain' key. This text will be embedded inside the translation for that key."
@@ -2077,6 +2097,9 @@
   },
   "mobileSyncWarning": {
     "message": "「拡張機能と同期」機能は一時的に無効になっています。拡張ウォレットをMetaMaskモバイルで使用する場合は、モバイルアプリでウォレットの設定オプションに戻り、「シークレットリカバリーフレーズでインポート」オプションを選択します。拡張ウォレットのシークレットフレーズを使用して、ウォレットをモバイルにインポートします。"
+  },
+  "moreComingSoon": {
+    "message": "さらに近日追加予定..."
   },
   "mustSelectOne": {
     "message": "トークンを1つ以上選択する必要があります。"
@@ -2242,6 +2265,9 @@
   },
   "nft": {
     "message": "NFT"
+  },
+  "nftDisclaimer": {
+    "message": "開示事項: MetaMask はソース URL からメディアファイルを取得します。この URL は時々、NFT がミントされたマーケットプレイスにより変更されることがあります。"
   },
   "nftTokenIdPlaceholder": {
     "message": "トークンIDを入力してください"
@@ -2654,6 +2680,9 @@
   "openInBlockExplorer": {
     "message": "ブロックエクスプローラーで開く"
   },
+  "openSea": {
+    "message": "OpenSea (ベータ)"
+  },
   "optional": {
     "message": "任意"
   },
@@ -2967,6 +2996,9 @@
   "removeAccountDescription": {
     "message": "このアカウントはウォレットから削除されます。続行する前に、インポートしたアカウントの元のシークレットリカバリーフレーズまたは秘密鍵を持っていることを確認してください。アカウントはアカウントドロップダウンから再度インポートまたは作成できます。"
   },
+  "removeCollectibleMessage": {
+    "message": "コレクティブルが削除されました！"
+  },
   "removeNFT": {
     "message": "NFTを削除"
   },
@@ -3204,6 +3236,9 @@
   },
   "selectPathHelp": {
     "message": "アカウントが見当たらない場合は、HDパスを切り替えてみてください。"
+  },
+  "selectProvider": {
+    "message": "プロバイダーを選択してください:"
   },
   "selectType": {
     "message": "種類を選択"
@@ -3453,6 +3488,9 @@
   },
   "spendLimitTooLarge": {
     "message": "使用限度額が大きすぎます"
+  },
+  "spendingCap": {
+    "message": "使用上限"
   },
   "spendingCapError": {
     "message": "エラー: 数字のみを入力してください"
@@ -3766,7 +3804,7 @@
     "message": "MetaMask手数料"
   },
   "swapMetaMaskFeeDescription": {
-    "message": "弊社は毎回最上位の流動性ソースから最良の価格を見つけます。$1%の手数料が自動的にこの見積もりに含まれます。",
+    "message": "このクォートには、$1% の手数料が自動的に含まれています。この手数料は、MetaMask の流動性プロバイダーの情報集積ソフトウェアの使用ライセンスの代金として支払うものです。",
     "description": "Provides information about the fee that metamask takes for swaps. $1 is a decimal number."
   },
   "swapNQuotesWithDot": {
@@ -4031,6 +4069,9 @@
   "thingsToKeep": {
     "message": "留意点:"
   },
+  "thisServiceIsExperimental": {
+    "message": "このサービスは実験段階です"
+  },
   "thisWillCreate": {
     "message": "これにより、新しいウォレットとシークレットリカバリーフレーズが作成されます"
   },
@@ -4200,7 +4241,7 @@
     "message": "推定のガス代を$2で$1に増加し、トランザクションを再送信しました"
   },
   "transactionSecurityCheck": {
-    "message": "トランザクションのセキュリティチェック"
+    "message": "トランザクションのセキュリティチェックを有効にする"
   },
   "transactionSecurityCheckDescription": {
     "message": "これをオンにすると、第三者 (OpenSea) がすべてのトランザクションや署名の要求を確認し、既知の悪質な要求に関して警告できるようになります。"

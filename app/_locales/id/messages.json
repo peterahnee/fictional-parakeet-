@@ -370,6 +370,10 @@
   "approveButtonText": {
     "message": "Setujui"
   },
+  "approveSpendingCap": {
+    "message": "Setujui batas pengeluaran $1",
+    "description": "The token symbol that is being approved"
+  },
   "approveTokenDescription": {
     "message": "Hal ini memungkinkan pihak ketiga untuk mengakses dan mentransfer NFT berikut tanpa pemberitahuan lebih lanjut sampai Anda mencabut aksesnya."
   },
@@ -421,7 +425,7 @@
     "message": "Deteksi otomatis token"
   },
   "autoDetectTokensDescription": {
-    "message": "Kami menggunakan API pihak ketiga untuk mendeteksi dan menampilkan token baru yang dikirim ke dompet Anda. Nonaktifkan jika Anda tidak ingin aplikasi memakai data dari layanan tersebut. $1",
+    "message": "Kami menggunakan API pihak ketiga untuk mendeteksi dan menampilkan token baru yang dikirim ke dompet Anda. Nonaktifkan jika Anda tidak ingin aplikasi memakai data secara otomatis dari layanan tersebut. $1",
     "description": "$1 is a link to a support article"
   },
   "autoLockTimeLimit": {
@@ -671,6 +675,9 @@
   "close": {
     "message": "Tutup"
   },
+  "coingecko": {
+    "message": "CoinGecko"
+  },
   "collectibleAddFailedMessage": {
     "message": "NFT tidak dapat ditambahkan karena detail kepemilikan tidak cocok. Pastikan Anda telah memasukkan informasi yang benar."
   },
@@ -883,8 +890,18 @@
   "createPassword": {
     "message": "Buat kata sandi"
   },
+  "cryptoCompare": {
+    "message": "CryptoCompare"
+  },
   "currencyConversion": {
     "message": "Konversi mata uang"
+  },
+  "currencyRateCheckToggle": {
+    "message": "Tampilkan saldo dan pemeriksa harga token"
+  },
+  "currencyRateCheckToggleDescription": {
+    "message": "Kami menggunakan API $1 dan $2 untuk menampilkan saldo serta harga token Anda. $3",
+    "description": "$1 represents Coingecko, $2 represents CryptoCompare and $3 represents Privacy Policy"
   },
   "currencySymbol": {
     "message": "Simbol mata uang"
@@ -2046,6 +2063,9 @@
   "metametricsOptInDescription": {
     "message": "MetaMask ingin mengumpulkan data penggunaan untuk lebih memahami cara pengguna berinteraksi dengan ekstensi. Data ini akan digunakan untuk meningkatkan kegunaan dan pengalaman pengguna atas produk kami dan ekosistem Ethereum secara berkala."
   },
+  "metrics": {
+    "message": "Metrik"
+  },
   "mismatchedChainLinkText": {
     "message": "memverifikasi detail jaringan",
     "description": "Serves as link text for the 'mismatchedChain' key. This text will be embedded inside the translation for that key."
@@ -2077,6 +2097,9 @@
   },
   "mobileSyncWarning": {
     "message": "Fitur 'Sinkronkan dengan ekstensi' dinonaktifkan untuk sementara waktu. Jika Anda ingin menggunakan dompet ekstensi Anda di ponsel MetaMask, maka pada aplikasi seluler Anda: kembali ke opsi pengaturan dompet dan pilih opsi 'Impor dengan Frasa Pemulihan Rahasia'. Gunakan frasa rahasia dompet ekstensi Anda untuk mengimpor dompet Anda ke ponsel nantinya."
+  },
+  "moreComingSoon": {
+    "message": "Selanjutnya akan segera hadir..."
   },
   "mustSelectOne": {
     "message": "Harus memilih minimal 1 token."
@@ -2242,6 +2265,9 @@
   },
   "nft": {
     "message": "NFT"
+  },
+  "nftDisclaimer": {
+    "message": "Penafian: MetaMask mengambil fail media dari url sumber. Url ini terkadang diubah oleh lokapasar tempat NFT dicetak."
   },
   "nftTokenIdPlaceholder": {
     "message": "Masukkan id token"
@@ -2654,6 +2680,9 @@
   "openInBlockExplorer": {
     "message": "Buka di block explorer"
   },
+  "openSea": {
+    "message": "OpenSea (Beta)"
+  },
   "optional": {
     "message": "Opsional"
   },
@@ -2967,6 +2996,9 @@
   "removeAccountDescription": {
     "message": "Akun ini akan dihapus dari dompet Anda. Pastikan Anda memiliki Frasa Pemulihan Rahasia asli atau kunci privat untuk akun impor ini sebelum melanjutkan. Anda dapat mengimpor atau membuat akun lagi dari akun drop down. "
   },
+  "removeCollectibleMessage": {
+    "message": "Koleksi berhasil dihapus!"
+  },
   "removeNFT": {
     "message": "Hapus NFT"
   },
@@ -3204,6 +3236,9 @@
   },
   "selectPathHelp": {
     "message": "Jika Anda tidak menemukan akun yang diharapkan, coba alihkan jalur HD."
+  },
+  "selectProvider": {
+    "message": "Pilih penyedia:"
   },
   "selectType": {
     "message": "Pilih Jenis"
@@ -3453,6 +3488,9 @@
   },
   "spendLimitTooLarge": {
     "message": "Batas penggunaan terlalu besar"
+  },
+  "spendingCap": {
+    "message": "Batas pengeluaran"
   },
   "spendingCapError": {
     "message": "Kesalahan: Masukkan angka saja"
@@ -3766,7 +3804,7 @@
     "message": "Biaya MetaMask"
   },
   "swapMetaMaskFeeDescription": {
-    "message": "Kami menemukan harga terbaik dari sumber likuiditas teratas, setiap waktu. Biaya sebesar $1% otomatis diperhitungkan ke kuotasi ini.",
+    "message": "Biaya sebesar $1% otomatis diperhitungkan ke dalam kuotasi ini. Anda membayarnya sebagai ganti lisensi untuk menggunakan perangkat lunak pengumpul informasi penyedia likuiditas MetaMask.",
     "description": "Provides information about the fee that metamask takes for swaps. $1 is a decimal number."
   },
   "swapNQuotesWithDot": {
@@ -4031,6 +4069,9 @@
   "thingsToKeep": {
     "message": "Hal-hal yang perlu diingat:"
   },
+  "thisServiceIsExperimental": {
+    "message": "Layanan ini bersifat eksperimental"
+  },
   "thisWillCreate": {
     "message": "Ini akan membuat Frasa Pemulihan Rahasia dan dompet baru"
   },
@@ -4200,10 +4241,10 @@
     "message": "Transaksi dikirim kembali dengan estimasi biaya gas naik $1 pada $2"
   },
   "transactionSecurityCheck": {
-    "message": "Pemeriksaan keamanan transaksi"
+    "message": "Aktifkan penyedia keamanan transaksi"
   },
   "transactionSecurityCheckDescription": {
-    "message": "Aktifkan ini untuk mengizinkan pihak ketiga (OpenSea) meninjau semua transaksi dan permintaan tanda tangan Anda serta memperingatkan Anda terkait permintaan berbahaya yang terdeteksi."
+    "message": "Kami menggunakan API pihak ketiga untuk mendeteksi dan menampilkan berbagai risiko yang muncul dalam transaksi yang belum ditandatangani dan permintaan tanda tangan sebelum Anda menandatanganinya. Layanan ini akan dapat mengakses transaksi yang belum ditandatangani dan permintaan tanda tangan, alamat akun, serta bahasa pilihan Anda."
   },
   "transactionSubmitted": {
     "message": "Transaksi dikirim dengan estimasi biaya gas sebesar $1 pada $2."

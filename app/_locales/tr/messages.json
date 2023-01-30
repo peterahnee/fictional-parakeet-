@@ -370,6 +370,10 @@
   "approveButtonText": {
     "message": "Onayla"
   },
+  "approveSpendingCap": {
+    "message": "$1 harcama üst limitini onayla",
+    "description": "The token symbol that is being approved"
+  },
   "approveTokenDescription": {
     "message": "Üçüncü bir tarafın, siz bu erişimi iptal edene kadar başka bildirim yapılmaksızın aşağıdaki NFT'lere erişim sağlamasına ve onları transfer edebilmesine izin verir."
   },
@@ -421,7 +425,7 @@
     "message": "Tokenleri otomatik algıla"
   },
   "autoDetectTokensDescription": {
-    "message": "Cüzdanınıza gönderilen yeni tokenleri algılamak için üçüncü taraf API'leri kullanırız. Uygulamanın bu hizmetlerden veri çekmesini istemiyorsanız kapatın. $1",
+    "message": "Cüzdanınıza gönderilen yeni tokenleri algılamak ve göstermek için üçüncü taraf API'leri kullanırız. Uygulamanın bu hizmetlerden otomatik olarak veri çekmesini istemiyorsanız kapatın. $1",
     "description": "$1 is a link to a support article"
   },
   "autoLockTimeLimit": {
@@ -671,6 +675,9 @@
   "close": {
     "message": "Kapat"
   },
+  "coingecko": {
+    "message": "CoinGecko"
+  },
   "collectibleAddFailedMessage": {
     "message": "Sahiplik bilgileri eşleşmediğinden NFT eklenemez. Doğru bilgileri girdiğinden emin ol."
   },
@@ -883,8 +890,18 @@
   "createPassword": {
     "message": "Parola Oluştur"
   },
+  "cryptoCompare": {
+    "message": "CryptoCompare"
+  },
   "currencyConversion": {
     "message": "Para Birimi Dönüşümü"
+  },
+  "currencyRateCheckToggle": {
+    "message": "Bakiyeyi ve token fiyat denetleyicisini göster"
+  },
+  "currencyRateCheckToggleDescription": {
+    "message": "Bakiyenizi ve token fiyatınızı göstermek için $1 ve $2 API'lerini kullanırız. $3",
+    "description": "$1 represents Coingecko, $2 represents CryptoCompare and $3 represents Privacy Policy"
   },
   "currencySymbol": {
     "message": "Para Birimi Sembolü"
@@ -2046,6 +2063,9 @@
   "metametricsOptInDescription": {
     "message": "MetaMask, kullanıcılarımızın uzantıyı nasıl kullandıklarını daha iyi anlamak amacıyla kullanım verilerini toplamak istiyor. Bu veriler ürünümüzün ve Ethereum eko-sisteminin kullanılabilirliği ve kullanıcı deneyimini geliştirmek için sürekli olarak kullanılacaktır."
   },
+  "metrics": {
+    "message": "Metrikler"
+  },
   "mismatchedChainLinkText": {
     "message": "ağ bilgilerini doğrula",
     "description": "Serves as link text for the 'mismatchedChain' key. This text will be embedded inside the translation for that key."
@@ -2077,6 +2097,9 @@
   },
   "mobileSyncWarning": {
     "message": "\"Uzantı ile senkronize et\" özelliği geçici olarak devre dışı bırakılmış. MetaMask mobilde uzantı cüzdanınızı kullanmak istiyorsanız mobil uygulamaya gidin: cüzdan kurulum ayarlarına geri dönün ve \"Gizli Kurtarma İfadesi ile İçe Aktar\" seçeneğini seçin. Ardından cüzdanınızı mobil uygulamada içe aktarmak için uzantı cüzdanınızın gizli ifadesini kullanın."
+  },
+  "moreComingSoon": {
+    "message": "Daha fazlası çok yakında..."
   },
   "mustSelectOne": {
     "message": "En az bir token seçilmeli."
@@ -2242,6 +2265,9 @@
   },
   "nft": {
     "message": "NFT"
+  },
+  "nftDisclaimer": {
+    "message": "Sorumluluğun Reddi: MetaMask medya dosyasını kaynak url adresinden çeker. Bu url adresi bazen NFT'nin mint edildiği pazar yeri tarafından değiştirilir."
   },
   "nftTokenIdPlaceholder": {
     "message": "Token kimliğini gir"
@@ -2654,6 +2680,9 @@
   "openInBlockExplorer": {
     "message": "Blok gezgininde aç"
   },
+  "openSea": {
+    "message": "OpenSea (Beta)"
+  },
   "optional": {
     "message": "İsteğe bağlı"
   },
@@ -2967,6 +2996,9 @@
   "removeAccountDescription": {
     "message": "Bu hesap cüzdanınızdan kaldırılacaktır. Devam etmeden önce içe aktarılmış olan bu hesap için ilk olarak oluşturulan Gizli Kurtarma İfadesine ya da özel anahtara sahip olduğunuzdan lütfen emin olun. Hesap açılır menüsünden hesapları yeniden içe aktarabilir ya da hesap oluşturabilirsiniz. "
   },
+  "removeCollectibleMessage": {
+    "message": "Tahsil edilebilir tutar başarıyla kaldırıldı!"
+  },
   "removeNFT": {
     "message": "NFT'yi kaldır"
   },
@@ -3204,6 +3236,9 @@
   },
   "selectPathHelp": {
     "message": "Beklediğiniz hesapları görmüyorsanız HD yoluna geçmeyi deneyin."
+  },
+  "selectProvider": {
+    "message": "Sağlayıcıları seç:"
   },
   "selectType": {
     "message": "Tür Seç"
@@ -3453,6 +3488,9 @@
   },
   "spendLimitTooLarge": {
     "message": "Harcama limiti çok büyük"
+  },
+  "spendingCap": {
+    "message": "Harcama üst limiti"
   },
   "spendingCapError": {
     "message": "Hata: Sadece rakam"
@@ -3766,7 +3804,7 @@
     "message": "MetaMask ücreti"
   },
   "swapMetaMaskFeeDescription": {
-    "message": "Her defasında en iyi likidite kaynaklarından en iyi fiyatı buluyoruz. %$1 oranında bir ücret otomatik olarak bu teklife dahil edilmiştir.",
+    "message": "%$1 oranında bir ücret otomatik olarak bu teklife dahil edilmiştir. MetaMask'in likidite sağlayıcı bilgilerinin toplandığı yazılımı kullanma lisansı karşılığında ödersiniz.",
     "description": "Provides information about the fee that metamask takes for swaps. $1 is a decimal number."
   },
   "swapNQuotesWithDot": {
@@ -4031,6 +4069,9 @@
   "thingsToKeep": {
     "message": "Unutulmaması gerekenler:"
   },
+  "thisServiceIsExperimental": {
+    "message": "Bu hizmet deneyseldir"
+  },
   "thisWillCreate": {
     "message": "Bu, yeni bir cüzdan ve Gizli Kurtarma İfadesi oluşturacaktır"
   },
@@ -4200,10 +4241,10 @@
     "message": "İşlem, $2 itibaeiyle $1 olarak artırılan tahmini gaz ücreti ile yeniden gönderildi"
   },
   "transactionSecurityCheck": {
-    "message": "İşlem güvenlik kontrolü"
+    "message": "İşlem güvenlik sağlayıcılarını etkinleştir"
   },
   "transactionSecurityCheckDescription": {
-    "message": "Üçüncü bir tarafın (OpenSea) tüm işlemlerinizi ve imza taleplerinizi inceleyebilmesine ve bilinen kötü amaçlı talepler konusunda sizi uyarabilmesine izin vermek için bunu açın."
+    "message": "İmzalanmamış işleme dahil olan riskleri ve onları imzalamadan önce imza taleplerini algılamak ve göstermek için üçüncü taraf API'lerini kullanırız. Bu hizmetler imzalanmamış işlem ve imza taleplerinize, hesap adresinize ve tercih ettiğiniz dile erişim sağlar."
   },
   "transactionSubmitted": {
     "message": "İşlem $2 itibariyle tahmini $1 gaz ücreti ile gönderildi."

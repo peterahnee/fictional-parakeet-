@@ -370,6 +370,10 @@
   "approveButtonText": {
     "message": "Phê duyệt"
   },
+  "approveSpendingCap": {
+    "message": "Duyệt hạn mức chi tiêu $1",
+    "description": "The token symbol that is being approved"
+  },
   "approveTokenDescription": {
     "message": "Điều này cho phép bên thứ ba được quyền truy cập và chuyển các NFT sau đây mà không cần thông báo thêm cho đến khi bạn thu hồi quyền truy cập của họ."
   },
@@ -421,7 +425,7 @@
     "message": "Tự động phát hiện token"
   },
   "autoDetectTokensDescription": {
-    "message": "Chúng tôi sử dụng các API của bên thứ ba để phát hiện và hiển thị các token mới được gửi đến ví của bạn. Hãy tắt nếu bạn không muốn ứng dụng lấy dữ liệu từ các dịch vụ đó. $1",
+    "message": "Chúng tôi sử dụng API của bên thứ ba để phát hiện và hiển thị các token mới được gửi đến ví của bạn. Hãy tắt nếu bạn không muốn ứng dụng tự động lấy dữ liệu từ các dịch vụ đó. $1",
     "description": "$1 is a link to a support article"
   },
   "autoLockTimeLimit": {
@@ -671,6 +675,9 @@
   "close": {
     "message": "Đóng"
   },
+  "coingecko": {
+    "message": "CoinGecko"
+  },
   "collectibleAddFailedMessage": {
     "message": "Không thể thêm NFT vì thông tin quyền sở hữu không trùng khớp. Đảm bảo bạn đã nhập đúng thông tin."
   },
@@ -883,8 +890,18 @@
   "createPassword": {
     "message": "Tạo mật khẩu"
   },
+  "cryptoCompare": {
+    "message": "CryptoCompare"
+  },
   "currencyConversion": {
     "message": "Quy đổi tiền"
+  },
+  "currencyRateCheckToggle": {
+    "message": "Hiển thị trình kiểm tra giá token và số dư"
+  },
+  "currencyRateCheckToggleDescription": {
+    "message": "Chúng tôi sử dụng API của $1 và $2 để hiện thị giá token và số dư của bạn. $3",
+    "description": "$1 represents Coingecko, $2 represents CryptoCompare and $3 represents Privacy Policy"
   },
   "currencySymbol": {
     "message": "Ký hiệu tiền tệ"
@@ -2046,6 +2063,9 @@
   "metametricsOptInDescription": {
     "message": "MetaMask muốn thu thập dữ liệu sử dụng để hiểu rõ hơn về cách người dùng tương tác với tiện ích. Chúng tôi sẽ dùng dữ liệu này để liên tục cải thiện độ hữu ích và trải nghiệm người dùng trên sản phẩm của mình và hệ sinh thái Ethereum."
   },
+  "metrics": {
+    "message": "Chỉ số"
+  },
   "mismatchedChainLinkText": {
     "message": "xác minh thông tin về mạng",
     "description": "Serves as link text for the 'mismatchedChain' key. This text will be embedded inside the translation for that key."
@@ -2077,6 +2097,9 @@
   },
   "mobileSyncWarning": {
     "message": "Tính năng 'Đồng bộ với tiện ích' tạm thời bị tắt. Nếu bạn muốn sử dụng ví tiện ích trên thiết bị di động MetaMask, thì trên ứng dụng di động: hãy quay lại các tùy chọn thiết lập ví và chọn phương án 'Nhập bằng Cụm Mật Khẩu Khôi Phục Bí Mật'. Sử dụng cụm mật khẩu bí mật của ví tiện ích để nhập ví của bạn vào thiết bị di động."
+  },
+  "moreComingSoon": {
+    "message": "Sắp có thêm..."
   },
   "mustSelectOne": {
     "message": "Phải chọn ít nhất 1 token."
@@ -2242,6 +2265,9 @@
   },
   "nft": {
     "message": "NFT"
+  },
+  "nftDisclaimer": {
+    "message": "Tuyên bố miễn trừ trách nhiệm: MetaMask lấy tập tin phương tiện từ URL nguồn. URL này đôi khi bị thay đổi bởi thị trường mà NFT được đào."
   },
   "nftTokenIdPlaceholder": {
     "message": "Nhập mã token"
@@ -2654,6 +2680,9 @@
   "openInBlockExplorer": {
     "message": "Mở trên trình khám phá khối"
   },
+  "openSea": {
+    "message": "OpenSea (Beta)"
+  },
   "optional": {
     "message": "Không bắt buộc"
   },
@@ -2967,6 +2996,9 @@
   "removeAccountDescription": {
     "message": "Tài khoản này sẽ được xóa khỏi ví của bạn. Hãy đảm bảo rằng bạn có Cụm mật khẩu khôi phục bí mật ban đầu hoặc khóa riêng tư cho tài khoản được nhập trước khi tiếp tục. Bạn có thể nhập hoặc tạo lại tài khoản từ trình đơn tài khoản thả xuống. "
   },
+  "removeCollectibleMessage": {
+    "message": "Đồ sưu tập đã được xóa thành công!"
+  },
   "removeNFT": {
     "message": "Xóa NFT"
   },
@@ -3204,6 +3236,9 @@
   },
   "selectPathHelp": {
     "message": "Nếu bạn không thấy các tài khoản như mong đợi, hãy chuyển sang đường dẫn HD."
+  },
+  "selectProvider": {
+    "message": "Chọn nhà cung cấp:"
   },
   "selectType": {
     "message": "Chọn loại"
@@ -3453,6 +3488,9 @@
   },
   "spendLimitTooLarge": {
     "message": "Giới hạn chi tiêu quá lớn"
+  },
+  "spendingCap": {
+    "message": "Hạn mức chi tiêu"
   },
   "spendingCapError": {
     "message": "Lỗi: Chỉ nhập số"
@@ -3766,7 +3804,7 @@
     "message": "Phí của MetaMask"
   },
   "swapMetaMaskFeeDescription": {
-    "message": "Chúng tôi luôn tìm giá tốt nhất từ các nguồn thanh khoản hàng đầu. Phí $1% được tự động tính vào báo giá này.",
+    "message": "Khoản phí $1% sẽ tự động được tính vào báo giá này. Bạn trả tiền để đổi lấy giấy phép sử dụng phần mềm tổng hợp thông tin từ nhà cung cấp thanh khoản của MetaMask.",
     "description": "Provides information about the fee that metamask takes for swaps. $1 is a decimal number."
   },
   "swapNQuotesWithDot": {
@@ -4031,6 +4069,9 @@
   "thingsToKeep": {
     "message": "Những điều cần lưu ý:"
   },
+  "thisServiceIsExperimental": {
+    "message": "Đây là dịch vụ thử nghiệm"
+  },
   "thisWillCreate": {
     "message": "Thao tác này sẽ tạo một ví mới và Cụm mật khẩu khôi phục bí mật"
   },
@@ -4200,10 +4241,10 @@
     "message": "Đã gửi lại giao dịch với mức phí gas ước tính tăng lên $1 lúc $2"
   },
   "transactionSecurityCheck": {
-    "message": "Kiểm tra bảo mật giao dịch"
+    "message": "Kích hoạt nhà cung cấp bảo mật giao dịch"
   },
   "transactionSecurityCheckDescription": {
-    "message": "Bật tính năng này để cho phép bên thứ ba (OpenSea) xem xét tất cả các giao dịch và yêu cầu chữ ký của bạn, đồng thời cảnh báo bạn về các yêu cầu độc hại đã biết."
+    "message": "Chúng tôi sử dụng API của bên thứ ba để phát hiện và hiển thị những rủi ro liên quan đến các yêu cầu chữ ký và giao dịch chưa ký trước khi bạn ký. Những dịch vụ này sẽ có quyền truy cập vào các yêu cầu chữ ký và giao dịch chưa ký, địa chỉ tài khoản và ngôn ngữ yêu thích của bạn."
   },
   "transactionSubmitted": {
     "message": "Đã gửi giao dịch với mức phí gas ước tính $1 lúc $2."

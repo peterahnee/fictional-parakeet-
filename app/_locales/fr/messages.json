@@ -370,6 +370,10 @@
   "approveButtonText": {
     "message": "Approuver"
   },
+  "approveSpendingCap": {
+    "message": "Approuver le plafond de dépenses de $1",
+    "description": "The token symbol that is being approved"
+  },
   "approveTokenDescription": {
     "message": "Tant que vous n’aurez pas révoqué cette autorisation, l’autre partie pourra accéder à votre portefeuille et transférer sans préavis les NFT suivants."
   },
@@ -671,6 +675,9 @@
   "close": {
     "message": "Fermer"
   },
+  "coingecko": {
+    "message": "CoinGecko"
+  },
   "collectibleAddFailedMessage": {
     "message": "Ce NFT ne peut pas être ajouté, car les informations de propriété ne correspondent pas. Vérifiez que votre saisie est correcte."
   },
@@ -883,8 +890,18 @@
   "createPassword": {
     "message": "Créer un mot de passe"
   },
+  "cryptoCompare": {
+    "message": "CryptoCompare"
+  },
   "currencyConversion": {
     "message": "Conversion des devises"
+  },
+  "currencyRateCheckToggle": {
+    "message": "Afficher le solde et le prix actuel du jeton"
+  },
+  "currencyRateCheckToggleDescription": {
+    "message": "Nous utilisons les API $1 et $2 pour afficher le solde de votre compte et le prix du jeton. $3",
+    "description": "$1 represents Coingecko, $2 represents CryptoCompare and $3 represents Privacy Policy"
   },
   "currencySymbol": {
     "message": "Symbole de la devise"
@@ -2046,6 +2063,9 @@
   "metametricsOptInDescription": {
     "message": "MetaMask souhaite recueillir des données d’utilisation afin de mieux comprendre comment nos utilisateurs interagissent avec l’extension. Elles seront utilisées pour améliorer en permanence la convivialité et l’expérience utilisateur de notre produit et de l’écosystème Ethereum."
   },
+  "metrics": {
+    "message": "Indicateurs"
+  },
   "mismatchedChainLinkText": {
     "message": "vérifier les détails du réseau",
     "description": "Serves as link text for the 'mismatchedChain' key. This text will be embedded inside the translation for that key."
@@ -2077,6 +2097,9 @@
   },
   "mobileSyncWarning": {
     "message": "La fonction « Synchronisation avec l’extension » est temporairement désactivée. Si vous souhaitez utiliser votre portefeuille d’extension sur MetaMask mobile : sur votre application mobile, revenez aux options de configuration du portefeuille et sélectionnez l’option « Importation avec la phrase secrète de récupération ». Utilisez la phrase secrète de votre portefeuille d’extension pour importer celui-ci sur votre mobile."
+  },
+  "moreComingSoon": {
+    "message": "D’autres à venir..."
   },
   "mustSelectOne": {
     "message": "Vous devez sélectionner au moins 1 jeton."
@@ -2242,6 +2265,9 @@
   },
   "nft": {
     "message": "NFT"
+  },
+  "nftDisclaimer": {
+    "message": "Avertissement : MetaMask importe le fichier multimédia de l'URL source. Cette URL est parfois modifiée par la place de marché sur laquelle le NFT a été frappé."
   },
   "nftTokenIdPlaceholder": {
     "message": "Saisissez l’identifiant du jeton"
@@ -2654,6 +2680,9 @@
   "openInBlockExplorer": {
     "message": "Ouvrir dans l’explorateur de blocs"
   },
+  "openSea": {
+    "message": "OpenSea (Beta)"
+  },
   "optional": {
     "message": "Facultatif"
   },
@@ -2967,6 +2996,9 @@
   "removeAccountDescription": {
     "message": "Ce compte va être supprimé de votre portefeuille. Veuillez vérifier que vous avez la phrase secrète de récupération originale de ce compte ou la clé privée pour ce compte importé avant de continuer. Vous pouvez importer ou créer à nouveau des comptes à partir du menu des comptes. "
   },
+  "removeCollectibleMessage": {
+    "message": "L’objet de collection a été supprimé avec succès !"
+  },
   "removeNFT": {
     "message": "Supprimer le NFT"
   },
@@ -3204,6 +3236,9 @@
   },
   "selectPathHelp": {
     "message": "Si vos comptes n’apparaissent pas ci-dessous, essayez de sélectionner le chemin HD."
+  },
+  "selectProvider": {
+    "message": "Sélectionner les fournisseurs :"
   },
   "selectType": {
     "message": "Sélectionner le type"
@@ -3453,6 +3488,9 @@
   },
   "spendLimitTooLarge": {
     "message": "Limite de dépenses trop élevée"
+  },
+  "spendingCap": {
+    "message": "Plafond de dépenses"
   },
   "spendingCapError": {
     "message": "Erreur : saisissez uniquement des chiffres"
@@ -3766,7 +3804,7 @@
     "message": "Frais MetaMask"
   },
   "swapMetaMaskFeeDescription": {
-    "message": "Nous recherchons systématiquement le meilleur prix auprès des meilleures sources de liquidité. Une commission de $1 % est automatiquement incluse dans cette cotation.",
+    "message": "Des frais de $1 % sont automatiquement ajoutés à ce devis. Ces frais vous sont facturés en échange d'une licence d'utilisation du logiciel d'agrégation d'informations sur les fournisseurs de liquidités de MetaMask.",
     "description": "Provides information about the fee that metamask takes for swaps. $1 is a decimal number."
   },
   "swapNQuotesWithDot": {
@@ -4031,6 +4069,9 @@
   "thingsToKeep": {
     "message": "Les choses que vous devez garder à l’esprit :"
   },
+  "thisServiceIsExperimental": {
+    "message": "Ce service est expérimental"
+  },
   "thisWillCreate": {
     "message": "Cela créera un nouveau portefeuille et une nouvelle phrase mnémotechnique"
   },
@@ -4200,10 +4241,10 @@
     "message": "La transaction a été soumise à nouveau avec une augmentation du prix du gaz, désormais de $1 à $2"
   },
   "transactionSecurityCheck": {
-    "message": "Vérification des transactions"
+    "message": "Autoriser les fournisseurs de services de vérification des transactions"
   },
   "transactionSecurityCheckDescription": {
-    "message": "Activez cette option si vous voulez qu’un tiers (OpenSea) examine toutes vos transactions et vos demandes de signature afin qu’il puisse identifier les requêtes malveillantes."
+    "message": "Nous utilisons des API tierces pour détecter et afficher les risques liés aux transactions non signées et aux demandes de signature avant que vous ne les signiez. Ces services auront accès à vos transactions non signées et à vos demandes de signature, à l’adresse de votre compte et à la langue que vous préférez."
   },
   "transactionSubmitted": {
     "message": "Transaction envoyée sur $2."
