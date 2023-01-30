@@ -39,6 +39,10 @@
   &__manually-add-tokens {
     display: inline;
   }
+
+  &__popover-container {
+    z-index: 10000 !important;
+  }
 }
 
 .chip--with-left-icon {

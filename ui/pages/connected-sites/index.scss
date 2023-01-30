@@ -34,4 +34,8 @@
   a:hover {
     color: var(--color-primary-alternative);
   }
+
+  &__popover-container {
+    z-index: 10000;
+  }
 }

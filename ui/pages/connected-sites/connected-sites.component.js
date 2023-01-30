@@ -88,6 +88,7 @@ export default class ConnectedSites extends Component {
     return (
       <Popover
         className="connected-sites"
+        containerClassName="connected-sites__popover-container"
         title={t('connectedSites')}
         subtitle={
           connectedSubjects.length
