@@ -67,44 +67,44 @@ describe('Chain Interactions', function () {
     );
   });
 
-  // it('should add the Ganache chain and switch the network', async function () {
-  //   await withFixtures(
-  //     {
-  //       dapp: true,
-  //       fixtures: new FixtureBuilder().build(),
-  //       ganacheOptions,
-  //       title: this.test.title,
-  //     },
-  //     async ({ driver }) => {
-  //       await driver.navigate();
-  //       await driver.fill('#password', 'correct horse battery staple');
-  //       await driver.press('#password', driver.Key.ENTER);
+  it('should add the Ganache chain and switch the network', async function () {
+    await withFixtures(
+      {
+        dapp: true,
+        fixtures: new FixtureBuilder().build(),
+        ganacheOptions,
+        title: this.test.title,
+      },
+      async ({ driver }) => {
+        await driver.navigate();
+        await driver.fill('#password', 'correct horse battery staple');
+        await driver.press('#password', driver.Key.ENTER);
 
-  //       // trigger add chain confirmation
-  //       await driver.openNewPage('http://127.0.0.1:8080/');
-  //       await driver.clickElement('#addEthereumChain');
-  //       await driver.waitUntilXWindowHandles(3);
-  //       const windowHandles = await driver.getAllWindowHandles();
-  //       const extension = windowHandles[0];
-  //       await driver.switchToWindowWithTitle(
-  //         'MetaMask Notification',
-  //         windowHandles,
-  //       );
+        // trigger add chain confirmation
+        await driver.openNewPage('http://127.0.0.1:8080/');
+        await driver.clickElement('#addEthereumChain');
+        await driver.waitUntilXWindowHandles(3);
+        const windowHandles = await driver.getAllWindowHandles();
+        const extension = windowHandles[0];
+        await driver.switchToWindowWithTitle(
+          'MetaMask Notification',
+          windowHandles,
+        );
 
-  //       // approve and switch chain
-  //       await driver.clickElement({ text: 'Approve', tag: 'button' });
-  //       await driver.clickElement({ text: 'Switch network', tag: 'button' });
+        // approve and switch chain
+        await driver.clickElement({ text: 'Approve', tag: 'button' });
+        await driver.clickElement({ text: 'Switch network', tag: 'button' });
 
-  //       // switch to extension
-  //       await driver.waitUntilXWindowHandles(2);
-  //       await driver.switchToWindow(extension);
+        // switch to extension
+        await driver.waitUntilXWindowHandles(2);
+        await driver.switchToWindow(extension);
 
-  //       // verify current network
-  //       const networkDisplay = await driver.findElement(
-  //         '[data-testid="network-display"]',
-  //       );
-  //       assert.equal(await networkDisplay.getText(), `Localhost ${port}`);
-  //     },
-  //   );
-  // });
+        // verify current network
+        const networkDisplay = await driver.findElement(
+          '[data-testid="network-display"]',
+        );
+        assert.equal(await networkDisplay.getText(), `Localhost ${port}`);
+      },
+    );
+  });
 });
