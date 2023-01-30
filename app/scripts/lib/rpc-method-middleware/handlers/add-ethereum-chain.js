@@ -245,7 +245,7 @@ async function addEthereumChainHandler(
   }
 
   let customRpc;
-  let customRpcTarget;
+
   try {
     customRpc = await requestUserApproval({
       origin,
@@ -258,7 +258,12 @@ async function addEthereumChainHandler(
         ticker,
       },
     });
+  } catch (error) {
+    return end(error);
+  }
 
+  let customRpcTarget;
+  try {
     customRpcTarget = await requestUserApproval({
       origin,
       type: MESSAGE_TYPE.SWITCH_ETHEREUM_CHAIN,
@@ -270,7 +275,12 @@ async function addEthereumChainHandler(
       },
     });
   } catch (error) {
-    return end(error);
+    // For the purposes of this method, it does not matter if the user
+    // declines to switch the selected network. However, other errors indicate
+    // that something is wrong.
+    if (error.code !== errorCodes.provider.userRejectedRequest) {
+      return end(error);
+    }
   }
 
   let endpointChainId;
@@ -318,12 +328,7 @@ async function addEthereumChainHandler(
   try {
     updateRpcTarget(customRpcTarget);
   } catch (error) {
-    // For the purposes of this method, it does not matter if the user
-    // declines to switch the selected network. However, other errors indicate
-    // that something is wrong.
-    if (error.code !== errorCodes.provider.userRejectedRequest) {
-      return end(error);
-    }
+    return end(error);
   }
   return end();
 }
