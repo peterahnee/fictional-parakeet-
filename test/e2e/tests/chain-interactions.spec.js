@@ -32,7 +32,7 @@ describe('Chain Interactions', function () {
         await driver.openNewPage('http://127.0.0.1:8080/');
         await driver.clickElement('#addEthereumChain');
         await driver.waitUntilXWindowHandles(3);
-        let windowHandles = await driver.getAllWindowHandles();
+        const windowHandles = await driver.getAllWindowHandles();
         const extension = windowHandles[0];
         await driver.switchToWindowWithTitle(
           'MetaMask Notification',
@@ -48,14 +48,6 @@ describe('Chain Interactions', function () {
 
         // approve add chain, cancel switch chain
         await driver.clickElement({ text: 'Approve', tag: 'button' });
-
-        await driver.delay(1000);
-        windowHandles = await driver.getAllWindowHandles();
-        await driver.switchToWindowWithTitle(
-          'MetaMask Notification',
-          windowHandles,
-        );
-
         await driver.clickElement({ text: 'Cancel', tag: 'button' });
 
         // switch to extension
@@ -92,7 +84,7 @@ describe('Chain Interactions', function () {
         await driver.openNewPage('http://127.0.0.1:8080/');
         await driver.clickElement('#addEthereumChain');
         await driver.waitUntilXWindowHandles(3);
-        let windowHandles = await driver.getAllWindowHandles();
+        const windowHandles = await driver.getAllWindowHandles();
         const extension = windowHandles[0];
         await driver.switchToWindowWithTitle(
           'MetaMask Notification',
@@ -101,13 +93,6 @@ describe('Chain Interactions', function () {
 
         // approve and switch chain
         await driver.clickElement({ text: 'Approve', tag: 'button' });
-
-        await driver.delay(1000);
-        windowHandles = await driver.getAllWindowHandles();
-        await driver.switchToWindowWithTitle(
-          'MetaMask Notification',
-          windowHandles,
-        );
         await driver.clickElement({ text: 'Switch network', tag: 'button' });
 
         // switch to extension

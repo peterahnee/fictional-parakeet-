@@ -245,6 +245,7 @@ async function addEthereumChainHandler(
   }
 
   let customRpc;
+  let customRpcTarget;
   try {
     customRpc = await requestUserApproval({
       origin,
@@ -257,12 +258,22 @@ async function addEthereumChainHandler(
         ticker,
       },
     });
+
+    customRpcTarget = await requestUserApproval({
+      origin,
+      type: MESSAGE_TYPE.SWITCH_ETHEREUM_CHAIN,
+      requestData: {
+        rpcUrl: firstValidRPCUrl,
+        chainId: _chainId,
+        nickname: _chainName,
+        ticker,
+      },
+    });
   } catch (error) {
     return end(error);
   }
 
   let endpointChainId;
-
   try {
     endpointChainId = await jsonRpcRequest(firstValidRPCUrl, 'eth_chainId');
   } catch (err) {
@@ -284,7 +295,7 @@ async function addEthereumChainHandler(
   }
 
   try {
-    await addCustomRpc(customRpc);
+    addCustomRpc(customRpc);
     sendMetrics({
       event: 'Custom Network Added',
       category: EVENT.CATEGORIES.NETWORK,
@@ -303,21 +314,9 @@ async function addEthereumChainHandler(
   } catch (error) {
     return end(error);
   }
-
   // Ask the user to switch the network
   try {
-    await updateRpcTarget(
-      await requestUserApproval({
-        origin,
-        type: MESSAGE_TYPE.SWITCH_ETHEREUM_CHAIN,
-        requestData: {
-          rpcUrl: firstValidRPCUrl,
-          chainId: _chainId,
-          nickname: _chainName,
-          ticker,
-        },
-      }),
-    );
+    updateRpcTarget(customRpcTarget);
   } catch (error) {
     // For the purposes of this method, it does not matter if the user
     // declines to switch the selected network. However, other errors indicate
